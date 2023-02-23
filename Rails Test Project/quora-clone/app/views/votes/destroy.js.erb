@@ -1,0 +1,8 @@
+$("#Icons-<%= @vote.votable_type %>-<%= @vote.votable_id %>")
+.html('<%= j render "#{@vote.votable_type.downcase}s/icons",
+  votable: @votable ,
+  likes_count: @votable.likes_count,
+  dislikes_count: @votable.dislikes_count,
+  liked:  @votable.liked(current_user.id),
+  disliked: @votable.disliked(current_user.id)
+%>');

@@ -1,0 +1,25 @@
+
+To set up project with tailwind and  flowbite-react:
+
+https://flowbite.com/docs/getting-started/react/
+
+*******************************
+
+1) create project
+
+npx create-react-app my-project
+cd my-project
+
+
+2) setup tailwind
+
+3) set up flowbite-react
+
+
+*******************************
+
+get flowbyte react components:
+
+https://flowbite-react.com/
+
+*******************************

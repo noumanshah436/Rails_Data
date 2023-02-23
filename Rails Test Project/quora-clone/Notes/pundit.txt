@@ -1,0 +1,4 @@
+rails g pundit:policy question
+
+rails g pundit:policy topic
+

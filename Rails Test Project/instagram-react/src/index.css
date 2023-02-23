@@ -1,0 +1,16 @@
+.item {
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  max-width: 550px;
+  margin: 2rem auto;
+  align-items: center;
+  border-radius: 0.25rem;
+}
+
+
+.my-image {
+  width: 70px;
+  height: 70px;
+}
+ 

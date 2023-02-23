@@ -1,0 +1,18 @@
+https://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#method-i-has_many-label-Options
+
+
+Docs are available here
+
+Looks like the following options are supported:
+
+nil - do nothing (default). if it is required to do nothing on deletion, nil (which is default behaviour) can also be used
+
+:destroy - causes all the associated objects to also be destroyed.
+
+:delete_all - causes all the associated objects to be deleted directly from the database (so callbacks will not be executed).
+
+:nullify - causes the foreign keys to be set to NULL. Callbacks are not executed.
+
+:restrict_with_exception - causes an exception to be raised if there are any associated records.
+
+:restrict_with_error - causes an error to be added to the owner if there are any associated objects.

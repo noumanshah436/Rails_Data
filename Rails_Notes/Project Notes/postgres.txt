@@ -1,0 +1,12 @@
+https://www.youtube.com/watch?v=v4yrpGy8NTs
+
+sudo -u postgres psql
+
+
+rails new instagram-clone -d postgresql
+add credentials in config/database.yml
+rails db:create
+
+
+
+ 

@@ -1,0 +1,56 @@
+
+
+rails g model Employee account employee_id:integer manager_id:integer
+rails db:migrate
+
+emp1 = Employee.create(:account => "emp1")
+emp2 = Employee.create(:account => "emp2")
+man1 = Employee.create(:account => "man1")
+emp1.subordinates
+emp1.manager
+
+emp1 = Employee.find(1)
+
+emp1.subordinates << emp2
+emp1.manager = man1
+emp1.subordinates
+
+
+************************
+
+
+In Self join association one model has relation with itself.
+For example one user table can have list of all coach and player.
+One coach can train many players. We will represent the association as:
+
+
+rails g model User name:string
+
+run migration:
+add_column :users , :coach_id, :integer
+
+class User < ActiveRecord::Base
+  has_many :players, :class_name => "User",  :foreign_key => "coach_id"
+  belongs_to :coach, :class_name => "User"
+end
+
+
+user1 = User.create(name:"Player1")
+user2 = User.create(name:"Player2")
+user3 = User.create(name:"Player3")
+
+coach1 = User.create(name:"coach1")
+
+user1.coach = coach1
+user1.save
+
+user2.coach = coach1
+user2.save
+
+user3.coach = coach1
+user3.save
+
+
+coach1.players
+
+user1.coach

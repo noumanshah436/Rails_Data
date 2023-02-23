@@ -1,0 +1,47 @@
+<h1 class="m-4 ">Products</h1>
+
+
+<%= link_to 'New Product', new_product_path, class:"m-4  btn btn-primary" %>
+ <div class="p-5">
+
+<table class="table table-striped   w-100">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Size</th>
+      <th scope="col">Color</th>
+      <th scope="col">Price</th>
+
+      <th scope="col">Model</th>
+      <th scope="col">Active</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">User</th>
+      <th scope="col" ></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @products.each_with_index do |product, i| %>
+      <tr>
+        <th scope="row"><%= product.id %></th>
+        <td><%= product.name %></td>
+        <td><%= product.size %></td>
+        <td><%= product.color %></td>
+        <td><%= product.price %></td>
+        <td><%= product.model %></td>
+        <td><%= product.active %></td>
+        <td><%= product.quantity %></td>
+        <td><%= product.user.email %></td>
+        <td>
+         <%= link_to 'Show', product,class:"btn btn-primary" %>
+         <%= link_to 'Edit', edit_product_path(product),class:"btn btn-primary" %>
+         <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-primary" %>
+        </td>
+      </tr>
+    <% end %>
+
+
+  </tbody>
+</table>
+ </div>
+<br>

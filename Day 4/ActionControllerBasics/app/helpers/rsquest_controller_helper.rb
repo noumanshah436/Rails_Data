@@ -1,0 +1,2 @@
+module RsquestControllerHelper
+end

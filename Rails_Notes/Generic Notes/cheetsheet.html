@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>My beloved Ruby on Rails cheat sheet - DEV Community 👩‍💻👨‍💻</title>
+</head>
+
+<body class="sans-serif-article-body default-header" data-user-status="logged-out" data-community-name="DEV Community"
+  data-locale="en" data-honeybadger-key="a45862f6" data-deployed-at="2022-08-26T15:53:22Z"
+  data-latest-commit-id="6bb523f480c0badc655537e3533f1e4bfc8b2515" data-ga-tracking="UA-71991109-1"
+  data-ga4-tracking-id="G-TYEM8Y3JN3">
+  <link rel="stylesheet"
+    href="https://dev.to/assets/minimal-5b7906f8aca74447068af5f8677182f4484365f08317cfdd7215fd38bcceaeb2.css"
+    media="all" id="secondary-minimal-stylesheet" />
+  <link rel="stylesheet"
+    href="https://dev.to/assets/views-a9298f924f603832afc6a482b31ac4d3f812e92e85eaf97d4d0345a5811502ed.css" media="all"
+    id="secondary-views-stylesheet" />
+  <link rel="stylesheet"
+    href="https://dev.to/assets/crayons-d29fb30f7419821bed167f8bc19cb88036bd49c4db701184d6590aed60b6905e.css"
+    media="all" id="secondary-crayons-stylesheet" />
+
+  <div id="body-styles">
+    <style>
+      :root {
+        --accent-brand-lighter-rgb: 80, 99, 301;
+        --accent-brand-rgb: 59, 73, 223;
+        --accent-brand-darker-rgb: 47, 58, 178;
+      }
+
+    </style>
+  </div>
+  <div id="audiocontent" data-podcast="">
+
+  </div>
+  <div class="navigation-progress" id="navigation-progress"></div>
+
+
+
+
+  <div id="active-broadcast" class="broadcast-wrapper"></div>
+  <div id="message-notice"></div>
+  <div id="base-payment-pointer" data-payment-pointer="$ilp.uphold.com/24HhrUGG7ekn"></div>
+  <div id="page-content" class="wrapper stories stories-show" data-current-page="stories-show">
+    <div id="page-content-inner">
+      <div id="page-route-change" class="screen-reader-only" aria-live="polite" aria-atomic="true"></div>
+
+
+
+      <style>
+        .html-variant-wrapper {
+          display: none
+        }
+
+      </style>
+
+
+
+      <div class="crayons-layout crayons-layout--3-cols crayons-layout--article">
+        <aside class="crayons-layout__sidebar-left" aria-label="Article actions">
+          <div class="crayons-article-actions print-hidden">
+
+          </div>
+
+          <div class="html-variant-wrapper" id="html-variant-article-show-below-article" data-variant-id="382">
+            <div></div>
+          </div>
+
+        </aside>
+
+        <main id="main-content" class="crayons-layout__content grid gap-4">
+          <div class="article-wrapper">
+
+
+            <article class="crayons-card crayons-article mb-4" id="article-show-container"  
+
+              data-scheduled="false">
+              <header class="crayons-article__header" id="main-title">
+                <div class="crayons-article__cover">
+                  <img
+                    src="https://res.cloudinary.com/practicaldev/image/fetch/s--XoZ9r3dL--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/vfxt3x3unfv9mxc7kyhj.jpeg"
+                    width="1000" height="420" style="background-color:#dddddd;" class="crayons-article__cover__image"
+                    alt="Cover image for My beloved Ruby on Rails cheat sheet">
+                </div>
+
+
+              </header>
+
+              <div class="crayons-article__main">
+
+                <div class="crayons-article__body text-styles spec__body" data-article-id="554494" id="article-body">
+
+                  <hr>
+                  <br>
+                  Rails CLI<br>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight ruby"><code>
+  <span class="c1"># Create a new rails app</span>
+  <span class="err">$</span> <span class="n">rails</span> <span class="n">new</span> <span class="n">project_name</span>
+
+  <span class="c1"># Start the Rails server</span>
+  <span class="err">$</span> <span class="n">rails</span> <span class="n">s</span>
+
+  <span class="c1"># Rails console</span>
+  <span class="err">$</span> <span class="n">rails</span> <span class="n">c</span>
+
+  <span class="c1"># Install dependencies</span>
+  <span class="err">$</span> <span class="n">bundle</span> <span class="n">install</span>
+
+  <span class="c1"># View all routes</span>
+  <span class="err">$</span> <span class="n">rails</span> <span class="n">routes</span>
+
+  <span class="c1"># Toggle rails caching</span>
+  <span class="err">$</span> <span class="n">rails</span> <span class="n">dev</span><span class="ss">:cache</span>
+
+  </code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <p>Rails generators CLI<br>
+                  </p>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight ruby"><code><span class="c1"># CRUD Scaffold (model, migrations, controller, views, test)</span>
+<span class="n">rails</span> <span class="n">g</span> <span class="n">scaffold</span> <span class="no">Product</span> <span class="nb">name</span><span class="ss">:string</span> <span class="n">price</span><span class="ss">:decimal</span>
+
+<span class="c1"># CRUD Scaffold with one to many relationship field</span>
+<span class="n">rails</span> <span class="n">g</span> <span class="n">scaffold</span> <span class="no">Invoice</span> <span class="n">customer</span><span class="ss">:references</span>
+
+<span class="c1"># Delete scaffold created files</span>
+<span class="n">rails</span> <span class="n">destroy</span> <span class="n">scaffold</span> <span class="no">Product</span>
+
+<span class="c1"># Controller (name, action1, action2, ...)</span>
+<span class="err">$</span> <span class="n">rails</span> <span class="n">g</span> <span class="n">controller</span> <span class="no">Products</span> <span class="n">index</span> <span class="n">show</span>
+
+<span class="c1"># Model, migration and table columns</span>
+<span class="err">$</span> <span class="n">rails</span> <span class="n">g</span> <span class="n">model</span> <span class="no">Product</span> <span class="nb">name</span><span class="ss">:string</span> <span class="n">active</span><span class="ss">:boolean</span>
+
+</code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <p>Migration<br>
+                  </p>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight ruby"><code><span class="c1"># Create new table migration</span>
+<span class="n">rails</span> <span class="n">g</span> <span class="n">migration</span> <span class="no">Invoices</span>
+
+<span class="c1"># Update existing table migration</span>
+<span class="n">rails</span> <span class="n">g</span> <span class="n">migration</span> <span class="n">add_comment_to_invoices</span> <span class="n">comment</span><span class="ss">:text</span>
+
+<span class="c1"># Run migration</span>
+<span class="err">$</span> <span class="n">rails</span> <span class="n">db</span><span class="ss">:migrate</span>
+
+<span class="c1"># Rollback last migration</span>
+<span class="err">$</span> <span class="n">rails</span> <span class="n">db</span><span class="ss">:rollback</span>
+
+<span class="c1"># Run database seed code</span>
+<span class="err">$</span> <span class="n">rails</span> <span class="n">db</span><span class="ss">:seed</span>
+
+<span class="c1"># Delete and re-create db and run migrations</span>
+<span class="err">$</span> <span class="n">rails</span> <span class="n">db</span><span class="ss">:reset</span>
+
+<span class="c1"># Create table migration exemple</span>
+<span class="n">create_table</span> <span class="ss">:products</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="n">t</span><span class="p">.</span><span class="nf">string</span> <span class="ss">:name</span>
+  <span class="n">t</span><span class="p">.</span><span class="nf">decimal</span> <span class="ss">:price</span><span class="p">,</span> <span class="ss">precision: </span><span class="mi">8</span><span class="p">,</span> <span class="ss">scale: </span><span class="mi">2</span>
+  <span class="n">t</span><span class="p">.</span><span class="nf">timestamps</span>
+<span class="k">end</span>
+
+<span class="c1"># Create table with foreign key</span>
+<span class="n">create_table</span> <span class="ss">:invoices</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="c1"># null: false = dont allow null value in this db field</span>
+  <span class="n">t</span><span class="p">.</span><span class="nf">references</span> <span class="ss">:customer</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span><span class="p">,</span> <span class="ss">foreign_key: </span><span class="kp">true</span>
+  <span class="n">t</span><span class="p">.</span><span class="nf">timestamps</span>
+<span class="k">end</span>
+
+<span class="c1"># Change table migration exemple</span>
+<span class="n">add_column</span> <span class="ss">:invoices</span><span class="p">,</span> <span class="ss">:comment</span><span class="p">,</span> <span class="ss">:text</span>
+
+
+</code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <p>Routes<br>
+                  </p>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight ruby"><code>
+<span class="c1"># Route maps to controller#action</span>
+<span class="n">get</span> <span class="s1">'welcome'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'pages#home'</span>
+
+<span class="c1"># Root page (root_path name helper)</span>
+<span class="n">root</span> <span class="s1">'pages#home'</span>
+
+<span class="c1"># Named route </span>
+<span class="n">get</span> <span class="s1">'exit'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'sessions#destroy'</span><span class="p">,</span> <span class="ss">as: :logout</span>
+
+<span class="c1"># Create all the routes for a RESTful resource</span>
+<span class="n">resources</span> <span class="ss">:items</span>
+
+<span class="c1"># HTTP    Verb Path    Controller#Action  Named Helper</span>
+<span class="c1"># GET     /items           items#index    items_path</span>
+<span class="c1"># GET     /items/new       items#new      new_item_path</span>
+<span class="c1"># POST    /items           items#create   items_path</span>
+<span class="c1"># GET     /items/:id       items#show     item_path(:id)</span>
+<span class="c1"># GET     /items/:id/edit  items#edit     edit_item_path(:id)</span>
+<span class="c1"># PUT     /items/:id       items#update   item_path(:id)</span>
+<span class="c1"># DELETE  /items/:id       items#destroy  item_path(:id)</span>
+
+<span class="c1"># Only for certain actions</span>
+<span class="n">resources</span> <span class="ss">:items</span><span class="p">,</span> <span class="ss">only: :index</span>
+
+<span class="c1"># Resource with exceptions </span>
+<span class="n">resources</span> <span class="ss">:items</span><span class="p">,</span> <span class="ss">except: </span><span class="p">[</span><span class="ss">:new</span><span class="p">,</span> <span class="ss">:create</span><span class="p">]</span>
+
+<span class="c1"># Nested resources</span>
+<span class="n">resources</span> <span class="ss">:items</span> <span class="k">do</span>
+  <span class="n">resources</span> <span class="ss">:reviews</span>
+<span class="k">end</span>
+<span class="c1"># create 7 RESTful for items and reviews </span>
+<span class="c1"># :reviews will have /items/item:id prefixing each routes</span>
+<span class="c1"># GET /items/:item_id/reviews  reviews#index  item_reviews_path </span>
+
+<span class="c1"># Dynamic segment: params['id']</span>
+<span class="n">get</span> <span class="s1">'products/:id'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'products#show'</span>
+<span class="c1"># Query String: url /products/1?user_id=2</span>
+<span class="c1"># params will be {'id' 'user_id'}</span>
+
+<span class="c1"># Namespace Admin::ArticleController</span>
+<span class="c1"># and prefix '/admin'</span>
+<span class="n">namespace</span> <span class="ss">:admin</span> <span class="k">do</span>
+  <span class="n">resources</span> <span class="ss">:articles</span>
+<span class="k">end</span>
+
+<span class="c1"># only prefix '/admin'</span>
+<span class="n">scope</span> <span class="s1">'/admin'</span> <span class="k">do</span>
+  <span class="n">resources</span> <span class="ss">:articles</span><span class="p">,</span> <span class="ss">:comments</span>
+<span class="k">end</span>
+
+<span class="c1"># Redirect</span>
+<span class="n">get</span> <span class="s1">'/stories'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">redirect</span><span class="p">(</span><span class="s1">'/articles'</span><span class="p">)</span>
+
+
+
+</code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <p>Model<br>
+                  </p>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight ruby"><code><span class="c1"># Model validation</span>
+<span class="n">validates</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:image_url</span><span class="p">,</span> <span class="ss">presence: </span><span class="kp">true</span>
+<span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">presence: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">format: </span><span class="p">{</span> <span class="ss">with: </span><span class="sr">/\A[^@\s]+@[^@\s]+\z/</span><span class="p">,</span> <span class="ss">message: </span><span class="s1">'Must be a valid email address'</span><span class="p">}</span>
+<span class="n">validates</span> <span class="ss">:price</span><span class="p">,</span> <span class="ss">numericality: </span><span class="p">{</span> <span class="ss">greater_than_equal_to: </span><span class="mf">0.01</span> <span class="p">}</span>
+<span class="n">validates</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">uniqueness:  </span><span class="kp">true</span>
+<span class="n">validates</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">length: </span><span class="p">{</span> <span class="ss">minimum: </span><span class="mi">3</span><span class="p">,</span> <span class="ss">maximum: </span><span class="mi">100</span> <span class="p">}</span>
+<span class="n">validates</span> <span class="ss">:type</span><span class="p">,</span> <span class="ss">inclusion: </span><span class="n">types</span><span class="p">.</span><span class="nf">keys</span>
+
+<span class="c1"># Model relationship</span>
+<span class="n">belongs_to</span> <span class="ss">:customer</span>
+
+<span class="c1"># Relation with cascade delete</span>
+<span class="n">has_many</span> <span class="ss">:invoices</span><span class="p">,</span> <span class="ss">dependent: :destroy</span>
+
+<span class="c1">#One to one</span>
+<span class="n">has_one</span> <span class="ss">:profile</span>
+
+<span class="c1"># Hook methods </span>
+<span class="n">before_destroy</span> <span class="ss">:ensure_not_reference_by_any_invoices</span>
+<span class="n">before_save</span> <span class="ss">:downcase_email</span>
+
+<span class="c1"># create virtual password and password_confirmation </span>
+<span class="c1"># and bcrypt password_digest</span>
+<span class="c1"># add method to model: user.authenticate(params[:password])</span>
+<span class="n">has_secure_password</span>
+
+</code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <p>Controllers<br>
+                  </p>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight ruby"><code><span class="c1"># Hook before running any code</span>
+<span class="n">before_action</span> <span class="ss">:set_post</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:show</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">]</span>
+
+<span class="c1"># If you use Devise (authentification)</span>
+<span class="n">before_action</span> <span class="ss">:authenticate_user!</span>
+
+<span class="c1"># 7 Restfull action short exemple </span>
+<span class="k">def</span> <span class="nf">index</span>
+  <span class="c1"># Search input name :q</span>
+  <span class="k">if</span> <span class="n">session</span><span class="p">[</span><span class="ss">:q</span><span class="p">].</span><span class="nf">present?</span>
+    <span class="n">params</span><span class="p">[</span><span class="ss">:page</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># Create instance variable @</span>
+    <span class="vi">@posts</span> <span class="o">=</span> <span class="no">Post</span><span class="p">.</span><span class="nf">where</span> <span class="s2">"title like ?"</span><span class="p">,</span> <span class="s2">"%"</span> <span class="o">+</span> <span class="n">session</span><span class="p">[</span><span class="ss">:q</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"%"</span>
+  <span class="k">else</span>
+    <span class="vi">@posts</span> <span class="o">=</span> <span class="no">Post</span><span class="p">.</span><span class="nf">all</span>
+  <span class="k">end</span>
+  <span class="vi">@posts</span> <span class="o">=</span> <span class="vi">@posts</span><span class="p">.</span><span class="nf">order</span><span class="p">(</span><span class="s2">"created_at DESC"</span><span class="p">)</span>
+  <span class="c1"># Pagination with will_paginate gem</span>
+  <span class="vi">@posts</span> <span class="o">=</span> <span class="vi">@posts</span><span class="p">.</span><span class="nf">paginate</span><span class="p">(</span><span class="ss">page: </span><span class="n">params</span><span class="p">[</span><span class="ss">:page</span><span class="p">],</span> <span class="ss">per_page: </span><span class="mi">3</span><span class="p">)</span>
+  <span class="n">session</span><span class="p">[</span><span class="ss">:q</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
+<span class="k">end</span>
+
+<span class="c1"># By convention all action (even empty one)</span>
+<span class="c1"># run hook before_action and render view template</span>
+<span class="k">def</span> <span class="nf">show</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">new</span>
+  <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="p">.</span><span class="nf">new</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">edit</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">create</span>
+  <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">post_params</span><span class="p">)</span>
+    <span class="k">if</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">save</span>
+      <span class="n">redirect_to</span> <span class="vi">@post</span><span class="p">,</span> <span class="ss">notice: </span><span class="s1">'Created successfully!'</span>
+    <span class="k">else</span>
+      <span class="n">render</span> <span class="ss">:new</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">update</span>
+  <span class="k">if</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">post_params</span><span class="p">)</span>
+      <span class="n">redirect_to</span> <span class="vi">@post</span><span class="p">,</span> <span class="ss">notice: </span><span class="s1">'Updated successfully!'</span>
+    <span class="k">else</span>
+      <span class="n">render</span> <span class="ss">:edit</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">destroy</span>
+    <span class="vi">@post</span><span class="p">.</span><span class="nf">destroy</span>
+    <span class="n">redirect_to</span> <span class="n">posts_url</span><span class="p">,</span> <span class="ss">notice: </span><span class="s1">'Delete successfully!'</span>
+  <span class="k">end</span>
+
+<span class="kp">private</span>
+  <span class="c1"># Use callbacks to share common methods between actions.</span>
+  <span class="k">def</span> <span class="nf">set_post</span>
+    <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+  <span class="k">end</span>
+
+  <span class="c1"># Only allow a list of trusted parameters through.</span>
+  <span class="k">def</span> <span class="nf">post_params</span>
+    <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:post</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:title</span><span class="p">,</span> <span class="ss">:body</span><span class="p">,</span> <span class="ss">:image_url</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># render text</span>
+<span class="n">render</span> <span class="ss">plain: </span><span class="s1">'Hello User'</span>
+
+</code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <p>Active Record<br>
+                  </p>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight ruby"><code><span class="c1"># Active record common methods</span>
+<span class="no">Article</span><span class="p">.</span><span class="nf">all</span>
+<span class="c1"># Throw error if not found</span>
+<span class="no">Article</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+<span class="c1"># Do not throw error if not found</span>
+<span class="no">Article</span><span class="p">.</span><span class="nf">find_by</span><span class="p">(</span><span class="ss">product_id: </span><span class="n">product_id</span><span class="p">)</span>
+<span class="vi">@category</span> <span class="o">=</span> <span class="no">Category</span><span class="p">.</span><span class="nf">find_by!</span><span class="p">(</span><span class="ss">slug: </span><span class="n">params</span><span class="p">[</span><span class="s1">'slug'</span><span class="p">])</span> <span class="c1"># Return Not Found Error (404 page in production)</span>
+<span class="no">Article</span><span class="p">.</span><span class="nf">group</span><span class="p">(</span><span class="ss">:product_id</span><span class="p">).</span><span class="nf">sum</span><span class="p">(</span><span class="ss">:quantity</span><span class="p">)</span>
+<span class="no">Article</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="s1">'quantity &gt; 1'</span><span class="p">)</span>
+<span class="no">Article</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="ss">cat_id: </span><span class="n">cat_id</span><span class="p">,</span> <span class="ss">model: </span><span class="n">model</span><span class="p">)</span>
+<span class="no">Article</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="ss">model: </span><span class="n">model</span><span class="p">).</span><span class="nf">or</span><span class="p">(</span><span class="no">Article</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="ss">cat_id: </span><span class="n">cat_id</span><span class="p">))</span>
+<span class="no">Article</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="ss">:categories</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="ss">categories: </span><span class="p">{</span> <span class="ss">id: </span><span class="mi">2</span> <span class="p">}</span> <span class="p">)</span>
+<span class="no">Article</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="s2">"title LIKE ?"</span><span class="p">,</span> <span class="s2">"%"</span> <span class="o">+</span> <span class="n">params</span><span class="p">[</span><span class="ss">:q</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"%"</span><span class="p">)</span>
+<span class="no">Article</span><span class="p">.</span><span class="nf">count</span>
+<span class="no">Article</span><span class="p">.</span><span class="nf">first</span>
+<span class="no">Article</span><span class="p">.</span><span class="nf">last</span>
+<span class="no">Article</span><span class="p">.</span><span class="nf">column_names</span> <span class="c1"># ['id', 'name', 'price']</span>
+<span class="no">Category</span><span class="p">.</span><span class="nf">delete_all</span> <span class="c1"># delete all rows in Category table</span>
+<span class="n">product</span><span class="p">.</span><span class="nf">category</span> <span class="o">=</span> <span class="no">Category</span><span class="p">.</span><span class="nf">all</span><span class="p">.</span><span class="nf">sample</span> <span class="c1"># random for Faker data</span>
+<span class="vi">@products</span> <span class="o">=</span> <span class="no">Product</span><span class="p">.</span><span class="nf">offset</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nf">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nf">all</span> <span class="c1"># skip 5, take 10</span>
+</code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <p>Template<br>
+                  </p>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight erb"><code><span class="c">&lt;%# Comment tag %&gt;</span>
+
+<span class="c">&lt;%# Output return expression tag %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="vi">@user</span><span class="p">.</span><span class="nf">name</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# No output return expression tag %&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@user</span><span class="p">.</span><span class="nf">name</span> <span class="o">==</span> <span class="s1">'Mike'</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Layout file : app/view/layouts/application.html.erb %&gt;</span>
+
+<span class="c">&lt;%# In layout file replace expression with page content %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="k">yield</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# View for the route name helper path %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'About'</span><span class="p">,</span> <span class="n">about_path</span><span class="p">,</span> <span class="ss">class: </span><span class="s1">'nav-link'</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# View for the route name helper path with params %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'Item record'</span><span class="p">,</span> <span class="n">item_path</span><span class="p">(</span><span class="vi">@item</span><span class="p">)</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# auto object to route map (/products/:id) %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'Show'</span><span class="p">,</span> <span class="vi">@product</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Delete link %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'Destroy'</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="ss">method: :delete</span><span class="p">,</span> <span class="ss">data: </span><span class="p">{</span> <span class="ss">confirm: </span><span class="s1">'Are you sure?'</span> <span class="p">}</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Post link %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">button_to</span> <span class="s1">'Add to Cart'</span><span class="p">,</span> <span class="n">line_items_path</span><span class="p">(</span><span class="ss">product_id: </span><span class="n">product</span><span class="p">)</span> <span class="cp">%&gt;</span>
+
+# link_to with slot
+<span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">category_path</span> <span class="k">do</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="vi">@product</span><span class="p">.</span><span class="nf">category</span><span class="p">.</span><span class="nf">name</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Button form %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">button_to</span> <span class="s1">'Logout'</span><span class="p">,</span> <span class="n">logout_path</span><span class="p">,</span> <span class="ss">method: :delete</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Image asset (app/assets/images) %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">image_tag</span> <span class="s2">"rails.png"</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Format currency %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">number_to_currency</span><span class="p">(</span><span class="n">product</span><span class="p">.</span><span class="nf">price</span><span class="p">)</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Safe Html render %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">sanitize</span><span class="p">(</span><span class="n">product</span><span class="p">.</span><span class="nf">description</span><span class="p">)</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Enable caching %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">cache</span> <span class="vi">@products</span> <span class="k">do</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Check url %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">request</span><span class="p">.</span><span class="nf">path</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="s1">'post'</span><span class="p">)</span> <span class="p">?</span> <span class="s1">'active'</span> <span class="p">:</span> <span class="s1">''</span> <span class="cp">%&gt;</span>"&gt;
+
+<span class="c">&lt;%# Check current page %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">current_page?</span><span class="p">(</span><span class="s1">'about'</span><span class="p">)</span> <span class="p">?</span> <span class="s1">'active'</span> <span class="p">:</span> <span class="s1">''</span> <span class="cp">%&gt;</span>"&gt;
+
+<span class="c">&lt;%# Render shared partial _navbar.html.erb %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">render</span> <span class="ss">partial: </span><span class="s1">'shared/navbar'</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Render partial _form.html.erb %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">'form'</span><span class="p">,</span> <span class="ss">product: </span><span class="vi">@product</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# data tables iterations %&gt;</span>
+<span class="cp">&lt;%</span> <span class="vi">@users</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span> <span class="cp">%&gt;</span> <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Render a for each _user.html.erb %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">render</span> <span class="vi">@users</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Conditional %&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">current_user</span><span class="p">.</span><span class="nf">signed_in?</span> <span class="cp">%&gt;</span>
+  ...
+<span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span>
+  ...
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Display errors %&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">any?</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">form</span><span class="p">.</span><span class="nf">object</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">any?</span> <span class="cp">%&gt;</span>
+
+<span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">empty?</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%</span> <span class="vi">@post</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">full_messages</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">message</span><span class="o">|</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">'error'</span><span class="nt">&gt;</span><span class="cp">&lt;%=</span> <span class="n">message</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">user</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">count</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">post</span><span class="p">.</span><span class="nf">errors</span><span class="p">[</span><span class="ss">:description</span><span class="p">]</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Flash messages %&gt;</span>
+<span class="cp">&lt;%</span> <span class="n">flash</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">msg</span><span class="o">|</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert alert-</span><span class="cp">&lt;%=</span> <span class="n">msg_type</span> <span class="cp">%&gt;</span><span class="s">"</span><span class="nt">&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">msg</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+
+</code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <p>Form<br>
+                  </p>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight erb"><code><span class="c">&lt;%# Model form %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">form_with</span><span class="p">(</span><span class="ss">model: </span><span class="n">product</span><span class="p">),</span> <span class="ss">local: </span><span class="kp">true</span> <span class="k">do</span> <span class="o">|</span><span class="n">form</span><span class="o">|</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">form</span><span class="p">.</span><span class="nf">label</span> <span class="ss">:title</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">form</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">class: </span><span class="s1">'form-control'</span> <span class="cp">%&gt;</span>
+
+  <span class="cp">&lt;%=</span> <span class="n">form</span><span class="p">.</span><span class="nf">submit</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Generic form %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">form_with</span> <span class="ss">url: </span><span class="s2">"/search"</span><span class="p">,</span> <span class="ss">method: :get</span><span class="p">,</span> <span class="ss">local: </span><span class="kp">true</span> <span class="k">do</span> <span class="o">|</span><span class="n">form</span><span class="o">|</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">form</span><span class="p">.</span><span class="nf">label</span> <span class="ss">:query</span><span class="p">,</span> <span class="s2">"Search for:"</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">form</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:query</span><span class="p">,</span> <span class="ss">placeholder: </span><span class="s1">'search'</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">form</span><span class="p">.</span><span class="nf">submit</span> <span class="s2">"Search"</span><span class="p">,</span> <span class="ss">class: </span><span class="s1">'btn btn-primary'</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Multi-lines memo %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">form</span><span class="p">.</span><span class="nf">text_area</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">rows: </span><span class="mi">10</span><span class="p">,</span> <span class="ss">cols: </span><span class="mi">60</span> <span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# Collection Select (field, collection, key, value, label) %&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">form</span><span class="p">.</span><span class="nf">collection_select</span> <span class="ss">:category_id</span><span class="p">,</span> <span class="no">Category</span><span class="p">.</span><span class="nf">all</span><span class="p">,</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:name</span><span class="p">,</span> <span class="p">{</span><span class="ss">include_blank: </span><span class="s1">'- Select a Category -'</span><span class="p">},</span> <span class="p">{</span><span class="ss">class: </span><span class="s1">'form-select'</span><span class="p">}</span>
+
+<span class="o">&lt;</span><span class="sx">%# Select </span><span class="cp">%&gt;</span>
+<span class="cp">&lt;%=</span><span class="sx"> form.select :type, Customer.types.keys, prompt: 'Select a type' </span><span class="cp">%&gt;</span>
+<span class="cp">&lt;%=</span><span class="sx"> form.select :rating, (1..5) </span><span class="cp">%&gt;</span>
+
+<span class="c">&lt;%# if form in new or edit mode change submit text %&gt;</span>
+<span class="cp">&lt;%=</span><span class="sx"> form.submit @product.new_record? ? 'Create' : 'Update', class: "mt-4 btn btn-primary" </span><span class="cp">%&gt;</span>
+
+
+</code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <p>Flash, Session and Cookie<br>
+                  </p>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight ruby"><code><span class="c1"># Create flash (reset every new request)</span>
+<span class="n">flash</span><span class="p">[</span><span class="ss">:success</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'User created with success!'</span>
+
+<span class="c1"># Create flash.now (reset every new view render)</span>
+<span class="n">flash</span><span class="p">.</span><span class="nf">now</span><span class="p">[</span><span class="ss">:error</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Please select s user!'</span>
+
+<span class="c1"># Create session (reset every browser close)</span>
+<span class="n">session</span><span class="p">[</span><span class="ss">:user_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">user</span><span class="p">.</span><span class="nf">id</span>
+
+<span class="c1"># Check if session exist</span>
+<span class="n">session</span><span class="p">[</span><span class="ss">:user_id</span><span class="p">].</span><span class="nf">nil?</span>
+
+<span class="c1"># Remove</span>
+<span class="n">session</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="ss">:user_id</span><span class="p">)</span>
+
+<span class="c1"># Remove all</span>
+<span class="n">reset_session</span>
+
+<span class="c1"># Create cookie (reset at expiration date)</span>
+<span class="n">cookies</span><span class="p">.</span><span class="nf">permanent</span><span class="p">[</span><span class="ss">:remember_token</span><span class="p">]</span> <span class="o">=</span> <span class="n">remember_token</span>
+
+<span class="c1"># Encrypted cookie</span>
+<span class="n">cookies</span><span class="p">.</span><span class="nf">permanent</span><span class="p">.</span><span class="nf">encrypted</span><span class="p">[</span><span class="ss">:user_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">user</span><span class="p">.</span><span class="nf">id</span>
+
+<span class="c1"># Delete cookie</span>
+<span class="n">cookies</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="ss">:user_id</span><span class="p">)</span>
+</code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <p>Database seed with faker<br>
+                  </p>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight ruby"><code><span class="c1"># bundle install </span>
+<span class="err">$</span> <span class="n">gem</span> <span class="s1">'faker'</span>
+
+<span class="c1"># db/seeds.rb</span>
+<span class="no">Customer</span><span class="p">.</span><span class="nf">delete_all</span>
+<span class="mi">10</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
+    <span class="n">customer</span> <span class="o">=</span> <span class="no">Customer</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">customer</span><span class="p">.</span><span class="nf">name</span> <span class="o">=</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">name</span>
+    <span class="n">customer</span><span class="p">.</span><span class="nf">phone</span> <span class="o">=</span> <span class="no">Faker</span><span class="o">::</span><span class="no">PhoneNumber</span><span class="p">.</span><span class="nf">phone_number</span>
+    <span class="n">customer</span><span class="p">.</span><span class="nf">save</span>
+<span class="k">end</span>
+
+<span class="c1"># Run seed script</span>
+<span class="err">$</span> <span class="n">rails</span> <span class="n">db</span><span class="ss">:seed</span>
+
+</code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <p>Devise Gem (authentification)<br>
+                  </p>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight ruby"><code><span class="c1"># Install</span>
+<span class="n">gem</span> <span class="n">devise</span>
+<span class="n">bundle</span> <span class="n">install</span>
+<span class="n">rails</span> <span class="n">g</span> <span class="n">devise</span><span class="ss">:install</span> <span class="c1"># follow on-screen instruction</span>
+<span class="n">rails</span> <span class="n">generate</span> <span class="n">devise</span> <span class="no">User</span>
+<span class="n">rails</span> <span class="n">db</span><span class="ss">:migrate</span>
+
+<span class="c1"># Customize devise login, register, etc. views</span>
+<span class="n">rails</span> <span class="n">generate</span> <span class="n">devise</span><span class="ss">:views</span>
+
+<span class="c1"># Add in existing controllers</span>
+<span class="n">before_action</span> <span class="ss">:authenticate_user!</span>
+
+<span class="c1"># User shared globals</span>
+<span class="n">user_signed_in?</span>
+<span class="n">current_user</span>
+
+<span class="c1"># Logout link_to exemple</span>
+<span class="o">&lt;</span><span class="sx">%= link_to "Logout", destroy_user_session_path, method: :delete %&gt;
+
+</span></code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <p>Trix Editor<br>
+                  </p>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight ruby"><code><span class="n">gem</span> <span class="err">‘</span><span class="n">image_processing</span><span class="err">'</span>
+<span class="n">rails</span> <span class="n">action_text</span><span class="ss">:install</span>
+<span class="n">bundle</span> <span class="n">install</span>
+<span class="n">rails</span> <span class="n">db</span><span class="ss">:migrate</span>
+
+<span class="c1"># Add to model class </span>
+<span class="n">has_rich_text</span> <span class="ss">:body</span>
+
+<span class="c1"># Template use</span>
+<span class="o">&lt;</span><span class="sx">%= form.rich.text_area %&gt;
+
+# actiontext.scss (if using boostrap only)
+trix-editor {
+  &amp;.form-control {
+    height: auto;
+  }
+}
+
+</span></code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <p>MISC<br>
+                  </p>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight ruby"><code><span class="c1"># Edit credentials encrypted list (API keys, secrets, etc.)</span>
+<span class="err">$</span> <span class="no">EDITOR</span><span class="o">=</span><span class="s2">"code --wait"</span> <span class="n">bin</span><span class="o">/</span><span class="n">rails</span> <span class="n">credentials</span><span class="ss">:edit</span> <span class="o">--</span><span class="n">environment</span><span class="o">=</span><span class="n">development</span>
+
+</code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <p>Clone a Rails project from Github<br>
+                  </p>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight ruby"><code><span class="err">$</span> <span class="n">git</span> <span class="nb">clone</span> <span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">github</span><span class="o">/</span><span class="n">myprojet</span><span class="err">…</span>
+<span class="err">$</span> <span class="n">cd</span> <span class="n">projet_name</span>
+<span class="err">$</span> <span class="n">bundle</span> <span class="n">install</span>
+<span class="err">$</span> <span class="n">yarn</span> <span class="n">install</span> <span class="o">--</span><span class="n">check</span><span class="o">-</span><span class="n">files</span>
+<span class="err">$</span> <span class="n">rails</span> <span class="n">dev</span><span class="ss">:cache</span> <span class="c1"># not always needed</span>
+<span class="err">$</span> <span class="n">rails</span> <span class="n">db</span><span class="ss">:migrate</span>
+<span class="err">$</span> <span class="n">rails</span> <span class="n">db</span><span class="ss">:seed</span>
+<span class="err">$</span> <span class="n">rails</span> <span class="n">s</span>
+</code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <p>Heroku deployment<br>
+                  </p>
+
+                  <div class="highlight js-code-highlight">
+                    <pre class="highlight ruby"><code>
+<span class="c1"># Change Gemfile production database to Postgress</span>
+<span class="n">group</span> <span class="ss">:development</span> <span class="k">do</span>
+ <span class="n">gem</span> <span class="s1">'sqlite3'</span>
+<span class="k">end</span>
+
+<span class="n">group</span> <span class="ss">:production</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s1">'pg'</span>
+<span class="k">end</span>
+
+<span class="c1"># Create git and push to Heroku</span>
+<span class="err">$</span> <span class="n">heroku</span> <span class="n">create</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">remote</span>
+<span class="err">$</span> <span class="n">bundle</span> <span class="n">install</span> <span class="o">--</span><span class="n">without</span> <span class="n">production</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">status</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">add</span> <span class="o">-</span><span class="no">A</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">'heroku deployment'</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">push</span> <span class="n">heroku</span> <span class="n">master</span>
+<span class="err">$</span> <span class="n">heroku</span> <span class="n">run</span> <span class="n">rails</span> <span class="n">db</span><span class="ss">:migrate</span>
+<span class="err">$</span> <span class="n">heroku</span> <span class="n">run</span> <span class="n">rails</span> <span class="n">db</span><span class="ss">:seed</span>
+
+<span class="c1"># launch the upload site</span>
+<span class="err">$</span> <span class="n">heroku</span> <span class="nb">open</span>
+
+</code></pre>
+                    <div class="highlight__panel js-actions-panel">
+                      <div class="highlight__panel-action js-fullscreen-code-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-on">
+                          <title>Enter fullscreen mode</title>
+                          <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z">
+                          </path>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24"
+                          class="highlight-action crayons-icon highlight-action--fullscreen-off">
+                          <title>Exit fullscreen mode</title>
+                          <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z">
+                          </path>
+                        </svg>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                </div>
+
+              </div>
+
+
+
+
+
+          </div>
+
+
+          <div class="mod-actions-menu print-hidden"></div>
+          <div data-testid="unpublish-post-modal-container" class="unpublish-post-modal-container hidden"></div>
+          <div id="suspend-modal-content" class="hidden">
+            <p>
+              Once suspended, ericchapman will not be able to comment or publish posts until their suspension is
+              removed.
+            </p>
+
+            <div class="crayons-field mt-4">
+              <label for="suspend-reason-userid-462537" class="crayons-field__label">
+                Note:
+              </label>
+              <textarea id="suspend-reason-userid-462537" rows="4" cols="70" placeholder="Reason for suspension"
+                class="crayons-textfield" aria-describedby="suspension-reason-error" required></textarea>
+              <p id="suspension-reason-error" data-testid="suspension-reason-error"
+                class="suspend-reason-error crayons-field__description" style="color: red;" aria-live="assertive">
+              </p>
+            </div>
+            <div class="mt-4">
+              <button id="submit-user-suspend-btn" class="c-btn c-btn--primary c-btn--destructive"
+                data-btn-action="suspend" data-reason-selector="#suspend-reason-userid-462537" data-user-id="462537"
+                data-username="ericchapman">
+                Submit &amp; Suspend
+              </button>
+            </div>
+          </div>
+
+          <div id="unsuspend-modal-content" class="hidden">
+            <p>
+              Once unsuspended, ericchapman will be able to comment and publish posts again.
+            </p>
+
+            <div class="crayons-field mt-4">
+              <label for="unsuspend-reason-userid-462537" class="crayons-field__label">
+                Note:
+              </label>
+              <textarea id="unsuspend-reason-userid-462537" rows="4" cols="70" placeholder="Reason for unsuspension"
+                class="crayons-textfield" aria-describedby="unsuspension-reason-error" required></textarea>
+              <p id="unsuspension-reason-error" data-testid="unsuspension-reason-error"
+                class="unsuspend-reason-error crayons-field__description" style="color: red;" aria-live="assertive">
+              </p>
+            </div>
+            <div class="mt-4">
+              <button id="submit-user-unsuspend-btn" class="c-btn c-btn--primary" data-btn-action="unsuspend"
+                data-reason-selector="#unsuspend-reason-userid-462537" data-user-id="462537"
+                data-username="ericchapman">
+                Submit &amp; Unsuspend
+              </button>
+            </div>
+          </div>
+
+          <div id="unpublish-all-posts" class="hidden">
+            <p>
+              Once unpublished, all posts by ericchapman will become hidden and only accessible to themselves.
+            </p>
+            <p class="mt-2">
+              If ericchapman is not suspended, they can still re-publish their posts from their dashboard.
+            </p>
+            <div class="mt-4">
+              <button id="unpublish-all-posts-submit-btn" class="c-btn c-btn--destructive c-btn--primary"
+                data-user-id="462537">
+                Unpublish all posts
+              </button>
+            </div>
+          </div>
+
+          <div id="unpublish-post-modal" class="hidden">
+            <p>
+              Once unpublished, this post will become invisible to the public
+              and only accessible to Eric The Coder.
+            </p>
+            <p>They can still re-publish the post if they are not suspended.</p>
+            <div class="mt-4">
+              <button destructive variant="primary" class="c-btn c-btn--primary c-btn--destructive"
+                id="confirm-unpublish-post-action">
+                Unpublish post
+              </button>
+            </div>
+          </div>
+
+          <div id="flag-user-modal-content" class="hidden">
+            <p>
+              Thanks for keeping DEV Community 👩‍💻👨‍💻 safe. Here is what you can do to flag ericchapman:
+            </p>
+
+            <div class="crayons-field crayons-field--radio mt-4">
+              <input type="radio" id="flag-user-radio-input" name="flag-user-radio-input" class="crayons-radio"
+                data-reactable-id="462537" data-category="vomit" data-reactable-type="User" />
+              <label for="flag-user-radio-input" class="crayons-field__label">
+                Make all posts by ericchapman less visible
+                <p class="crayons-field__description">
+                  ericchapman consistently posts content that violates DEV Community 👩‍💻👨‍💻's
+                  code of conduct because it is harassing, offensive or spammy.
+                </p>
+              </label>
+            </div>
+
+            <div class="mt-4">
+              <a href="javascript:void(0);" id="report-inappropriate-content"
+                data-report-abuse-link="/report-abuse?url=https://dev.to/ericchapman/my-beloved-ruby-on-rails-cheat-sheet-50pi">
+                Report other inappropriate conduct
+              </a>
+            </div>
+
+            <div class="mt-6">
+              <p id="unselected-radio-error" data-testid="unselected-radio-error"
+                class="crayons-field__description mb-4" style="color: red;" aria-live="assertive">
+              </p>
+              <button id="confirm-flag-user-action" class="c-btn c-btn--primary c-btn--destructive"
+                data-category="vomit" data-reactable-type="User" data-user-id="462537" data-username="ericchapman">
+                Confirm Flag
+              </button>
+            </div>
+          </div>
+
+          <div id="unflag-user-modal-content" class="hidden">
+            <p>
+              Unflagging ericchapman will restore default visibility to their posts.
+            </p>
+
+            <div class="mt-6">
+              <button id="confirm-unflag-user-action" class="c-btn c-btn--primary" data-category="vomit"
+                data-reactable-type="User" data-user-id="462537" data-username="ericchapman">
+                Confirm Unflag
+              </button>
+            </div>
+          </div>
+
+
+          <div class="fullscreen-code js-fullscreen-code"></div>
+          <script src="https://dev.to/packs/js/runtime~followButtons-91991dc218fd32d1de3d.js" defer="defer"></script>
+          <script src="https://dev.to/packs/js/7-7fe5cbc622bb574786c4.chunk.js" defer="defer"></script>
+          <script src="https://dev.to/packs/js/followButtons-8dddfc61ae15c163b1a0.chunk.js" defer="defer"></script>
+
+          <script>
+            var waitingOnPodcast = setInterval(function () {
+              if (typeof initializePodcastPlayback !== 'undefined') {
+                initializePodcastPlayback();
+                clearInterval(waitingOnPodcast);
+              }
+            }, 1);
+
+            if (document.head.querySelector('meta[name="user-signed-in"][content="true"]')) {
+              function displayPollResults(json) {
+                var totalVotes = json.voting_data.votes_count;
+                json.voting_data.votes_distribution.forEach(function (point) {
+                  var pollOptionItem = document.getElementById('poll_option_list_item_' + point[0]);
+                  var optionText = document.getElementById('poll_option_label_' + point[0]).textContent;
+                  if (json.user_vote_poll_option_id === point[0]) {
+                    var votedClass = 'optionvotedfor'
+                  } else {
+                    var votedClass = 'optionnotvotedfor'
+                  }
+                  if (totalVotes === 0) {
+                    var percent = 0;
+                  } else {
+                    var percent = (point[1] / totalVotes) * 100;
+                  }
+                  var roundedPercent = Math.round(percent * 10) / 10
+                  var percentFromRight = (100 - roundedPercent)
+                  var html = '<span><span class="ltag-votepercent ltag-' + votedClass + '" style="right:' +
+                    percentFromRight + '%"></span>        <span class="ltag-votepercenttext">' + optionText +
+                    ' — ' + roundedPercent + '%</span></span>';
+                  pollOptionItem.innerHTML = html;
+                  pollOptionItem.classList.add('already-voted')
+                  document.getElementById('showmethemoney-' + json.poll_id).innerHTML =
+                    '<span class="ltag-voting-results-count">' + totalVotes + ' total votes</span>';
+                })
+              }
+
+              var polls = document.getElementsByClassName('ltag-poll');
+              for (var i = 0; i < polls.length; i += 1) {
+                var poll = polls[i]
+                var pollId = poll.dataset.pollId
+                window.fetch('/poll_votes/' + pollId)
+                  .then(function (response) {
+                    response.json().then(
+                      function (json) {
+                        if (json.voted) {
+                          displayPollResults(json)
+                        } else {
+                          var els = document.getElementById('poll_' + json.poll_id).getElementsByClassName(
+                            'ltag-polloption');
+
+                          for (i = 0; i < els.length; i += 1) {
+                            els[i].addEventListener('click', function (e) {
+                              var tokenMeta = document.querySelector("meta[name='csrf-token']")
+                              if (!tokenMeta) {
+                                alert(
+                                  'Whoops. There was an error. Your vote was not counted. Try refreshing the page.'
+                                )
+                                return
+                              }
+                              var csrfToken = tokenMeta.getAttribute('content')
+                              var optionId = e.target.dataset.optionId
+                              window.fetch('/poll_votes', {
+                                method: 'POST',
+                                headers: {
+                                  'X-CSRF-Token': csrfToken,
+                                  'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                  poll_vote: {
+                                    poll_option_id: optionId
+                                  }
+                                }),
+                                credentials: 'same-origin',
+                              }).then(function (response) {
+                                response.json().then(function (j) {
+                                  displayPollResults(j)
+                                })
+                              })
+                            });
+                          }
+
+                          document.getElementById('showmethemoney-' + json.poll_id).addEventListener('click',
+                            function () {
+                              pollId = this.dataset.pollId
+                              window.fetch('/poll_skips', {
+                                method: 'POST',
+                                headers: {
+                                  'X-CSRF-Token': csrfToken,
+                                  'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                  poll_skip: {
+                                    poll_id: pollId
+                                  }
+                                }),
+                                credentials: 'same-origin',
+                              }).then(function (response) {
+                                response.json().then(function (j) {
+                                  displayPollResults(j)
+                                })
+                              })
+                            });
+                        }
+                      }
+                    )
+                  })
+              }
+            } else {
+              var els = document.getElementsByClassName('ltag-poll')
+              for (i = 0; i < els.length; i += 1) {
+                els[i].onclick = function (e) {
+                  if (typeof showLoginModal !== "undefined") {
+                    showLoginModal();
+                  }
+                }
+              }
+            }
+
+            function activateRunkitTags() {
+              if (!areAnyRunkitTagsPresent())
+                return
+
+              var checkRunkit = setInterval(function () {
+                try {
+                  dynamicallyLoadRunkitLibrary()
+
+                  if (typeof (RunKit) === 'undefined') {
+                    return
+                  }
+
+                  replaceTagContentsWithRunkitWidget()
+                  clearInterval(checkRunkit);
+                } catch (e) {
+                  console.error(e);
+                  clearInterval(checkRunkit);
+                }
+              }, 200);
+            }
+
+            function isRunkitTagAlreadyActive(runkitTag) {
+              return runkitTag.querySelector("iframe") !== null;
+            };
+
+            function areAnyRunkitTagsPresent() {
+              var presentRunkitTags = document.getElementsByClassName("runkit-element");
+
+              return presentRunkitTags.length > 0
+            }
+
+            function replaceTagContentsWithRunkitWidget() {
+              var targets = document.getElementsByClassName("runkit-element");
+              for (var i = 0; i < targets.length; i++) {
+                if (isRunkitTagAlreadyActive(targets[i])) {
+                  continue;
+                }
+
+                var wrapperContent = targets[i].textContent;
+                if (/^(<iframe src)/.test(wrapperContent) === false) {
+                  if (targets[i].children.length > 0) {
+                    var preamble = targets[i].children[0].textContent;
+                    var content = targets[i].children[1].textContent;
+                    targets[i].innerHTML = "";
+                    var notebook = RunKit.createNotebook({
+                      element: targets[i],
+                      source: content,
+                      preamble: preamble
+                    });
+                  }
+                }
+              }
+            };
+
+            function dynamicallyLoadRunkitLibrary() {
+              if (typeof (dynamicallyLoadScript) === "undefined")
+                return
+
+              dynamicallyLoadScript("//embed.runkit.com")
+            }
+
+            activateRunkitTags();
+
+            var videoPreviews = document.getElementsByClassName("ltag__twitter-tweet__media__video-wrapper");
+            [].forEach.call(videoPreviews, function (el) {
+              el.onclick = function (e) {
+                var divHeight = el.offsetHeight;
+                el.style.maxHeight = divHeight + "px";
+                el.getElementsByClassName("ltag__twitter-tweet__media--video-preview")[0].style.display = "none";
+                el.getElementsByClassName("ltag__twitter-tweet__video")[0].style.display = "block";
+                el.getElementsByTagName("video")[0].play();
+              }
+            });
+            var tweets = document.getElementsByClassName("ltag__twitter-tweet__main");
+            [].forEach.call(tweets, function (tweet) {
+              tweet.onclick = function (e) {
+                if (e.target.nodeName == "A" || e.target.parentElement.nodeName == "A") {
+                  return;
+                }
+                window.open(tweet.dataset.url, "_blank");
+              }
+            });
+          </script>
+
+          <div id="runtime-banner-container"></div>
+      </div>
+    </div>
+
+
+    <script src="https://dev.to/packs/js/runtime~signupModalShortcuts-b9beb5ee6e65857034c5.js" defer="defer"></script>
+    <script src="https://dev.to/packs/js/signupModalShortcuts-13a5b190938efd0098ea.chunk.js" defer="defer"></script>
+
+    <div id="i18n-translations"
+      data-translations="{&quot;en&quot;:{&quot;core&quot;:{&quot;add_comment&quot;:&quot;Add comment&quot;,&quot;beta&quot;:&quot;beta&quot;,&quot;comment&quot;:&quot;Comment&quot;,&quot;copy_link&quot;:&quot;Copy link&quot;,&quot;edit_profile&quot;:&quot;Edit profile&quot;,&quot;follow&quot;:&quot;Follow&quot;,&quot;follow_back&quot;:&quot;Follow back&quot;,&quot;following&quot;:&quot;Following&quot;,&quot;like&quot;:&quot;Like&quot;,&quot;loading&quot;:&quot;loading...&quot;,&quot;reaction&quot;:&quot;Reaction&quot;,&quot;report_abuse&quot;:&quot;Report abuse&quot;,&quot;search&quot;:&quot;Search&quot;,&quot;success_settings&quot;:&quot;Successfully updated settings.&quot;}}}">
+    </div>
+</body>
+
+</html>

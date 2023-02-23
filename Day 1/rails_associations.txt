@@ -1,0 +1,22 @@
+
+
+
+
+
+Links Friend list to each user separately
+
+2:27:28
+
+
+see docs 
+add belongs_to and has_many to models in app>model>table
+and run these commands
+
+$ rails g migration add_user_id_to_friends user_id:integer:index
+$ rails db:migrate
+
+update form 
+
+params in rails are the form fields
+
+now we associate friends to user but each user has its own separate fried list

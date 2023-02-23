@@ -1,0 +1,382 @@
+
+Article.count
+Article.first
+Article.last
+
+Article.column_names
+=>["id", "title", "text", "created_at", "updated_at"]
+
+
+Article.ids
+[7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
+
+
+*******************
+
+a= Article.find([9, 10])      #  find with id in  9 or 10
+a[0].text
+
+Article.take(2)    # get first two records
+
+Article.first
+Client.first(3)
+
+
+
+
+******************************
+
+order:
+
+Article.order(:title)       #  get all records order by title
+Article.order(:id)          #  get all records order by id
+Article.order(:title).first        # then fetch first record
+
+
+
+Article.order(created_at: :desc)
+
+Article.order(created_at: :asc)
+
+Article.order("created_at DESC")
+
+Article.order("created_at ASC")
+ 
+
+
+************************************
+select:
+
+Article.select(:id )
+=> #<ActiveRecord::Relation [#<Article id: 2>, #<Article id: 3>, #<Article id: 4>, #<Article id: 5>, #<Article id: 6>, #<Article id: 8>, #<Article id: 10>, #<Article id: 11>, #<Article id: 12>, #<Article id: 13>, ...]>
+
+Article.select(:id, :title)
+
+
+Client.select(:name).distinct
+
+************************
+
+in:  pass array
+
+Client.where(orders_count: [1,3,5])
+
+This code will generate SQL like this:
+SELECT * FROM clients WHERE (clients.orders_count IN (1,3,5))
+
+
+**********************************
+
+Pluck directly returns array of the attribute that we pass to it
+
+
+Article.pluck(:id)    						# get only specified attributes
+
+=> [2, 3, 4, 5, 6, 8, 10, 11, 12, 13, 14]
+
+Article.pluck(:id, :name, :dreams)
+
+=> [[2, "name", "dreams"], [3, "name", "dreams"], [4, "name", "dreams"], [5, "name", "dreams"], [6, "name", "dreams"], [8, "name", "dreams"], [10, "name", "dreams"], [11, "name", "dreams"], [12, "name", "dreams"], [13, "name", "dreams"], [14, "name", "dreams"]]
+****************************
+
+find_by
+
+Article.find_by(id: 9)
+Article.where(id:9).take          # same as above
+
+Article.find_by!(id: 9)           # give error if record not found
+
+
+************************************
+where:
+
+conditions ( where )
+
+
+params = {id:10 }
+Article.where("id= ?", params[:id])
+
+params = {id:7 }
+Article.where("id=? and title=?", params[:id], "Article 0")
+
+
+
+Hash Conditions:
+
+Article.where(id:7)
+Article.where(title:"Article 0")
+Article.where("title" => "Article 0")     # we can also use string
+
+Article.where.not(id:7)         # get all records where id is not 7
+
+
+************************************
+
+OR condition:
+
+Article.where(id:1).or(Article.where(id:20))    => SELECT  "articles".* FROM "articles" WHERE ("articles"."id" = ? OR "articles"."id" = ?)
+
+
+
+******************************
+
+pluck
+pluck can be used to query single or multiple columns from the underlying table of a model.
+
+User.all.pluck(:id)
+User.all.pluck(:name)
+
+*********************
+
+present:
+
+User.where(name: 'mike').present?
+
+**********************
+
+exists?
+
+check for the existence of the object there's a method called exists?.
+return either true or false
+
+User.exists?(1)
+
+User.exists?(id: [1,2,3])
+
+User.exists?(name: ['John', 'Sergei'])
+
+User.where(name:"NOuman").exists?
+
+User.exists?(name: 'mike')
+
+*********************
+
+ Calculations
+
+count:
+  User.count(:id)
+  User.count("id")
+
+Average:
+  Product.average(:price)
+  Product.average("price")
+
+Minimum:
+  Product.minimum(:price)
+  Product.minimum("price")
+
+Maximum
+  Product.maximum(:price)
+
+Sum:
+  Product.sum(:price)
+
+
+***********************
+
+:includes  loads associated records in advance and limits the number of SQL queries made to the database.
+ This technique is known as "eager loading" and in many cases will improve performance by a significant amount.
+
+
+User.includes(:products).where(products: {name:"Laptop"})
+
+
+*************************
+
+Length:
+
+Product.where("LENGTH(name) < 5")
+
+
+*************************
+
+Scope:
+
+syntax:
+    scope :name, -> { where(:attibute => value)}
+
+create scope in Product model class
+
+> scope  :laptops, -> { where( name:"Laptop") }
+
+In console:
+Product.laptops
+
+
+****
+
+Passing in arguments:
+
+scope  :get_product, -> (name) { where( "name= ?", name) }
+
+Product.get_product("Laptop")
+
+***
+
+default_scope:   this scope will be applied across all queries to the model
+
+> default_scope { where("user_id IS NOT NULL") }
+>Product.all.count
+
+*************************
+
+
+
+*************************
+
+
+Group:
+
+
+To get the total of grouped items on a single query, call count after the group.
+ Order.group(:status).count
+
+
+
+Product.group(:price).count
+
+{0.334e1=>1, 0.8399e2=>1, 0.11334e3=>1, 1000=>3, 2000=>3}       
+
+it says that product with price 1000 are 3 and product with price 2000 are 3 and so on 
+
+
+************************************************************************************************************
+************************************************************************************************************
+
+Joins:
+
+Article.find(3).comments                                                    - get all comments of article 3 using ( this will run 2 sql queries )
+
+-> get the comments where the arycle title is  "Article 3" :
+
+irb>    cmt = Comment.joins(:article).where(articles: {title: "Article 3" }).first
+
+***
+
+Day 7:
+
+user = User.create(name:"NOuman")
+user.products.create(name:"tv", price: 5000)
+
+User.find(2).products.create(name:"Laptop", price:30000)
+
+****************************************** 
+
+simple Join or Inner Join:
+
+select all products where user name is "NOuman:
+
+products = Product.joins(:user).where(:users =>{:name => "NOuman" })
+products = Product.joins(:user).where(users: {name: "NOuman" })           --  above query can be wriiten as this
+products[0]
+products[1]
+
+product = Product.joins(:user).where(users: {name: "NOuman" }).first
+product
+
+
+prod = Product.joins(:user)
+prod.to_sql
+
+
+*****************
+
+Create product with not user:
+
+p = Product.create(name:"prod1", price: 1234)
+p.user
+
+prod = Product.where(:user_id => nil)
+prod
+
+*****************
+
+> user = User.create(name:"Farhan")
+
+> User.where(name:"Farhan").joins(:products).where( :products => { :id=>nil} ).first
+=> nil
+
+Note:
+Inner join connects foreign and primary key
+Inner join excludes relations that don't exist
+
+***************************************************************
+
+outer join:
+Outer Join take all users and match them up with a product even if no matching product exists
+
+> User.left_outer_joins(:products).where(:products=>{:id=>nil})
+
+can be written as
+
+> User.left_outer_joins(:products).where(products:{id:nil})
+
+Now this outer join has solved the problem
+
+*********************
+
+get product where user name is "NOuman" and product name is "laptop":
+
+product = Product.joins(:user).where(  users: {name: "NOuman" },  products:{name: "Laptop"}  )
+
+***************************
+find_by_sql
+
+User.find_by_sql("SELECT * FROM users INNER JOIN products ON user.id = products.user_id ")
+
+
+***************************
+
+https://www.bigbinary.com/blog/preload-vs-eager-load-vs-joins-vs-includes
+
+Preload:
+
+Article.preload(:comments).where(articles: {title: "Article 3" })                 -- use two queries
+
+Article.preload(:comments).where(comments: { commenter: "Nouman4" })              -- we cannot use where on 2nd table 
+
+***********
+
+includes:
+
+Article.includes(:comments)                                                       --  work as preload (using two queries )
+
+Article.includes(:comments).where(comments: { commenter: "Nouman" })              --  use left outer join when we use where or order command
+
+Article.includes(:comments).references(:comments)                                 --  forcefully run in single query
+
+Article.all.includes(:comments).where(articles: {title: "Article 3" })
+
+Article.all.includes(:comments).where(comments:{article_id: 2 })
+
+
+************
+
+Eager load:
+
+Eager loading loads all association in a single query using LEFT OUTER JOIN.
+
+
+Article.eager_load(:comments).to_a
+
+Article.eager_load(:comments).where(comments: { commenter: "Nouman" }) 
+
+************************************************************************************************************
+************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

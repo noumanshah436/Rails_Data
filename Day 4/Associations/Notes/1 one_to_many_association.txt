@@ -1,0 +1,73 @@
+cheetsheet:
+https://web-crunch.com/posts/understanding-active-record-associations
+
+rails new Associations
+rails g controller home index
+
+
+************************************************************************************************************
+one to many relationship:
+
+summary:
+  1) create simple parent model
+  2) create child model with foreign key of parent
+  3) add has_many statement in parent model
+************************************************************************************************************
+
+1)
+rails g model Student name:string email:string
+rails db:migrate
+
+2)
+rails generate model Blog title:string content:text student:references       ( we can manually add foreign key but this is better - this will also add belongsto statement in blog model)
+rails db:migrate
+
+3)
+and add  in stuent model:
+ has_many :blogs
+
+
+To do manually:
+add column in blog table in migration  --  t.integer :student_id, null: false
+and then add belongs_to :student in blog model
+and add ( has_many :blogs ) to stuent model
+
+
+Note:
+use singular name with belongs_to :student            ( hint: use file name of the model class)
+use plural name with   has_many :blogs                ( hint: use the table name in the database)
+
+****************
+
+class Student < ApplicationRecord
+  has_many :blogs
+end
+
+class Blog < ApplicationRecord
+  belongs_to :student
+end
+
+
+****************
+test in console:
+
+-> Student.create(name:"Nouman", email:"nouman@gmail.com")
+-> Student.create(name:"Shahmeer", email:"shahmeer@gmail.com")
+-> Student.create(name:"Farhan", email:"farhan@gmail.com")
+-> Student.create(name:"Fatima", email:"fatima@gmail.com")
+
+-> Blog.count
+-> Student.count
+-> std1 = Student.first
+-> std1.blogs                   #  use blogs ( plural as menthion with has_many statement )
+
+-> blog = Blog.last
+-> std = blog.student
+-> std
+-> blog.student_id
+-> blog.student.name             #  use student ( singular as menthion with belongs_to statement )
+
+****************
+
+
+

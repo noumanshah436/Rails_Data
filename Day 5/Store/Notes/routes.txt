@@ -1,0 +1,55 @@
+member routes: routes that needs the id to perform action (like  show, edit, update destroy) ( acts on single object)
+
+collection routes : routes that do not need id ti perform action ( lik index, create , new)  ( acts on collection of obhects)
+
+***************************
+
+namespace routing is used when you want to organize group of controllers under a namespace
+
+***************************
+
+create controler in subdirectory:
+
+rails g controller admin/Users
+
+
+**********************************
+
+https://www.youtube.com/watch?v=KmYt07MUh9c
+
+http://localhost:3000/admin/sellers
+
+rails g scaffold admin/Sellers name:string
+rails db:migrate
+
+rails g scaffold animals/Cat name:string age:integer
+rails db:migrate
+
+namespace :animals do
+    resources :cats
+end
+
+**********************************
+
+or you can add existing controller in sub folder and then add Admin:: before controller class
+and move routes under namespace
+and at last we need to set the new links to our buttons
+
+**********************************
+
+
+# this will remove the admin prefix from the url and is still use controller in admin folder
+scope  module: :admin do
+  resources :students
+end
+
+Note: change links in case you change scope or namespace accordingly
+
+**********************************
+
+if you want admin prefix to your routes and not want the namespace
+( i.e you want normal controller in Controller folder not in any sub folder)
+
+scope :admin do
+  resources :students
+end

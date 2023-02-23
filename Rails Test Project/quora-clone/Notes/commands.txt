@@ -1,0 +1,78 @@
+
+
+rails g model Topic title:string{150} desc:text{500} user:references
+
+rails g model user first_name:string{16} last_name:string email_address:string address_line_one address_line_two address_city address_state:string{2} address_zip:integer
+
+
+rails g controller
+
+rails g controller Topics
+
+
+***************************************
+Feature:  user can follow many topics:
+
+rails g model user_topic  user:references topic:references
+rails db:migrate
+
+2)  add this to user  model class:
+has_many :user_topics
+has_many :topics, through: :user_topics
+
+3) add this to topic model class:
+has_many :user_topics
+has_many :users, through: :user_topics
+
+commands:
+u = User.first
+t1 = Topic.first
+t2 = Topic.last
+
+u.topics << t1 << t2
+
+u= User.last
+t3 = Topic.find(3)
+t4 = Topic.find(4)
+t5 = Topic.find(5)
+u.topics << t3 << t4 << t5
+
+https://stackoverflow.com/questions/1129781/has-and-belongs-to-many-avoiding-dupes-in-the-join-table
+
+***************************************
+
+Question and its relationship with topic model:
+
+rails g model question text:text user:references
+
+rails g model question_topic question:references topic:references
+rails db:migrate
+
+2)  add this to question  model class:
+has_many :question_topics
+has_many :topics, through: :question_topics
+
+3) add this to topic model class:
+has_many :question_topics
+has_many :questions, through: :question_topics
+
+
+t= Topic.find(2)
+q = Question.first
+q.topics << t
+
+***************************************
+
+Answer and its relationship with question model:
+
+rails g model answer text:text question:references user:references
+rails db:migrate
+
+
+q = Question.first
+q.answers.create(text: "the process or activity of writing computer programs.")
+
+
+q.answers.create(text:"answer", user_id:2)
+q.answers.create(text:"Statistics is a branch that deals with every aspect of the data. Statistical knowledge helps to choose the proper method of collecting the data and employ those samples in the correct analysis process in order to effectively produce the results", user_id:1)
+q.answers.create(text:"a branch of mathematics dealing with the collection, analysis, interpretation, and presentation of masses of numerical data", user_id:2)

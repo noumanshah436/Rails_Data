@@ -1,0 +1,11 @@
+<div class="w-full d-flex justify-content-center mx-auto my-4">
+  <%= image_tag( @user.avatar,  class: "display_pic text-center rounded-circle" ) %><br />
+</div>
+<div class="card"  >
+  <div class="card-body text-center">
+    <h5 class="card-title font-weight-bold"><%= @user.name %></h5>
+    <h5 class="card-title  "><%= @user.email %></h5>
+  </div>
+</div>
+
+<%= render questions_answered_by_user(@user.id) , show_answer_form: false  %>

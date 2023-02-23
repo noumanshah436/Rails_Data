@@ -1,0 +1,113 @@
+https://guides.rubyonrails.org/v5.2/action_controller_overview.html#session
+
+Sessions:
+Your application has a session for each user in which you can store small amounts of data that will be
+ persisted between requests.
+
+session[:user_id] = user.id
+
+session[:user_id] = nil
+
+******************
+
+Flash:
+The flash is a special part of the session which is cleared with each request.
+ This means that values stored there will only be available in the next request, which is useful for passing error messages etc.
+
+flash[:notice] = "You have successfully logged out."
+
+<% flash.each do |name, msg| -%>
+	<%= content_tag :div, msg, class: name %>
+<% end -%>
+
+
+#  'keep' to make it persist for another request.
+ def index
+    # Will persist all flash values.
+    flash.keep
+
+    # You can also use a key to keep only some kind of value.
+    # flash.keep(:notice)
+    redirect_to users_url
+  end
+
+
+
+By default, adding values to the flash will make them available to the next request, but sometimes you may want to access those values in the same request.For example, if the create action fails to save a resource and you render the new template directly, that's not going to result in a new request, but you may still want to display a message using the flash.
+
+flash.now[:error] = "Could not save client"
+render action: "new"
+
+******************
+
+Cookies:
+
+Your application can store small amounts of data on the client - called cookies - that will be persisted across requests and even sessions.
+ Rails provides easy access to cookies via the cookies method, which - much like the session - works like a hash:
+
+
+ cookies[:commenter_name] = @comment.author
+ cookies.delete(:commenter_name)
+
+
+ def set_cookie
+    cookies.encrypted[:expiration_date] = Date.tomorrow # => Thu, 20 Mar 2014
+    redirect_to action: 'read_cookie'
+  end
+
+  def read_cookie
+    cookies.encrypted[:expiration_date] # => "2014-03-20"
+  end
+
+
+ **************************************
+
+
+ cheetsheet:
+
+
+ # Create flash (reset every new request)
+flash[:success] = 'User created with success!'
+
+# Create flash.now (reset every new view render)
+flash.now[:error] = 'Please select s user!'
+
+# Create session (reset every browser close)
+session[:user_id] = user.id
+
+# Check if session exist
+session[:user_id].nil?
+
+# Remove
+session.delete(:user_id)
+
+# Remove all
+reset_session
+
+# Create cookie (reset at expiration date)
+cookies.permanent[:remember_token] = remember_token
+
+# Encrypted cookie
+cookies.permanent.encrypted[:user_id] = user.id
+
+# Delete cookie
+cookies.delete(:user_id)
+
+
+************************************
+
+
+The main difference, in Rails 3, is that when you use cookie[:foo] = 'bar' the user is able to see the value for the cookie, i.e. 'bar'.
+
+When you use session[:foo] = 'bar' the value will be encrypted by rails and stored in the _myapp_session cookie.
+
+You would use the cookie[] format when the information you want to store is not bound to the session, e.g. when the users selects the preferred language.
+
+You would use the session[] format when you want to store information that is related to the current session, e.g. the id of the the user.
+
+
+************************************
+
+
+session/cookies will be destroid if we close browser .
+

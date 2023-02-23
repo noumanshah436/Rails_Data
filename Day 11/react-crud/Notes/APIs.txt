@@ -1,0 +1,57 @@
+
+Simple Ruby on Rails 5 REST API From Scratch:
+
+https://www.youtube.com/watch?v=QojnRc7SS9o
+
+rails new app_name --api
+
+***************************
+
+
+index
+http://localhost:3000/api/v1/posts
+
+
+
+show
+http://localhost:3000/api/v1/posts/1
+
+
+post
+post req to
+http://localhost:3000/api/v1/posts
+
+{
+    "title":"postman",
+    "body":"this is from postman"
+}
+
+
+delete
+delete req to
+http://localhost:3000/api/v1/posts/6
+
+
+update
+put req to
+http://localhost:3000/api/v1/posts/5
+
+{
+    "title":"Updated",
+    "body":"this update is from postman"
+}
+
+
+
+******************************
+
+Create new Post:
+
+Parameters: {
+
+    "utf8"=>"✓",
+    "authenticity_token"=>"9MP8Z64Ftz25L3JjURaFgnrx8Qr6FW1oSKokJefbFeihagJF5aYQxG/Tk/GaTqy/9c/9t/qkvmLIAN8haJ/pOQ==",
+    "post"=>{
+        "image"=>#<ActionDispatch::Http::UploadedFile:0x00007ff220459ce0 @tempfile=#<Tempfile:/tmp/RackMultipart20221111-572699-jk6rc7.jpg>, @original_filename="2022-09-19-230459.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"post[image]\"; filename=\"2022-09-19-230459.jpg\"\r\nContent-Type: image/jpeg\r\n">,
+        "title"=>"title ", "body"=>"body"},
+        "commit"=>"Create Post"}

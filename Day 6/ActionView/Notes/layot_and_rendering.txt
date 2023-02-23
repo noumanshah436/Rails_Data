@@ -1,0 +1,25 @@
+
+
+Layout :
+
+add file (header.html.erb) in views/layouts and
+use layout 'header' in controller will use header file as layout instead of default ( application.html.erb )
+
+
+*********************
+
+see helper methods in welcome controller
+
+**********************
+
+
+get 'form', to: 'welcome#form', as: 'form'
+
+redirect_to :form
+render "form"          -- can also use string
+
+****
+
+ redirect_to action: 'form'
+
+********************************

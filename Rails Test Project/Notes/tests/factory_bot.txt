@@ -1,0 +1,116 @@
+ 
+ 
+ 
+ Factory Bot Docs:
+ https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md
+ 
+ traits:
+ https://thoughtbot.com/blog/remove-duplication-with-factorybots-traits
+ 
+ 
+ 
+ ******************************************************************************************
+ 
+ 
+ traits:
+ 
+ Rspec Trait
+Rspec has great feature and that is trait. In rspec we create factory for each class which provides the simplest set of attributes necessary to create an instance of that class. Many times we need some attributes which we do not want to add in original factory and at the same time we do not want to repeat it. In such scenario rspec trait is good option. For few attributes we need different values and we want to use it at multiple places can be another reason to use it.
+
+Without Trait:
+
+  FactoryGirl.define do
+    factory :package do
+      description     FFaker::Lorem.sentence
+    end
+  end
+
+  package = create :package, is_set: true, set_value: 1
+
+
+This code can be normalize as follow. It becomes more readable, reusable and clear with the help of traits.
+
+****************************
+
+
+With Trait:
+
+ FactoryGirl.define do
+    factory :package do
+      description     FFaker::Lorem.sentence
+
+      trait :as_set do
+        is_set true
+        set_value 1
+      end
+    end
+  end
+
+  package = create :package, :as_set
+  
+  
+  
+**************************
+
+
+
+FactoryBot.define do
+  factory :todo_item do
+    name { 'Pick up a gallon of milk' }
+
+    trait :completed do
+      complete { true }
+    end
+
+    trait :not_completed do
+      complete { false }
+    end
+
+    trait :with_comments do
+      after(:create) do |instance|
+        create_list :comment, 2, todo_item: instance
+      end
+    end
+  end
+end
+
+
+
+You can mix and match traits as you please:
+
+create(:todo_item, :completed, :with_comments)
+create(:todo_item)
+create(:todo_item, :not_completed, name: 'Pick up a bag of sugar')
+
+
+
+
+******************************************************************************************
+
+
+
+
+
+phone_number { rand(10**9..10**10) } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

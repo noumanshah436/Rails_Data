@@ -1,0 +1,3 @@
+id = "#new-answers-question-<%= @question.id.to_s %>";
+$(id).append('<%= j render "answers/answer", answer: @answer  %>');
+$('#answer_text').val('');

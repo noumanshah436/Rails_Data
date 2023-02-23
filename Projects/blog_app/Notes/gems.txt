@@ -1,0 +1,33 @@
+
+# Bulma CSS
+gem 'bulma-rails', '~> 0.6.1'
+# Simple forms
+gem 'simple_form', '~> 5.0'
+
+
+For development:
+
+# Guard is a command line tool to easily handle events on file system modifications.
+gem 'guard', '~> 2.14', '>= 2.14.1'
+
+# reload the browser after changes to assets/helpers/tests
+gem 'guard-livereload', '~> 2.5', '>= 2.5.2', require: false
+
+# Make errors prettier
+gem 'better_errors', '~> 2.4'
+
+***************************
+
+for  simple_forms:
+rails generate simple_form:install
+
+for guard-livereload:
+guard init livereload
+
+run Guard:
+bundle exec guard
+
+add this in development.rb
+BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
+
+***************************

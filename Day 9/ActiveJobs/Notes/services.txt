@@ -1,0 +1,8 @@
+
+
+1) Add this line in config/application.rb file:
+    config.eager_load_paths << Rails.root.join("app/services")
+
+2) create services folder in app folder
+
+3) 

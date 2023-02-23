@@ -1,0 +1,18 @@
+
+<strong>
+    <% likes.each.with_index do |like, index| %>
+        <% if likes.count == 1 %>
+            <%= like.account.name %> </strong> like this
+        <% elsif like == likes.last %>
+            </strong>and<strong>
+    <%= + like.account.name %></strong> like this
+        <% elsif index > 1 %>
+            </strong><%= "and " + (likes.count-index).to_s + " others " %> like this
+            <% break %>
+        <% elsif index==likes.count-2 || index==1%>
+            <%= like.account.name %>
+        <% else %>
+            <%= like.account.name + ", " %>
+        <% end %>
+    <% end %>
+</strong>

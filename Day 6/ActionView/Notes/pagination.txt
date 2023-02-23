@@ -1,0 +1,33 @@
+https://github.com/kaminari/kaminari
+
+gem 'kaminari'
+ bundle install
+
+
+
+1) add in model class:
+  paginates_per 5
+
+2) IN controller:
+  @articles = Article.all.page(params[:page])
+
+3) add in index file
+<%= paginate @articles %>
+
+4) rails g kaminari:views bootstrap4
+
+
+**********************************
+
+It is A Tradeoff, Each one has its own advantages and disadvantages.
+
+For Server Side Pagination:
+your request time and data are reduced, as only a selected no of rows will be sent by the server.
+browser required less memory hence faster to process like filter, map, reduce etc.(only for one page)
+
+
+For Client Side Pagination:
+As all data is present on client machine user can easily switch between back and forth.
+filter, search, map, reduce is possible on whole data.
+server get few requests as for search, filter, etc needed extra request and many iterations to the server.
+So choose according to your specific requirements.

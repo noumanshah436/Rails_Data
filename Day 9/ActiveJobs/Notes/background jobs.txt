@@ -1,0 +1,63 @@
+Active Job is a framework for declaring jobs and making them run on a variety of queueing backends.
+
+******************************
+Active Job is an interface to queueing backends such as sidekiq, delayed_job or resque.
+ It's simply a way for you to write background jobs where you don't have to care about which of the queueing backends will be used.
+
+
+******************************
+
+rails g job first_job
+
+GuestsCleanupJob.set(wait: 5.seconds).perform_later(2)
+
+*****************************
+
+Sidekiq is a Ruby Background Processor that manages its queue with a Redis service. Learn the basics of Sidekiq and integrating it with ActiveJob
+
+1) gem 'sidekiq'
+   bundle
+
+2) config/application.rb:
+config.active_job.queue_adapter = :sidekiq
+config.active_job.queue_adapter =  Rails.env.production? ? :sidekiq : :async
+
+3) create sidekiq.rb in config/initializers
+
+4) rails g job generate_random_user
+
+5) GenerateRandomUserJob.perform_later
+
+6) in terminal run sidekiq sever:
+    sidekiq
+
+7) run rails server in production:
+    rails s -e production
+
+8) http://localhost:3000/sidekiq
+
+
+https://www.youtube.com/watch?v=CStZg8ql9Vs
+https://www.digitalocean.com/community/questions/how-to-run-rails-server-in-production-mode
+
+9) rake db:migrate RAILS_ENV=production
+
+https://stackoverflow.com/questions/4909831/rake-dbmigrate-doesnt-seem-to-work-in-production
+
+
+*********************
+Background Processing with Rails, Redis and Sidekiq
+https://www.youtube.com/watch?v=GBEDvF1_8B8
+
+*********************
+https://stackoverflow.com/questions/32947076/redis-server-in-ubuntu14-04-bind-address-already-in-use
+
+stop server is redis not worK:
+
+sudo service redis-server stop
+
+redis-server
+*********************
+
+gem 'faker'
+

@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: manager_histories
+#
+#  id               :integer          not null, primary key
+#  joining_date     :date
+#  total_experience :integer
+#  manager_id       :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
+one:
+  joining_date: 2022-08-29
+  total_experience: 1
+  manager: one
+
+two:
+  joining_date: 2022-08-29
+  total_experience: 1
+  manager: two

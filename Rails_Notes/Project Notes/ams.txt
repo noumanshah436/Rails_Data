@@ -1,0 +1,11 @@
+https://github.com/rails-api/active_model_serializers/blob/0-10-stable/docs/README.md
+
+
+  youtube.com/watch?v=lQOLrycmXC4&ab_channel=GoRails
+
+  http://railscasts.com/episodes/409-active-model-serializers?autoplay=true
+
+
+https://github.com/rails-api/active_model_serializers/tree/v0.10.6/docs
+https://github.com/rails-api/active_model_serializers/tree/v0.10.6/docs/general
+https://github.com/rails-api/active_model_serializers/blob/v0.10.6/docs/general/serializers.md#root

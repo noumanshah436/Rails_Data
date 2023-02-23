@@ -1,0 +1,19 @@
+
+http://localhost:3000/params/index?status=activated
+
+# {"status"=>"activated", "controller"=>"params", "action"=>"index"}
+
+puts "params:"
+p params[:controller]
+p params[:status]
+p params[:action]
+
+
+**********************
+
+
+get 'params/new'
+post 'params/create'
+ 
+
+

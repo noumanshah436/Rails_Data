@@ -1,0 +1,24 @@
+ day#6
+ 
+Views
+layouts and rendering
+action view from helpers
+view helpers
+view partials
+partial vs view vs layout
+Passing data from controller to view, to partials
+remote form submission
+custom form routes
+pagination
+
+
+
+when ever a request comes to the controller then first controller handle that request and then 
+the action view is responsible for compiling that request on to the browser
+
+action view represents the v in MVC and also known as the presentation layer 
+
+
+*********************
+
+render action: :edit

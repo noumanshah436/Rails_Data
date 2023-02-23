@@ -1,0 +1,71 @@
+https://guides.rubyonrails.org/v5.2/active_record_callbacks.html
+
+Callbacks allow you to trigger logic before or after an alteration of an object's state.
+
+
+Callbacks are methods that get called at certain moments of an object's life cycle.
+With callbacks it is possible to write code that will run whenever an Active Record object is
+created, saved, updated, deleted, validated, or loaded from the database.
+
+
+***********************
+
+  def greeting_message
+    puts "before_create"
+  end
+
+  after_create do
+      puts "after Create"
+  end
+
+  around_create do
+    puts "around_create"
+  end
+
+  before_validation do
+    puts "before valid"
+  end
+
+  after_validation do
+    puts "afetr valid"
+  end
+
+end
+
+
+# (0.1ms)  begin transaction
+# before valid
+# afetr valid
+# before_create
+# around_create
+# after Create
+# (0.1ms)  commit transaction
+
+**************************
+
+after_create :display_age
+
+def display_age
+  if self.age.present?
+    puts "age=#{self.age}"
+  else
+      puts "age not present"
+  end
+end
+
+**************************
+ after_create :display_age
+
+  def display_age
+    if self.DOB.present?
+      age= Date.today.year - self.DOB.year
+      puts "====age=#{age}===="
+    else
+        puts "DOB not present"
+    end
+  end
+
+ p = Person.create(name: "Nouman", age: 23, DOB:"1998-11-19")
+ p = Person.create(name: "Nouman", age: 23, DOB: Date.today - 24.years)
+
+**************************

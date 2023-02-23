@@ -1,0 +1,70 @@
+
+
+user = User.create(name:"NOuman")
+user.products.create(name:"tv", price: 5000)
+
+User.find(2).products.create(name:"Laptop", price:30000)
+
+*****************************
+
+simple Join or Inner Join:
+
+select all products where user name is "NOuman:
+
+products = Product.joins(:user).where(:users =>{:name => "NOuman" })
+products = Product.joins(:user).where(users: {name: "NOuman" })           --  above query can be wriiten as this
+products[0]
+products[1]
+
+product = Product.joins(:user).where(users: {name: "NOuman" }).first
+product
+
+
+prod = Product.joins(:user)
+prod.to_sql
+
+
+*****************
+
+p = Product.create(name:"prod1", price: 1234)
+p.user
+
+prod = Product.where(:user_id => nil)
+prod
+
+*****************
+
+> user = User.create(name:"Farhan")
+
+> User.where(name:"Farhan").joins(:products).where( :products => { :id=>nil} ).first
+=> nil
+
+Note:
+Inner join connects foreign and primary key
+Inner join excludes relations that don't exist
+
+*********************
+
+outer join:
+Outer Join take all users and match them up with a product even if no matching product exists
+
+> User.left_outer_joins(:products).where(:products=>{:id=>nil})
+
+can be written as
+
+> User.left_outer_joins(:products).where(products:{id:nil})
+
+Now this outer join has solved the problem
+
+*********************
+
+get product where user name is "NOuman" and product name is "laptop":
+
+product = Product.joins(:user).where(  users: {name: "NOuman" },  products:{name: "Laptop"}  )
+
+***************************
+find_by_sql
+
+User.find_by_sql("SELECT * FROM users INNER JOIN products ON user.id = products.user_id ")
+
+*********************

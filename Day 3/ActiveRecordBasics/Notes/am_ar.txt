@@ -1,0 +1,97 @@
+
+
+https://edgeguides.rubyonrails.org/active_model_basics.html
+
+ActiveModel:  Active Model is a library containing various modules used in developing classes that need some features present on Active Record.  So ActiveModel includes things like validations.
+
+1) When including ActiveModel::API you get some features like:
+
+model name introspection
+conversions
+translations
+validations
+initialize object
+
+2) The ActiveModel::AttributeMethods module can add custom prefixes and suffixes on methods of a class. It is used by defining the prefixes and suffixes and which methods on the object will use them.
+
+3) ActiveModel::Callbacks gives Active Record style callbacks. This provides an ability to define callbacks which run at appropriate times. After defining callbacks, you can wrap them with before, after, and around custom methods.
+
+4) An object becomes dirty when it has gone through one or more changes to its attributes and has not been saved. ActiveModel::Dirty gives the ability to check whether an object has been changed or not. It also has attribute-based accessor methods.
+
+
+5) The ActiveModel::Validations module adds the ability to validate objects like in Active Record.
+
+6) ActiveModel::Model allows implementing models similar to ActiveRecord::Base
+
+7) ActiveModel::Serialization provides basic serialization for your object. You need to declare an attributes Hash which contains the attributes you want to serialize. Attributes must be strings, not symbols.
+
+8) ActiveModel::SecurePassword provides a way to securely store any password in an encrypted form. When you include this module, a has_secure_password class method is provided which defines a password accessor with certain validations on it.
+
+
+**********************
+
+ActiveRecord: This is the component that associates a class to the database. This will give the class functionality such as methods that make it easy to pull records from the database (An example is the find method).
+
+ActiveResource: Similar to ActiveRecord. However, instead of being backed by a database, an ActiveResource object is backed by another application through a web service API. More information: http://ofps.oreilly.com/titles/9780596521424/activeresource_id59243.html
+
+
+“ORM: An object that wraps a row in a database table or view, encapsulates
+the database access, and adds domain logic on that data.”
+
+**********************
+
+Active Record is the M in MVC - the model - which is the layer of the system responsible for representing business data and logic. Active Record facilitates the creation and use of business objects whose data requires persistent storage to a database.
+
+Active Record gives us several mechanisms, the most important being the ability to:
+
+Represent models and their data.
+Represent associations between these models.
+Represent inheritance hierarchies through related models.
+Validate models before they get persisted to the database.
+Perform database operations in an object-oriented fashion
+
+***************
+
+Active Record supports the following database column types:
+
+:binary
+:boolean
+:date
+:datetime
+:decimal
+:float
+:integer
+:primary_key
+:string
+:text
+:time
+:timestamp
+
+***************
+
+Rails will plularize your tablename
+
+Model name will automatically get pluralize in database
+
+
+Model naming convention
+
+Model/Class	Table/Schema
+Article	articles
+LineItem	line_items
+Deer		deers
+Mouse		mice
+Person		people
+
+
+Suppose you have Model name Book , it will store in sqlite as books and
+in model it will be class name as  Book
+
+This will create a Book model, mapped to a books table at the database
+
+Book.all
+Book.new
+@book.save
+@book.update
+@book.destroy
+ 

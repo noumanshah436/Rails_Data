@@ -1,0 +1,15 @@
+we write re usable modules in concerns
+
+A rail concern is any module that extends ActiveSupport::Concern module
+
+concerns
+https://www.youtube.com/watch?v=iLKSpfQWvMA
+https://www.akshaykhot.com/how-rails-concerns-work-and-how-to-use-them/
+
+
+Using concern we can add common code of controllers in concern module and include it in controller that will enhance readability
+
+
+*************************
+
+

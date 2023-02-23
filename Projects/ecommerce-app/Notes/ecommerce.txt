@@ -1,0 +1,19 @@
+rails g model
+
+
+rails g scaffold Product name price:decimal size description:text model:string status:boolean quantity:integer
+
+
+
+:binary
+:boolean
+:date
+:datetime
+:decimal
+:float
+:integer
+:primary_key
+:string
+:text
+:time
+:timestamp

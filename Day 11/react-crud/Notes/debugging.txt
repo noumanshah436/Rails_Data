@@ -1,0 +1,38 @@
+
+
+<%= debug(params) %>
+<%= debug(@post) %>
+<%= simple_format(@post.to_yaml) %>
+
+<%= @post.inspect %>
+
+**************************
+
+gem 'web-console'
+
+to get console, add console statemen anywhere on page:
+we write any query there and can access instance variables also:
+
+
+<%= console %>
+
+**************************
+
+gem 'pry-rails'
+gem "table_print"
+
+tp Post.all
+
+**************************
+
+rails c --sandbox
+
+now any change in database will be rollback
+
+**************************
+
+use byebug anywhere:
+
+byebug
+
+**************************

@@ -1,0 +1,9 @@
+<% if answers.present? %>
+  <ul class="list-group list-group-flush">
+    <%= render answers %>
+  </ul>
+<% else %>
+  <div class="p-4">
+    No answer
+  </div>
+<% end %>

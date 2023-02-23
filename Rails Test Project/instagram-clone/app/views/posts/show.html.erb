@@ -1,0 +1,66 @@
+<div class="card mt-3 post">
+
+  <!-- header -->
+  <div class="card-header d-flex align-items-center">
+
+    <%= link_to profile_path(@post.account), class: "no-text-decoration" do %>
+      <%= image_tag @post.account.image.url(:thumbnail),  class: "profile_pic rounded-circle"%>
+    <% end %>
+
+    <%= link_to profile_path(@post.account), class: " lead ml-3", title: @post.account.name do %>
+      <strong><%= @post.account.name %></strong>
+    <% end %>
+
+    <% if @post.belongs_to? current_account %>
+
+        <div class="ml-auto">
+          <%= link_to post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } , class: "nounderline mx-2" do %>
+            <i class="fa-sharp fa-solid fa-trash fa-2x text-danger" aria-hidden="true"></i>
+          <% end %>
+
+          <%= link_to edit_post_path(@post) , class: " nounderline " do %>
+            <i class="fa-sharp fa-solid fa-pen-to-square fa-2x text-danger" aria-hidden="true"></i>
+          <% end %>
+        </div>
+    <% end %>
+
+  </div>
+
+  <%= render "photos", {post: @post} %>
+
+  <div class="card-body h5">
+
+    <div id="like-icon-post-<%= @post.id.to_s %>">
+      <%= render "like_icon", {liked: @post.liked(current_account), post: @post} %>
+    </div>
+    <br>
+    <div id="like-text-post-<%= @post.id.to_s %>">
+      <%= render "like_text", {likes: @likes} %>
+    </div>
+    <br>
+
+    <div>
+      <span><strong class=" "><%= @post.account.name %></strong></span>
+      <span><%= @post.content %></span>
+    </div>
+    <br>
+    <%=  time_ago_in_words(@post.created_at)  + " ago"   %>
+    <hr>
+
+    <div class=" mb-5  " id="comment-form-post-<%= @post.id.to_s %>">
+      <%= render 'comments/comment_form', post: @post %>
+    </div>
+
+    <div class="" id="comment-post-<%= @post.id.to_s %>">
+      <% @post.comments.where(parent_id: nil).each do |comment| %>
+         <%= render  partial:'comments/comment', locals: { comment:comment  }   %>
+      <% end %>
+    </div>
+
+  </div> 
+<div class="mb-5"></div>
+<div class="mb-5"></div>
+<div class="mb-5"></div>
+<div class="mb-5"></div>
+
+</div>

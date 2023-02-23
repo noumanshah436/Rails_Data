@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: employees
+#
+#  id          :integer          not null, primary key
+#  account     :string
+#  employee_id :integer
+#  manager_id  :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+one:
+  account: MyString
+  employee_id: 1
+  manager_id: 1
+
+two:
+  account: MyString
+  employee_id: 1
+  manager_id: 1

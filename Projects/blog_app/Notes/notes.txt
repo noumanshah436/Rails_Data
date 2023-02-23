@@ -1,0 +1,10 @@
+RUBYOPT='-W0' bundle exec rails s
+
+
+rails g controller posts
+rails g model  Post title content:text
+rails db:migrate
+
+rails g controller comments
+rails g model Comment name comment:text
+rails db:migrate

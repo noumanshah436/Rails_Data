@@ -1,0 +1,87 @@
+rails g model Post title:string body:text author:string
+
+**********************************
+https://medium.com/@michellekwong2/form-tag-vs-form-for-vs-form-with-fa6e0ac73aac
+**********************************
+
+form_tag generates an HTML form for us and lets you specify options you want for your form.
+We use the rails method, url_for, to create a URL we want the form to submit to. This request for making a new post would have a URL of /posts and let Rails know the specific controller this URL is going to be for.
+
+******
+
+
+<%= form_tag url_for(action: 'create'), method: "post" do %>
+
+  <%= label_tag 'Title' %>
+  <%= text_field_tag 'title', @post.title %>
+
+  <%= label_tag 'Body' %>
+  <%= text_area_tag 'body', @post.body %>
+
+  <%= label_tag 'Author' %>
+  <%= text_field_tag 'author', @post.author %>
+
+  <%= submit_tag "Create Post" %>
+
+<% end %>
+
+
+**********************************
+
+form_for
+
+form_for method follows RESTful conventions on its own. It accepts the instance of the model as an argument where it makes assumptions for you (which is why it can be seen to be preferred over form_tag).
+form_for prefers the argument that you’re passing in to be an active record object. This will easily make a create or edit form.
+
+
+
+<%= form_for @post , :html => {:class => "w-100"} do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <br>
+
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+  <br>
+
+  <%= f.label :author %>
+  <%= f.text_field :author %>
+  <br>
+
+  <%= f.submit %>
+<% end %>
+
+**********************************
+
+
+Know when to use form_for vs. form_tag
+
+We use form_for with a specific model and use form_tag when you don’t have a model for it (for custom URLs).
+Both form_for and form_tag produce HTML for a form.
+However, the syntax for both forms is different since we use form builder field helpers with form_for but not with form_tag.
+And then theres form_with where we always use form builder.
+
+
+**********************************
+
+form_with
+
+If we don’t pass a model, form_with behaves like form_tag.
+
+form_with submits are remote by default and attaches the data-remote=“true” to the form.
+You can change this by using local: true. This is the opposite from the other methods where the default is local and you have to specify remote: true to make it remote.
+
+
+
+Another difference between form_with compared to form_for and form_tag is that form_for and form_tag generate automatic ids for the input fields.
+ On the other hand, form_with does not. Ids and classes have to be specified.
+
+
+Lastly, another difference in form_with is that any id and class are not wrapped in the html key.
+Example of form_with wrapping id & class in keys :
+
+<%= form_with model: @post, id: “custom-id”, class: “custom-class” do |form| %>
+
+as opposed to form_for where you have to specify the id and class:
+
+<%= form_for @post, html: { id: “custom-id”, class: “custom-class” } do |form| %>

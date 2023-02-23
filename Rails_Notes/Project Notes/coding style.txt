@@ -1,0 +1,78 @@
+describe 'contamination create' do
+    context 'with valid params' do
+    before do
+      sign_in(user1)
+      post :create, params: { contaminate: { sender_id: user1.id, receiver_id: user2.id } }, xhr: true
+    end
+    it 'successfully' do
+      expect(response).to have_http_status(200)
+      should render_template('create')
+    end
+  end
+
+    context 'with invalid params' do
+      before do
+        sign_in(user1)
+        post :create, params: { contaminate: { sender_id: user1.id, receiver_id: nil } }
+      end
+      it 'not successfully' do
+        expect(response).to have_http_status(302)
+        expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq 'There was a problem saving your contamination.'
+      end
+  end
+  end
+  
+  ****************************
+  
+  
+  # frozen_string_literal: true
+
+class ContaminationsController < ApplicationController
+  include CheckContaminationStatus
+  before_action :check_contamination
+  after_action :change_user_status
+
+  def create
+    @contamination = current_user.contaminations.new(contamination_params)
+    authorize @contamination
+    if @contamination.save!
+      respond_to do |format|
+        format.html { redirect_to contaminations_path, notice: 'User Contamed' }
+        format.js
+      end
+    else
+      redirect_to root_path, alert: 'There was a problem saving your contamination.'
+    end
+  end
+
+  def destroy
+    begin
+      @contamination = current_user.contaminations.find_by(receiver_id: params[:contaminate][:receiver_id],
+                                                           sender_id: current_user.id)
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path, alert: 'There was a problem saving your contamination.'
+    end
+    @contamination.destroy
+    respond_to do |format|
+      format.html { redirect_to contaminations_path, notice: 'User Decontamied' }
+      format.js
+    end
+    authorize @contamination
+  end
+
+  private
+
+  def contamination_params
+    params.require(:contaminate).permit(:receiver_id).tap do |params|
+      params[:sender_id] = current_user.id
+    end
+  end
+
+  def change_user_status
+    if current_user.my_contaminations.count == 5
+      current_user.status = 'zombie'
+      current_user.save
+    end
+  end
+end

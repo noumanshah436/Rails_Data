@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+class TopicPolicy < ApplicationPolicy
+  def edit?
+    user == record.user
+  end
+
+  def update?
+    user == record.user
+  end
+
+  def destroy?
+    user == record.user
+  end
+end

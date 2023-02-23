@@ -1,0 +1,9 @@
+<form accept-charset="UTF-8" action="/params/create"   method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <input type="text" name="id" value="23" />
+  <input type="text" name="client[name]" value="Acme" />
+  <input type="text" name="client[phone]" value="12345" />
+  <input type="text" name="client[address][postcode]" value="12345" />
+  <input type="text" name="client[address][city]" value="Carrot City" />
+  <input type="submit" value="Submit">
+</form>

@@ -1,0 +1,22 @@
+Profile page
+Users can click on any username (from the question or answer given) and can view their information
+Users can view questions answered by this specific user until now.
+
+
+Question.includes(:answers).where(answers: {user_id:3}).distinct
+
+Question.with_answers_and_users.where(answers: {user_id:3}).distinct
+
+
+********************
+
+
+ <% if controller.controller_name != 'topics'%>
+    <div class="p-4">
+      <h3>Give Answer </h3>
+      <%= render 'answers/form', question: question,  answer: question.answers.new %>
+      <br>
+    </div>
+  <% end %>
+
+********************

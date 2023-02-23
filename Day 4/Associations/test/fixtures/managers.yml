@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: managers
+#
+#  id            :integer          not null, primary key
+#  name          :string
+#  email         :string
+#  contact       :string
+#  department_id :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+one:
+  name: MyString
+  email: MyString
+  contact: MyString
+  department: one
+
+two:
+  name: MyString
+  email: MyString
+  contact: MyString
+  department: two

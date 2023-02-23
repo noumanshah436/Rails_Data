@@ -1,0 +1,9 @@
+
+<% @post.parent_comments.each do |comment| %>
+
+  <%= render  partial:'comments/comment', locals: { comment:comment  }   %>
+
+<% end %>
+
+
+

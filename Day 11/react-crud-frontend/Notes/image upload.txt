@@ -1,0 +1,129 @@
+export const createPost = (e) => {
+  const CREATE_API_URL = process.env.REACT_APP_API;
+
+  e.preventDefault();
+  const formData = new FormData();
+
+  formData.append("post[user_id]", 1);
+  formData.append("post[text]", e.target.text.value);
+  formData.append("post[title]", e.target.title.value);
+
+  if (e.target.image.files[0] != null) {
+    formData.append("post[image]", e.target.image.files[0]);
+  }
+
+  fetch(CREATE_API_URL, {
+    method: "POST",
+    body: formData,
+  }).then((result) => {
+    result.json().then((resp) => {
+      // console.log(resp);
+    });
+  });
+};
+
+*************************
+
+export const createPost = (e) => {
+
+  export const createPost = (e) => {
+
+  e.preventDefault();
+   formData.append("post[title]", title);
+    formData.append("post[body]", body);
+    formData.append("post[image]", image);
+
+  fetch("http://localhost:3000/api/v1/posts", {
+    method: "POST",
+    body: formData,
+  }).then((result) => {
+    result.json().then((resp) => {
+      console.log(resp);
+    });
+  });
+};
+}
+
+*************************
+
+import "../assets/css/post.css";
+import { useState } from "react";
+import { createPost } from "./Helper";
+
+const PostCreate = () => {
+  const [text, setText] = useState("");
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState(null);
+
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const handleTextChange = (event) => {
+    setText(event.target.value);
+  };
+
+  const handleImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setImage(URL.createObjectURL(event.target.files[0]));
+    }
+  };
+
+  return (
+    <>
+      <form onSubmit={createPost}>
+        <div className="form-group">
+          <label>Title</label>
+          <input
+            type="text"
+            name="title"
+            className="form-control"
+            placeholder="Enter Title"
+            value={title}
+            onChange={handleTitleChange}
+            required
+          />
+          <small className="form-text text-muted">
+            Title length must be between (10-30) and Unique
+          </small>
+        </div>
+        <div className="form-group">
+          <label>Description</label>
+          <input
+            type="text"
+            name="text"
+            className="form-control"
+            placeholder="Enter Description"
+            value={text}
+            onChange={handleTextChange}
+            required
+          />
+          <small className="form-text text-muted">
+            Description length must be greater than 50 characters
+          </small>
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Image</label>
+          <input
+            type="file"
+            name="image"
+            className="form-control"
+            onChange={handleImageChange}
+            required
+          />
+
+          {image && <img src={image} alt="preview_image" />}
+          <small className="form-text text-muted">Image must required</small>
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </form>
+    </>
+  );
+};
+
+export default PostCreate;
+
+
+*************************

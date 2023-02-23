@@ -1,0 +1,43 @@
+rails g simple_form:install --bootstrap
+
+
+Running via Spring preloader in process 319438
+      create  config/initializers/simple_form.rb
+      create  config/initializers/simple_form_bootstrap.rb
+       exist  config/locales
+      create  config/locales/simple_form.en.yml
+      create  lib/templates/erb/scaffold/_form.html.erb
+
+**********************
+
+rails new action_cable_chat_app
+cd action_cable_chat_app/
+code .
+
+rails g simple_form:install --bootstrap
+git add -A
+git commit -m "install form"
+
+rails g devise:install
+rails g devise:views
+rails g devise User
+
+
+rails g controller pages home
+rails g model message body:text user:references
+rails g controller messages create
+rails db:migrate
+
+**********************
+
+change application.rb file for time:
+
+rails time:zones:all
+
+
+***********************
+
+1) rails g channel chat
+
+2) add in development.rb
+ config.action_cable.mount_path = "/cable"

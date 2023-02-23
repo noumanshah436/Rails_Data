@@ -1,0 +1,52 @@
+
+
+1) `initialize': No such file or directory - connect(2) 
+`spawn': No such file or directory - /home/dev/Rails/Day (Errno::ENOENT)
+
+
+solution:  https://stackoverflow.com/questions/48703240/module-build-failed-error-spawn-bin-rails-enoent
+
+run this command:
+rails app:update:bin
+
+******************************
+
+
+https://stackoverflow.com/questions/19961821/why-bundle-install-is-installing-gems-in-vendor-bundle
+
+To Install Gem in system wide avoiding path vendor/bundle, just run the following command in project directory
+
+bundle install --system
+
+******************************
+
+Rails 4: check if a local variable exists and is true in a partial
+
+https://stackoverflow.com/questions/23018339/rails-4-check-if-a-local-variable-exists-and-is-true-in-a-partial
+
+
+******************************
+
+
+Render and/or redirect were called multiple times in this action.
+Please note that you may only call render OR redirect, and at most once per action.
+
+Also note that neither redirect nor render terminate execution of the action, 
+so if you want to exit an action after redirecting, you need to do something like "redirect_to(...) and return".
+
+
+******************************
+
+remove warnings:
+
+https://stackoverflow.com/questions/59491848/how-to-fix-railss-warning-messages-with-ruby-2-7-0
+
+RUBYOPT='-W0'  rails s
+
+or 
+
+export RUBYOPT='-W0'
+rails s
+
+
+******************************

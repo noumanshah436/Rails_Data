@@ -1,0 +1,39 @@
+rails g model vote likable:references{polymorphic} user:references status:integer
+
+def change
+  create_table :votes do |t|
+    t.references :likable, polymorphic: true
+    t.references :user, foreign_key: true, null: false
+    t.integer :status, default: 0, null: false
+
+    t.timestamps
+  end
+end
+
+1) create model
+2) link associations
+
+3)
+
+a= Answer.last
+a.votes.create(status:0, user_id:3)
+a.votes.create!(status:0, user_id:1)
+
+a.votes.where(status:0, user_id:3).present?
+
+
+likes count:
+a.votes.where(status:1).count
+
+dislikes count:
+a.votes.where(status:1).count
+
+
+
+
+
+<i class="fa-regular fa-thumbs-up"></i>
+<i class="fa-solid fa-thumbs-up"></i>
+
+<i class="fa-regular fa-thumbs-down"></i>
+<i class="fa-solid fa-thumbs-down"></i>

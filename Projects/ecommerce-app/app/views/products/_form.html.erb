@@ -1,0 +1,54 @@
+<%= form_with(model: product, local: true) do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation " class="m-3 text-danger">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+      <ul>
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, maxlength: 35, class:"form-control" %>
+  </div>
+
+  <div class="field  form-group">
+    <%= form.label :color %>
+    <%= form.text_field :color, maxlength: 25, class:"form-control"  %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :price %>
+    <%= form.number_field :price, step: 0.5,  min: 0, max: 999999999999, class:"form-control" %>
+  </div>
+  <div class="field form-group">
+    <%= form.label :size %>
+    <%= form.text_field :size, maxlength: 25  , class:"form-control" %>
+  </div>
+  <div class="field form-group">
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity, min: 0, max: 999999999999  , class:"form-control"%>
+  </div>
+  <div class="field form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description , maxlength: 250, class:"form-control"  %>
+  </div>
+  <div class="field form-group">
+    <%= form.label :model %>
+    <%= form.text_field :model , maxlength: 25, class:"form-control" %>
+  </div>
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+  <div class="field mb-4">
+    <%= form.label :images %>
+    <%= form.file_field :images , multiple: true %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

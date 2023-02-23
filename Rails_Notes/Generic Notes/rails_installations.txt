@@ -1,0 +1,40 @@
+
+
+gem install rails -v 5.2.0
+
+
+
+I accidentally installed rails version 4.1.7 but I need rails version 4.1.6 . In order to fix this issue I uninstalled rails with this command:
+
+gem uninstall rails 
+gem install rails -v 5.2
+sudo gem uninstall railties 
+
+
+***********************
+
+
+
+sudo apt install sqlitebrowser
+
+
+**********************
+
+
+Put this in your app/assets/javascripts/application.js
+
+//= require jquery
+//= require jquery_ujs
+and install this gem file:
+
+gem 'jquery-rails'
+bundle install
+
+
+
+************************
+
+
+add favicon:
+
+https://discoposse.com/2018/09/04/setting-your-favicon-in-ruby-on-rails-apps/

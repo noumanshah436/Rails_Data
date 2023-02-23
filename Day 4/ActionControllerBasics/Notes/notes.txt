@@ -1,0 +1,32 @@
+
+
+Action Controller is concerned with communicating with the database and performing CRUD actions where necessary.
+
+***********************8
+
+resource based routing
+
+resources :student will generate all the routes for CRUD operations
+
+HTTP verbs 
+
+POST    - Create
+GET     - Read
+PUT	 - UPdate 
+DELETE  -Destroy
+
+
+The naming convention of controllers in Rails favors pluralization of the last word in the controller's name, although it is not strictly required (e.g. ApplicationController). For example, ClientsController is preferable to ClientController, SiteAdminsController is preferable to SiteAdminController or SitesAdminsController, and so on.
+
+The controller naming convention differs from the naming convention of models, which are expected to be named in singular form.
+
+*******
+
+
+There are two kinds of parameters possible in a web application. 
+1) query string (  after the ? in the url)
+2) The second type of parameter is usually referred to as POST data. This information usually comes from an HTML form which has been filled in by the user. 
+
+Rails does not make any distinction between query string parameters and POST parameters, and both are available in the params hash in your controller:
+
+*******

@@ -1,0 +1,8 @@
+rspce spec
+
+bundle exec rspce spec/models/person_spec.rb
+
+
+********************************
+
+sp = Species.create(name:"specie 3")

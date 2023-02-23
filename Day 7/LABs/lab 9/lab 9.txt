@@ -1,0 +1,182 @@
+create view emp2
+as      select * from emp 
+        where sal > (select avg(sal) from emp)
+
+select * from emp_with_high_sal
+
+
+
+
+i)
+create view emp_sales
+as  select * from emp 
+    where deptno=(select deptno from dept where dname='SALES');
+
+ii)
+select * from emp_sales
+
+
+i)
+CREATE VIEW	dept_sum_vu  
+ AS SELECT	e.ename,e.empno,e.deptno,d.dname,d.loc		
+  FROM		emp e, dept d
+  WHERE		e.deptno = d.deptno
+
+ii)
+select * from dept_sum_vu 
+
+i)
+create view managers_view
+as select * from emp
+   where job like 'MANAGER'
+   with read only
+
+ii)
+select * from managers_view
+
+
+
+
+
+
+i)
+create view dept20
+as select * from emp
+   where deptno=20 and sal>1500
+   
+ii)
+select * from dept20
+
+
+
+create table STUDENT
+(
+REQNO Number(4) primary key,
+SNAME VARCHAR2(10) NOT NULL,
+PROGRAM VARCHAR2(4) CHECK (PROGRAM IN('BS','BBA','BA')),
+NIC Number(13)
+)
+
+i)
+
+create table student
+(
+REQNO Number(4) primary key,
+SNAME VARCHAR2(10) ,
+subjectNo Number(4)  ,
+PROGRAM VARCHAR2(4) ,
+NIC Number(13)
+)
+
+ii)
+
+create table subject
+(
+subjectNo Number(4) primary key,
+sname VARCHAR2(10)
+)
+
+iii)
+alter table subject
+add primary key(subjectNo)
+
+iv)
+alter table student
+add foreign key(subjectNo) references  subject(subjectNo)
+
+insert into subject
+values (1,'OOP')
+
+insert into subject
+values (2,'DSA')
+
+insert into subject
+values (3,'AOA')
+
+insert into student
+values (1,'Ali',1,'BS',3465454635555)
+
+
+insert into student
+values (2,'Humza',2,'BA',3565454635555)
+
+insert into student
+values (3,'Humza',3,'BBA',3665454635555)
+
+
+
+
+select st.sname as "Student", s.sname as Subject	
+  FROM		student st, subject s
+  WHERE		st.subjectNo = s.subjectNo
+
+create view student_sum_subject (student,subject)
+as select st.sname , s.sname 
+  FROM		student st, subject s
+  WHERE		st.subjectNo = s.subjectNo
+
+
+select * from student_sum_subject 
+
+
+select ename,hiredate,(trunc(months_between(sysdate,hiredate)/12,1))+24 as "age of each employee" 
+from emp
+
+select ename,hiredate,(trunc(months_between(sysdate,hiredate)/12,0))+24 as "age of each employee" 
+from emp
+
+
+select ename,hiredate, (months_between(sysdate,hiredate)/12)+24 as "age of each employee" 
+from emp
+
+
+create view emp_salesman
+ as select empno as "ID",ename as "name",d.loc as Locaion from emp e  , dept d
+ where e.deptno=d.deptno and job='SALESMAN'
+
+
+select * from  emp_salesman
+
+
+
+create table customer
+(
+customer_id Number(4) primary key,
+cust_name VARCHAR2(20)  ,
+city VARCHAR2(15)  ,
+grade  Number(5),
+salesman_id Number(4)
+)
+
+
+insert into customer
+values (3002,'Nick Rimando','New York',100,5001)
+
+
+insert into customer
+values (3007,'Brad Davis','New York',200,5001);
+
+insert into customer
+values (3005,'Graham Zusi','California',200,5002);
+
+insert into customer
+values (3008,'Julian Green','London',300,5002);
+
+insert into customer
+values (3004,'Fabian Johnson','Paris',300,5006);
+
+insert into customer
+values (3009,'Geoff Cameron','Berlin',100,5003);
+
+insert into customer
+values (3003,'jozy Altidor','Moscow',200,5007);
+
+select * from customer
+
+
+
+create or replace view emp_sales
+ as   select ename ,job as "Designation",hiredate as "Join Date",e.deptno,dname,loc
+     from emp e,dept d
+     where dname='SALES' and e.deptno=d.deptno
+

@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: student_projects
+#
+#  id              :integer          not null, primary key
+#  student_id      :integer
+#  project_id      :integer
+#  submission_date :date
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
+one:
+  student: one
+  project: one
+  submission_date: 2022-08-29
+
+two:
+  student: two
+  project: two
+  submission_date: 2022-08-29

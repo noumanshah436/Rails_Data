@@ -1,0 +1,88 @@
+************************************************************************************************************
+has_one
+
+Implementation summary:
+  1) generate simple parent model and a child model with foreign key of parent
+  2) add has_one statement in parent model
+************************************************************************************************************
+
+rails g model Supplier name:string
+rails db:migrate
+
+rails g model Account account_number:string supplier:references
+rails db:migrate
+
+1) add ( has_one :account ) in parent model
+both model msut use singular name for association
+
+supplier = Supplier.create(name: "Nouman")
+account = Account.create(account_number: 123, supplier_id: supplier.id)
+
+supplier.account
+supplier.account.account_number
+
+account.supplier
+account.supplier.name
+
+
+
+************************************************************************************************************
+has_one :through
+
+Implementation summary:
+    1) create one simple parent model ( department)
+    2) create child model with foreign key of parent ( department:references )
+    3) create third model with foreign ley of child  ( manager:references )
+    4) add statement has_one and has_one_through in parent model
+    5) add has_one statement in child model
+
+https://guides.rubyonrails.org/v5.2/association_basics.html#the-has-one-through-association
+************************************************************************************************************
+A has_one :through association sets up a one-to-one connection with another model.
+This association indicates that the declaring model (department) can be matched with one instance of another model by proceeding through a third model.
+Use has_one_through when you want to associate two models using third model.
+
+For examle:
+If each Department has one Manager, and each Manager is associated with one Managerhistory,   or
+if each   supplier has one account, and each account is associated with one account history,
+
+In docs:
+supplier = Department
+Accout = manager
+account history = manager history
+
+***********
+
+1) create models
+rails g model department name:string
+rails g model manager name:string email:string contact:string department:references
+rails g model manager_history joining_date:date total_experience:integer manager:references
+rails db:migrate
+
+2) add this to department model
+has_one :manager
+has_one :manager_history, through: :manager
+
+3) add  in managet model
+  has_one :manager_history
+
+4) add records:
+
+dept1 = Department.create(name: "Production department")
+dept2 = Department.create(name: "Accounts department")
+
+manager = Manager.create(name: "Nouman", email: "noman@gmail.com" , contact: "03335465765", department_id: dept1.id)
+manager.department
+
+dept1.manager
+
+manager_history = ManagerHistory.create( joining_date: Date.today - 100.days , total_experience: 2, manager_id: Manager.first.id)
+manager_history.manager
+
+manager = Manager.find(1)
+manager.manager_history
+
+dept1.manager_history
+
+manager_history.department   --  give error bec there is not association that manager_history belongs to department
+                                  so we cannt accesss department through manager_history

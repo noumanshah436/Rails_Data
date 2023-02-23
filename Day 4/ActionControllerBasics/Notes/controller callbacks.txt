@@ -1,0 +1,85 @@
+
+rails g scaffold Student name:string
+rails db:migrate
+
+
+Filters are methods that are run "before", "after" or "around" a controller action.
+
+*****************
+
+Filters are inherited, so if you set a filter on ApplicationController, it will be run on every controller in your application.
+"before" filters may halt the request cycle.
+
+class ApplicationController < ActionController::Base
+  before_action :require_login
+
+  private
+
+  def require_login
+    unless logged_in?
+      flash[:error] = "You must be logged in to access this section"
+      redirect_to new_login_url # halts request cycle
+    end
+  end
+end
+
+*****************
+
+You can prevent this filter from running before particular actions with skip_before_action:
+
+class LoginsController < ApplicationController
+  skip_before_action :require_login, only: [:new, :create]
+end
+
+The :only option is used to skip this filter only for these actions, and there is also an :except option which works the other way.
+
+
+
+
+
+*****************************************************
+
+https://stackoverflow.com/questions/36143039/rails-around-action-in-the-callback-stack
+
+around_action are more like append_before_action + prepend_after_action.
+
+Internally, think of it like rails has two arrays, @before_actions and @after_actions.
+ So when you declare around_action, it pushes/appends it to the end of @before_actions and it unshift/prepends to the @after_actions.
+
+With a quick test as follows:
+
+class SomeController < ApplicationController
+  before_action :before_action
+  after_action :after_action
+  around_filter :around_action
+
+  def before_action
+    $stderr.puts "From before_action"
+  end
+
+  def after_action
+    $stderr.puts "From after_action"
+  end
+
+  def around_action
+    begin
+      $stderr.puts "From around_action before yielding"
+      yield
+      $stderr.puts "From around_action after yielding"
+    end
+  end
+
+  def index
+  end
+end
+
+
+I got the following in the log:
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 17:11:01 -0700
+Processing by SomeController#index as HTML
+From before_action
+From around_action before yielding
+  Rendered some/index.html.slim within layouts/index (1.5ms)
+From around_action after yielding
+From after_action

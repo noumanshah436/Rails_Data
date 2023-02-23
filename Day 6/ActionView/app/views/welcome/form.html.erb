@@ -1,0 +1,25 @@
+<h1>Form</h1>
+<%= radio_button("article", "category", "rails") %>
+<%= radio_button("article", "category", "java") %>
+
+
+<br>
+<%= text_area(:comment, :text ) %>
+
+<br>
+<%= email_field(:user, :email) %>
+
+<br>
+<br>
+
+<select name=" ">
+  <option value=""></option>
+  <option value="1" selected="selected">David</option>
+  <option value="2">Eileen</option>
+  <option value="3">Rafael</option>
+</select>
+
+<br>
+<br>
+<%= date_field("user", "dob") %>
+

@@ -1,0 +1,91 @@
+rails new bookstore --api
+
+
+gem 'rails', '~> 7.0.1'
+gem 'rack-cors'
+
+bundle
+
+
+config/initializers/cors.rb:
+'http://localhost:3000'
+
+# frozen_string_literal: true
+
+# Be sure to restart your server when you modify this file.
+
+# Avoid CORS issues when API is called from the frontend app.
+# Handle Cross-Origin Resource Sharing (CORS) in order to accept cross-origin AJAX requests.
+
+# Read more: https://github.com/cyu/rack-cors
+
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    # origins 'http://localhost:3001'
+    origins '*'
+
+    resource '*',
+             headers: :any,
+             methods: %i[get post put patch delete options head]
+  end
+end
+
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins '*'
+    resource '*', headers: :any, methods: %i[get post put patch delete options head]
+  end
+end
+
+
+rails g scaffold book title:string body:text
+rails db:migrate
+
+namespace :api do
+ namespace :v1 do
+  resouces :books
+ end
+end
+
+
+controllers/api/v1:
+move book_contoller.rb
+
+Api::V1::BooksController
+
+npx create-react-app bookable
+
+
+__________________________________________
+
+1)
+make folder controller/api/v1mc square
+
+2) Create file api_controller.rb:
+module Api
+  module V1
+    class ApiController < ActionController::Base
+    end
+  end
+end
+
+
+3) Create file posts_controller.rb:
+module Api
+  module V1
+    class PostsController < ApiController
+      def index
+        @posts = Post.all
+        render json: @posts
+      end
+    end
+  end
+end
+
+4)
+routes.rb:
+  namespace :api do
+    namespace :v1 do
+      resources :posts
+    end
+  end

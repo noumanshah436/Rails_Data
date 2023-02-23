@@ -1,0 +1,126 @@
+implement devise
+
+gem  'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+
+bundle
+
+models/user.rb:
+class User < ApplicationRecord
+  extend Devise::Models
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: [:google_oauth2]
+
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.full_name = auth.info.name # assuming the user model has a name
+      user.avatar_url = auth.info.image # assuming the user model has an image
+      # If you are using confirmable and the provider(s) you use validate emails,
+      # uncomment the line below to skip the confirmation emails.
+      # user.skip_confirmation!
+    end
+  end
+end
+
+
+controllers/users/registrations_controller.rb:
+
+def update_resource(resource, params)
+    if resource.provider == 'google_oauth2'
+      params.delete('current_password')
+      resource.password = params['password']
+
+      resource.update_without_password(params)
+    else
+      resource.update_with_password(params)
+    end
+  end
+  
+controllers/users/sessions_controller.rb:
+
+  def after_sign_out_path_for(_resource_or_scope)
+    new_user_session_path
+  end
+
+  def after_sign_in_path_for(resource_or_scope)
+    stored_location_for(resource_or_scope) || root_path
+  end
+  
+controllers/users/omniauth_callbacks_controller.rb:
+
+  def google_oauth2
+    user = User.from_omniauth(auth)
+    if user.present?
+      sign_out_all_scopes
+      flash[:success] = t 'devise.omniauth_callbacks.success', kind: 'Google'
+      sign_in_and_redirect user, event: :authentication
+    else
+      flash[:alert] =
+        t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized."
+      redirect_to new_user_session_path
+    end
+  end
+
+  protected
+
+  def after_omniauth_failure_path_for(_scope)
+    new_user_session_path
+  end
+
+  def after_sign_in_path_for(resource_or_scope)
+    stored_location_for(resource_or_scope) || root_path
+  end
+
+  private
+
+  def auth
+    @auth ||= request.env['omniauth.auth']
+  end
+  
+devise migration file:
+      t.string :full_name
+      t.string :uid
+      t.string :avatar_url
+      t.string :provider
+
+
+routes.rb:
+ devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
+
+
+config/initializer/devise.rb
+config.omniauth :google_oauth2, ENV['GOOGLE_OAUTH_CLIENT_ID'], ENV['GOOGLE_OAUTH_CLIENT_SECRET']
+
+views/devise/shared/_links.html.erb:
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= form_for "Login",
+      url: omniauth_authorize_path(resource_name, provider),
+      method: :post,
+      data: {turbo: "false"} do |f| %>
+      <%= f.submit "Login", type: "image", src: url_for("/assets/btn_google_signin_light_normal_web.png") %>
+    <% end %>
+  <% end %>
+<% end %>
+
+
+Any Page:
+<%= current_user.full_name %>
+<%= link_to "Log In", new_user_session_path, class: "nav-link" %>
+<%= link_to "Log out", destroy_user_session_path, class: "nav-link", method: :delete %>
+<%= link_to "Edit User", edit_user_registration_path, class: "nav-link" %>
+
+youtube:
+https://www.youtube.com/watch?v=CnZnwV38cjo
+
+
+

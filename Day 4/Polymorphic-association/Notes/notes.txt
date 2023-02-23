@@ -1,0 +1,18 @@
+
+https://www.youtube.com/watch?v=qF51M95YnaA
+Episode #098 - Polymorphic Associations
+
+
+1) generate models
+rails g scaffold company name website
+
+rails g scaffold  employees first_name last_name email birth_date:date
+
+rails g model note notable:references{polymorphic} content:text
+
+
+2) set routes
+
+3) create notes controller both for companies and employees
+
+4) modify views

@@ -1,0 +1,21 @@
+<%= form_with( model: [notable, Note.new], local:true ) do |form| %>
+  <div class="field">
+    <%= form.label :content%> <br>
+    <%= form.text_area :content %>
+  </div>
+  <%= form.submit class:"btn btn-primary" %>
+<% end %>
+
+<!--
+Example Post Request if notable is of company class:
+
+Started POST "/companies/2/notes" for ::1 at 2023-01-02 20:41:01 +0500
+Processing by Companies::NotesController#create as HTML
+Parameters: {
+  "utf8"=>"✓",
+  "authenticity_token"=>"1uzR+r2AC5e9pZ7ur4sQaYtLhoYaZArDc+WpvKlzUKyCBdXzvcW7oE7/h4yFwdNxuI3K8wm+9mQo2FmCUXcR5g==",
+  "note"=>{"content"=>"Best For its search engine"},
+  "commit"=>"Create Note", "company_id"=>"2"
+}
+
+-->

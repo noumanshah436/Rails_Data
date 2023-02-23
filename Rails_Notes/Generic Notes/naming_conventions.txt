@@ -1,0 +1,88 @@
+
+General Ruby conventions
+
+
+Class names are CamelCase.
+
+Methods and variables are snake_case.
+
+Methods with a ? suffix will return a boolean.
+
+Methods with a ! suffix mean one of two things: either the method operates destructively in some fashion, or it will raise and exception instead of failing (such as Rails models' #save! vs. #save).
+
+*******************************
+
+
+Model class names :
+	singular
+	use CamelCase
+        plural database table name.
+
+
+Rails will plularize your tablename
+Model name will automatically get pluralize in database
+
+
+Model naming convention
+
+Model/Class	Table/Schema
+Article	articles
+LineItem	line_items
+Deer		deers
+Mouse		mice
+Person		people
+
+
+rails g model  LineItem name 
+will generate table with name line_items
+
+
+Suppose you have Model name Book , it will store in sqlite as books and 
+in model it will be class name as  Book
+
+This will create a Book model, mapped to a books table at the database
+
+Book.all
+Book.new
+@book.save
+@book.update
+@book.destroy
+
+
+*********************************
+
+
+Controllers : 
+   use Plural name
+   
+   
+   
+   
+   
+*********************************
+
+
+routes
+
+Route names are snake_case , and usually match the controller. Most of the time routes
+are plural and use the plural resources .
+
+
+*******************************
+
+rails g controller Comments
+
+rails g model Comment
+
+resources :comments
+
+
+
+*******************************
+
+
+
+
+
+
+

@@ -1,0 +1,9 @@
+<% if following?(topic) %>
+  <%= link_to  follow_path(id: topic.id), method: :delete, remote: true, class: "btn btn-primary" do %>
+    <button type="button" class="btn btn-primary btn-sm">Unfollow</button>
+  <% end %>
+<% else %>
+  <%= link_to  follows_path(id: topic.id), method: :post, remote: true,  class: "btn btn-primary" do %>
+    <button type="button" class="btn btn-primary btn-sm ">Follow</button>
+  <% end %>
+<% end %>

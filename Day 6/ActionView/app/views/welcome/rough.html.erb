@@ -1,0 +1,68 @@
+<%= text_area_tag(:message, "Hi, nice site", size: "24x6") %> <br> <br>
+<%= password_field_tag(:password) %> <br> <br>
+<%= hidden_field_tag(:parent_id, "5") %> <br> <br>
+<%= search_field(:user, :name) %> <br> <br>
+<%= telephone_field(:user, :phone) %> <br> <br>
+<%= date_field(:user, :born_on) %> <br> <br>
+<%= datetime_local_field(:user, :graduation_day) %> <br> <br>
+<%= month_field(:user, :birthday_month) %> <br> <br>
+<%= week_field(:user, :birthday_week) %> <br> <br>
+<%= url_field(:user, :homepage) %> <br> <br>
+<%= email_field(:user, :address) %> <br> <br>
+<%= color_field(:user, :favorite_color) %> <br> <br>
+<%= time_field(:task, :started_at) %> <br> <br>
+<%= number_field(:product, :price, in: 1.0..20.0, step: 0.5) %> <br> <br>
+<%= range_field(:product, :discount, in: 1..100) %>
+
+
+<!--
+
+Parameters: {
+"utf8"=>"✓",
+"authenticity_token"=>"2y31uqya4BO37Ttmc5bJQvm72RJC+4J3SXvPMhKOo9U49GrdDYfwkPhVsht7ySwNSxXDP9yKNDPQaodgz5tkKA==",
+"abc"=>"",
+"body"=>"",
+"author"=>"",
+"message"=>"Hi, nice site",
+"password"=>"[FILTERED]",
+"parent_id"=>"5",
+"user"=>{
+      "name"=>"noumanrehman042@gmail.com",
+      "phone"=>"Nomi",
+      "born_on"=>"2023-01-05",
+      "graduation_day"=>"2023-01-02T14:19",
+      "birthday_month"=>"2023-03",
+      "birthday_week"=>"2023-W02",
+      "homepage"=>"http://localhost:3000/welcome/new",
+      "address"=>"hello@gmail.com",
+      "favorite_color"=>"#da1b1b"
+      },
+"task"=>{
+    "started_at"=>"21:18"
+  },
+"product"=>{
+    "price"=>"",
+    "discount"=>"51"
+  },
+"commit"=>"Save "}
+
+{
+
+"utf8"=>"✓",
+"authenticity_token"=>"2y31uqya4BO37Ttmc5bJQvm72RJC+4J3SXvPMhKOo9U49GrdDYfwkPhVsht7ySwNSxXDP9yKNDPQaodgz5tkKA==",
+"abc"=>"",
+"body"=>"",
+"author"=>"",
+"message"=>"Hi, nice site",
+"password"=>"nouman",
+"parent_id"=>"5",
+"user"=>{"name"=>"noumanrehman042@gmail.com", "phone"=>"Nomi", "born_on"=>"2023-01-05", "graduation_day"=>"2023-01-02T14:19", "birthday_month"=>"2023-03", "birthday_week"=>"2023-W02", "homepage"=>"http://localhost:3000/welcome/new", "address"=>"hello@gmail.com", "favorite_color"=>"#da1b1b"},
+"task"=>{"started_at"=>"21:18"},
+"product"=>{"price"=>"", "discount"=>"51"},
+"commit"=>"Save ",
+"controller"=>"welcome",
+"action"=>"create"
+
+ }
+
+ -->

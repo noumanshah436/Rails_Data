@@ -1,0 +1,20 @@
+
+<%= form_with url: welcome_index_path , method: :post   do |f| %>
+<!--
+
+<%= f.label :abc %>
+<%= f.text_field :abc %>
+<br>
+
+<%= f.label :body %>
+<%= f.text_area :body %>
+<br>
+
+<%= f.label :author %>
+<%= f.text_field :author %>
+
+-->
+
+<%= text_area( "abc", "desc", size: "24x6") %>  <br>
+<%= f.submit %>
+<% end %>

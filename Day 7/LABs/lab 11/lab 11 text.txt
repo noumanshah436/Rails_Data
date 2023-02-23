@@ -1,0 +1,26 @@
+create procedure get_Record is
+begin
+empno emp.empno%type;
+ename emp.ename%type;
+job emp.job%type;
+mgr emp.mgr%type;
+hiredate emp.hiredate%type;
+sal emp.sal%type;
+comm emp.comm%type;
+deptno emp.deptno%type;
+begin
+select empno,ename,job,mgr,hiredate,sal,comm,deptno
+into empno,ename,job,mgr,hiredate,sal,comm,deptno from emp
+where empno=7369
+
+
+dbms_output.put_line(empno);
+dbms_output.put_line(ename);
+dbms_output.put_line(job);
+dbms_output.put_line(mgr);
+dbms_output.put_line(hiredate);
+dbms_output.put_line(sal);
+dbms_output.put_line(comm);
+dbms_output.put_line(deptno);
+end;
+

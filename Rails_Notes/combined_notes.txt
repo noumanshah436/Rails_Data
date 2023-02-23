@@ -1,0 +1,5315 @@
+
+========================================================================================================================================================================
+Topics
+
+========================================================================================================================================================================
+
+Day 1:
+Blog app
+bundler
+Friends app
+Remote form submission
+
+Day 2:
+SASS
+Coffeescript
+
+Day 3:
+Actice Record
+Active Model
+Migrations
+Validations
+Model Callbacks ( like before and after save )
+Faker
+gem 'activerecord-import' gem for bulk insertions
+
+Day 4:
+Action controller:
+
+Parameters
+Session
+Flash
+Cookies
+Controller Callbacks
+AR associations
+renderring in different formats
+
+
+Day 5:
+routing :
+
+namespace
+scope
+queries
+present vs exists
+
+pending:
+queries
+theory
+
+
+
+Day 6:
+ActionView:
+
+Layouts
+Helper methods
+Action View Form Helpers
+Remote form submission
+Pagination
+Queries
+form tags
+View Helpers
+
+
+Day 7
+AR queries
+joins
+default_scope
+Custom transaction
+STI associations, Self Associations
+eager_loading/pre_loading, lazy loading
+
+
+
+Day 8
+Mailing
+Devise  + Active storage
+
+Day 9 :
+Background jobs
+sidekiq
+services vs concerncs
+
+
+Rough Project:
+  Rake tasks
+  Carrierwaves
+
+
+Day 10:
+rails rest apis
+faker
+Action cable
+active storage
+
+
+Day 11:
+react CRUD
+React CRUD frontend
+
+webpacker
+Rake tasks
+
+========================================================================================================================================================================
+Blog Notes
+========================================================================================================================================================================
+$ rails new blog
+$ rails generate controller Welcome index
+
+1) resources :articles
+
+2) rails generate controller Articles
+  -> now create action new and its view( html file)
+
+3) create form in new.html.erb
+
+4) make create method to get post request
+
+5) create article model (  Models in Rails use a singular name, and their corresponding database tables use a plural name. )
+  rails generate model Article title:string text:text
+  rails db:migrate
+
+6) showing article ( show method )
+7) Listing article ( index method )
+
+8) adding links to pages
+
+9) add validations
+The reason why we added @article = Article.new in the ArticlesController is that otherwise @article would be nil in our view, and calling @article.errors.any? would throw an error.
+
+10) Updating Articles
+It is not necessary to pass all the attributes to update. For example, if @article.update(title: 'A new title') was called, Rails would only update the title attribute, leaving all other attributes untouched.
+
+11) Using partials to clean up duplication in views
+
+12) Deleting Articles
+
+11)  Generate comment model
+rails generate model Comment commenter:string body:text article:references       ( we can manually add foreign key but this is better)
+rails db:migrate
+
+12) Associating Models
+   add has many line ina article.db
+
+13) adding route for comments
+14) complete comment section
+15) partail form comment
+16) delete  comment
+17) security
+
+
+**************************
+
+Migrations are Ruby classes that are designed to make it simple to create and modify database tables. Rails uses rake commands to run migrations, and it's possible to undo a migration after it's been applied to your database.
+
+
+A frequent practice is to place the standard CRUD actions in each controller in the following order: index, show, new, edit, create, update and destroy. You may use any order you choose,
+
+
+
+https://github.com/noumanshah436/Rails_Blog
+
+****************
+
+$ rake routes -c articles    (  see all routes of article )
+
+rails g  (  see all generators)
+
+rails -T ( see all available rails commands)
+
+
+To see where a bundled gem is installed:
+bundle info [gemname]
+
+****************
+
+
+redirect_to article_path(@article)
+
+will redirect to the show method ( http://localhost:3000/articles/2 )
+
+******************
+
+Other authentication methods are available for Rails applications. Two popular authentication add-ons for Rails are the Devise rails engine and the Authlogic gem, along with a number of others.
+
+
+
+
+
+
+========================================================================================================================================================================
+Asset Pipeline
+========================================================================================================================================================================
+
+
+https://www.youtube.com/watch?v=l0E-D53gEL0
+
+asset pipeline is a system of managing our static assets
+asset pipelne also handle the preprocessing
+
+*****************
+
+//= require_tree .
+this will include all files in the current directory and sub_directory
+
+//= require_directory .
+only include the assets in the current directory ( not from the nested directory)
+
+//= require_directory ./public
+load only file present in the public directory
+
+*****************
+
+
+see assets directly on chrome
+http://localhost:3000/assets/jquery.js
+
+bundle info jquery-rails
+
+
+rails c
+Rails.application.config.assets.paths
+y _
+exit
+
+
+http://localhost:3000/?debug_assets=1
+and then view page source to see all the file incluede
+
+
+*******************
+
+if you have something like jquery plugin that is not maintained by you that will be in vaendor/javascript directory
+
+
+*******************
+
+rails s -e production
+
+************************
+
+https://guides.rubyonrails.org/v5.2/asset_pipeline.html#coding-links-to-assets
+
+
+
+========================================================================================================================================================================
+Friends app
+========================================================================================================================================================================
+
+I am applying all commands in friends folder
+
+$ rails new friends
+
+$ rails s   or  rails server
+
+localhost:3000
+
+127.0.0.1:3000
+
+********************
+
+To create a new controller, you will need to run the "controller" generator and tell it you want a controller called "home" with an action called "index", just like this:
+
+$ rails g controller home index
+
+home is the controller name
+index is the action name ()
+
+http://localhost:3000/home/index
+
+********************
+to see all routes
+$ rails routes
+
+********************
+
+partial files
+
+_header.html.erb
+
+use _ before partial file name and include in file without _
+
+********************
+
+Scaffold:
+
+for CRUD operations we use scaffold:
+$ rails g scaffold friends first_name:string last_name:string email:string phone:string twitter:string
+( this will create all the CRUD functoinality )
+
+$ pushing the migrations into the database( craete schema file):
+rails db:migrate
+
+
+delete this file as it is adding it own css:
+scaffolds.scss
+
+http://localhost:3000/friends
+
+we need to use _path after prefix to create a link to that route
+
+***************************************************************
+
+devise gem: ( friends app)
+
+Devise is the cornerstone gem for Ruby on Rails authentication. With Devise, creating a User that can log in and out of your application is so simple because Devise takes care of all the controllers necessary for user creation ( users_controller ) and for user sessions ( users_sessions_controller ).
+
+Go to https://rubygems.org/   and search for devise
+
+copy gem to gemfile
+Go to its doc at github https://github.com/heartcombo/devise
+
+bundle install will install all the gems in the gemfile
+
+rails generate devise:install
+
+complete instructions
+
+rails g devise:views
+
+rails generate devise user    ( this is migration command )
+rails db:migrate              ( migrate )
+
+Add links to navbar and style each page with bootstrap
+
+**********************
+model is like database
+
+views are web pages
+
+controller is like views in django
+
+ctrl +c to break server
+
+use two terminals open
+
+for every web page we need a route
+
+
+************************************
+
+
+https://guides.rubyonrails.org/v3.2/migrations.html
+
+
+************************************
+noumanrehman042@gmail.com
+nouman
+
+nouman.rehman@devsinc.com
+nouman
+
+1:21:50
+
+
+========================================================================================================================================================================
+Day 2
+coffeescript   SAAS
+========================================================================================================================================================================
+http://railscasts.com/episodes/267-coffeescript-basics?autoplay=true
+
+1) rails new CoffeeScriptPractice
+
+2) rails g controller home index
+
+
+3) rails generate scaffold orders credit_card_number:string credit_card_expires_on:date
+   rails db:migrate
+
+5)
+
+Put this in your app/assets/javascripts/application.js
+
+//= require jquery
+//= require jquery_ujs
+and install this gem file:
+
+gem 'jquery-rails'
+bundle install
+
+
+*****************************
+
+javascript to coffeescript
+
+1) use consistent tabs instead of curly braces
+2) remove var for variables ( not needed)
+3) remove return keyword ( automatically return like in ruby)
+4) remove semicolon at the end of line
+
+5) if function call have arguments , do not use parenthesis otherwise use ()
+6) remove function keyword and use -> after arguments
+
+7) replace "this." with an @ symbol
+8) do not use () with if statement
+9) replace ternary operator with if-then-else
+
+*****************************
+
+For jquery
+
+1) remove () and {}
+
+2) replace function() with ->
+3) replace "this." with an @ symbol
+3) replace $ with an jQuery ( not required )
+
+
+***************************
+
+sass is just a css preprocessor
+
+Sass (which stands for 'Syntactically awesome style sheets) is an extension of CSS that enables you to use things like variables, nested rules, inline imports and more. It also helps to keep things organised and allows you to create style sheets faster. Sass is compatible with all versions of CSS.
+
+
+========================================================================================================================================================================
+Day 3
+Active Record     and     active model
+========================================================================================================================================================================
+
+https://edgeguides.rubyonrails.org/active_model_basics.html
+
+ActiveModel:  Active Model is a library containing various modules used in developing classes that need some features present on Active Record.  So ActiveModel includes things like validations.
+
+1) When including ActiveModel::API you get some features like:
+
+model name introspection
+conversions
+translations
+validations
+initialize object
+
+2) The ActiveModel::AttributeMethods module can add custom prefixes and suffixes on methods of a class. It is used by defining the prefixes and suffixes and which methods on the object will use them.
+
+3) ActiveModel::Callbacks gives Active Record style callbacks. This provides an ability to define callbacks which run at appropriate times. After defining callbacks, you can wrap them with before, after, and around custom methods.
+
+4) An object becomes dirty when it has gone through one or more changes to its attributes and has not been saved. ActiveModel::Dirty gives the ability to check whether an object has been changed or not. It also has attribute-based accessor methods.
+
+
+5) The ActiveModel::Validations module adds the ability to validate objects like in Active Record.
+
+6) ActiveModel::Model allows implementing models similar to ActiveRecord::Base
+
+7) ActiveModel::Serialization provides basic serialization for your object. You need to declare an attributes Hash which contains the attributes you want to serialize. Attributes must be strings, not symbols.
+
+8) ActiveModel::SecurePassword provides a way to securely store any password in an encrypted form. When you include this module, a has_secure_password class method is provided which defines a password accessor with certain validations on it.
+
+
+**********************
+
+ActiveRecord: This is the component that associates a class to the database. This will give the class functionality such as methods that make it easy to pull records from the database (An example is the find method).
+
+ActiveResource: Similar to ActiveRecord. However, instead of being backed by a database, an ActiveResource object is backed by another application through a web service API. More information: http://ofps.oreilly.com/titles/9780596521424/activeresource_id59243.html
+
+
+“ORM: An object that wraps a row in a database table or view, encapsulates
+the database access, and adds domain logic on that data.”
+
+**********************
+
+Active Record is the M in MVC - the model - which is the layer of the system responsible for representing business data and logic. Active Record facilitates the creation and use of business objects whose data requires persistent storage to a database.
+
+Active Record gives us several mechanisms, the most important being the ability to:
+
+Represent models and their data.
+Represent associations between these models.
+Represent inheritance hierarchies through related models.
+Validate models before they get persisted to the database.
+Perform database operations in an object-oriented fashion
+
+***************
+
+Active Record supports the following database column types ( datatypes database):
+
+:binary
+:boolean
+:date
+:datetime
+:decimal
+:float
+:integer
+:primary_key
+:string
+:text
+:time
+:timestamp
+
+***************
+
+Rails will plularize your tablename
+
+Model name will automatically get pluralize in database
+
+
+Model naming convention
+
+Model/Class	Table/Schema
+Article	articles
+LineItem	line_items
+Deer		deers
+Mouse		mice
+Person		people
+
+
+Suppose you have Model name Book , it will store in sqlite as books and
+in model it will be class name as  Book
+
+This will create a Book model, mapped to a books table at the database
+
+Book.all
+Book.new
+@book.save
+@book.update
+@book.destroy
+
+*****************************
+Activerecord lifecyle methods
+*****************************
+
+https://stackoverflow.com/questions/20720901/how-to-use-new-record-changed-and-persisted-methods-in-rails-in-this-example
+
+ I will try explain the Activerecord lifecyle methods.
+
+new_record? ****
+car = Car.new # => initialize a new Car object
+car.new_record? # => true
+
+
+persisted? ****
+car.save
+car.persisted? # => true
+
+changed? ****
+car.model = 'New release model S'
+car.changed? # => true
+
+destroyed?  ****
+car.destroy
+car.destroyed? # => true
+
+
+
+========================================================================================================================================================================
+Active Record callbacks
+========================================================================================================================================================================
+
+https://guides.rubyonrails.org/v5.2/active_record_callbacks.html
+
+Callbacks allow you to trigger logic before or after an alteration of an object's state.
+
+
+Callbacks are methods that get called at certain moments of an object's life cycle.
+With callbacks it is possible to write code that will run whenever an Active Record object is
+created, saved, updated, deleted, validated, or loaded from the database.
+
+
+***********************
+
+  def greeting_message
+    puts "before_create"
+  end
+
+  after_create do
+      puts "after Create"
+  end
+
+  around_create do
+    puts "around_create"
+  end
+
+  before_validation do
+    puts "before valid"
+  end
+
+  after_validation do
+    puts "afetr valid"
+  end
+
+end
+
+
+# (0.1ms)  begin transaction
+# before valid
+# afetr valid
+# before_create
+# around_create
+# after Create
+# (0.1ms)  commit transaction
+
+**************************
+
+after_create :display_age
+
+def display_age
+  if self.age.present?
+    puts "age=#{self.age}"
+  else
+      puts "age not present"
+  end
+end
+
+**************************
+ after_create :display_age
+
+  def display_age
+    if self.DOB.present?
+      age= Date.today.year - self.DOB.year
+      puts "====age=#{age}===="
+    else
+        puts "DOB not present"
+    end
+  end
+
+ p = Person.create(name: "Nouman", age: 23, DOB:"1998-11-19")
+ p = Person.create(name: "Nouman", age: 23, DOB: Date.today - 24.years)
+
+**************************
+
+
+========================================================================================================================================================================
+Active Record CRUD
+========================================================================================================================================================================
+
+
+# Create:
+
+#  the create method call will create and save a new record into the database:
+
+@user = User.create(name: "Nouman", occupation: "ASE")
+p @user
+#<User id: 1, name: "David", occupation: "Code Artist", created_at: "2022-08-25 10:30:45", updated_at: "2022-08-25 10:30:45">
+
+
+# Using the new method, an object can be instantiated without being saved:
+
+user = User.new
+user.name = "Shah"
+user.occupation = "Code Artist"
+p user
+
+user = User.new do |u|
+  u.name = "David"
+  u.occupation = "Code Artist"
+end
+
+p user
+
+******************************
+
+Read :
+
+@users = User.all
+@users.each do |user|
+  p user
+end
+
+user = User.first
+p user
+
+# return the first user named Nouman
+nouman = User.find_by(name: 'Nouman')
+p nouman
+
+nouman = User.find_by(name: 'Nouhhman')
+p nouman
+
+
+# find all users named David who are Code Artists and sort by created_at in reverse chronological order
+users = User.where(name: 'Nouman' , occupation: 'Code Artist').order(created_at: :desc)
+users.each do |user|
+  p user
+end
+
+******************************
+
+update:
+
+user = User.find_by(name: 'Nouman')
+user.name = 'Syed'
+user.save
+
+
+user = User.find_by(name: 'David')
+user.update(name: 'Dave')
+
+User.update_all "name = 'Nouman', occupation='seller' "
+
+
+******************************
+
+destroy:
+
+user = User.find_by(name: 'Nouman')
+user.destroy
+
+# find and delete all users named David
+User.where(name: 'Nouman').destroy_all
+
+# delete all users
+User.destroy_all
+
+
+******************************
+
+<h1>Listing Users</h1>
+<table  >
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Occupation</th>
+  </tr>
+
+  <% @users.each do |user| %>
+  <tr>
+    <td><%= user.id %></td>
+    <td><%= user.name %></td>
+    <td><%= user.occupation %></td>
+  </tr>
+  <% end %>
+</table>
+
+
+
+******************************
+
+make your own action:
+
+1) just create action in controller
+2) add route to that action
+3) create template with action_name.html.erb
+
+
+***********************
+more on queries:
+https://guides.rubyonrails.org/v5.2/active_record_querying.html
+
+
+========================================================================================================================================================================
+Migrations*
+========================================================================================================================================================================
+
+
+https://guides.rubyonrails.org/v5.2/active_record_migrations.html
+
+
+Migrations:
+
+Migrations alow you to use an Ruby DSL to describe changes to your tables -
+
+Create Migration , alter table
+
+rails g migration migration_name
+
+***************
+
+
+if you want to change the structure of db table you need to create a migration file alone ( we can change more than one table in one migration file )
+
+1) rails generate migration changes_to_tables
+
+2) write down changes:
+
+def change
+	add_column :books, year, :integer
+	rename_column :students, :name, :student_name
+	remove_timestamps :students
+end
+
+
+
+3) rake db:migrate
+
+4) see refresh sqlite table
+
+if you want more changes , you need to create another migration file
+
+
+***********************
+
+If you wish for a migration to do something that Active Record doesn't know how to reverse, you can use reversible.
+
+You can also use the old style of migration using up and down methods instead of the change method.
+The up method should describe the transformation you'd like to make to your schema,
+and the down method of your migration should revert the transformations done by the up method.
+
+***********************
+
+
+1)
+add column part_number of string type in products:
+add_column :products, :part_number, :string
+
+change_table :books do |t|
+  t.integer :rating, inclusion: 0..100
+end
+
+add_column :products, :price, :decimal, precision: 5, scale: 2
+
+add_column :users, :username, :string, null: false, default: '', index: true, unique: true
+
+add_column :accounts, :active, :boolean, default: true
+
+2)  add_index :products, :part_number
+    add_index :users, :cnic, unique: true
+
+3)  remove_column :products, :part_number, :string
+
+remove_column :posts, :slug, :string, null: false, default: '', index: true
+
+4) create_table :products do |t|
+      t.string :name
+      t.string :part_number
+    end
+
+5) AddUserRefToProducts
+add_reference :products, :user, foreign_key: true
+
+6) change_table, used for changing existing tables.
+To removes the description and name columns, creates a part_number string column and adds an index on it. Finally it renames the upccode column.
+
+change_table :products do |t|
+  t.remove :description, :name
+  t.string :part_number
+  t.index :part_number
+  t.rename :upccode, :upc_code
+end
+
+change_table :products do |t|
+	t.string :part_number,:description
+	t.index :part_number
+end
+
+
+7) change_column :products, :part_number, :text
+
+This changes the column part_number on products table to be a :text field. Note that change_column command is irreversible.
+
+8)
+This sets :name field on products to a NOT NULL column and the default value of the :approved field from true to false.
+
+change_column_null :products, :name, false
+change_column_default :products, :approved, from: true, to: false
+change_column_default :questions, :text, from: nil, to: ''
+
+
+
+9) drop_table :distributors
+
+10)  It is wise to perform the transformations in down method in precisely the reverse order they were made in the up method
+
+a)
+			def up
+				add_column :products, :price, :decimal, precision: 5, scale: 2
+				rename_column :products, :part_number, :part_type
+			end
+
+			def down
+				rename_column :products, :part_type, :part_number
+				remove_column :products, :price
+			end
+b)
+			def up
+				add_column :products, :ssl_enabled, :boolean, default: true
+			end
+
+			def down
+				remove_column :products, :ssl_enabled
+			end
+
+
+
+11)  drop_join_table :categories, :products
+
+12)  you can execute your own query to alter table
+
+13)  Joins table unique index validation:
+add_index :user_topics, %i[user_id topic_id], unique: true
+
+
+Product.connection.execute("UPDATE products SET price = 'free' WHERE 1=1")
+
+
+***********************
+
+This migration uses command, which is not automatically reversible.
+To make the migration reversible you can either:
+1. Define #up and #down methods in place of the #change method.
+2. Use the #reversible method to define reversible behavior.
+
+
+**********************
+
+If you specify a target version, Active Record will run the required migrations (change, up, down) until it has reached the specified version.
+
+->  rails db:migrate VERSION=20220825162220
+
+case 1) If version 20080906120000 is greater than the current version (i.e., it is migrating upwards), this will run the change (or up) method on all migrations up to and including 20080906120000, and will not execute any later migrations.
+
+case 2) If migrating downwards, this will run the down method on all the migrations down to, but not including, 20080906120000
+
+*********************
+
+-> For example, if rails db:migrate:status initially displays:
+
+  (... some older migrations ...)
+  up      20181001002039  Some migration description
+  up      20181002222222  Some migration description
+  up      20181003171932  Some migration description
+  up      20181004211151  Some migration description
+  up      20181005151403  Some migration description
+Running:
+
+-> rake db:migrate VERSION=20181002222222   Will result in:
+
+  (... some older migrations ...)
+  up      20181001002039  Some migration description
+  up      20181002222222  Some migration description
+  down    20181003171932  Some migration description
+  down    20181004211151  Some migration description
+  down    20181005151403  Some migration description
+
+**********************
+
+rake db:migrate:status
+
+**********************
+
+Rollback:
+
+A common task is to rollback the last migration. For example, if you made a mistake in it and wish to correct it.
+Rather than tracking down the version number associated with the previous migration you can run:
+
+rails db:rollback
+
+**********************
+
+rails db:rollback STEP=3
+will revert the last 3 migrations.
+
+**********************
+
+In order to rollback ONLY ONE specific migration (OUT OF ORDER) use::
+
+rake db:migrate:down VERSION="20140311142212"
+
+rake db:migrate:down VERSION="20230124132653"
+
+rake db:migrate:down VERSION="20230123182829"
+
+**********************
+
+And if you ever want to migrate a single migration out of order:
+
+rake db:migrate:up VERSION=20100905201547
+
+
+**********************
+
+
+https://stackoverflow.com/questions/3647685/how-to-rollback-a-specific-migration
+
+Note: we can migrate down specific migration, then change it, and then migrate it again.
+
+
+rake db:rollback STEP=1
+Is a way to do this, if the migration you want to rollback is the last one applied. You can substitute 1 for however many migrations you want to go back.
+
+For example:
+
+rake db:rollback STEP=5
+Will also rollback all the migration that happened later (4, 3, 2 and also 1).
+
+To roll back all migrations back to (and including) a target migration, use: (This corrected command was added AFTER all the comments pointing out the error in the original post)
+
+rake db:migrate VERSION=20100905201547
+
+
+In order to rollback ONLY ONE specific migration (OUT OF ORDER) use:
+rake db:migrate:down VERSION=20100905201547
+
+Note that this will NOT rollback any interceding migrations -- only the one listed. If that is not what you intended, you can safely run rake db:migrate and it will re-run only that one, skipping any others that were not previously rolled back.
+
+And if you ever want to migrate a single migration out of order, there is also its inverse db:migrate:up:
+rake db:migrate:up VERSION=20100905201547
+
+
+***************************
+
+In case of error adding null: false to foreign key:
+  rails db:drop
+  rails db:create
+  rails db:migrate
+
+After rails db:drop:
+we can change anything inside migration file, add of change anything or even delete migration.
+
+****************************
+
+remove version from schema_migrations:
+
+rails db:migrate:status
+
+Note the versions of the missing migrations and head into the db console:
+
+rails dbconsole
+
+Now remove the versions from the migration table manually:
+delete from schema_migrations where version='<version>';
+
+
+========================================================================================================================================================================
+migrations2
+========================================================================================================================================================================
+rails g model user first_name:string{16} last_name:string email_address:string address_line_one address_line_two address_city address_state:string{2} address_zip:integer
+
+rails db:migrate
+rake db:seed
+
+rails g migration AddIndexestoUsers
+rails db:migrate
+rails db:rollback
+rails db:migrate db:rollback
+rails db:migrate:down VERSION=20170828002007
+
+************************
+
+
+# 20170828002007_add_indexesto_users.rb
+class AddIndexestoUsers < ActiveRecord::Migration[5.1]
+  def up
+    execute <<~SQL
+    ALTER TABLE users
+    ADD INDEX index_users_on_first_name (first_name),
+    ADD INDEX index_users_on_last_name (last_name),
+    ADD INDEX index_users_on_email_address (email_address),
+    ADD INDEX index_users_on_address_zip (address_zip),
+    ALGORITHM = INPLACE,
+    LOCK = NONE
+    SQL
+  end
+
+  # def change
+  #   change_table :users, bulk: true do |t|
+  #     t.index :first_name, algorithm: :inplace
+  #     t.index :last_name, algorithm: :inplace
+  #     t.index :email_address, algorithm: :inplace
+  #     t.index :address_zip, algorithm: :inplace
+  #   end
+  # end
+
+  **********************
+
+  # def up
+  #   add_index :users, :first_name
+  #   add_index :users, :last_name
+  #   add_index :users, :email_address
+  #   add_index :users, :address_zip
+  # end
+
+  def down
+    # raise ActiveRecord::IrreversibleMigration
+    remove_index :users, :first_name
+    remove_index :users, :last_name
+    remove_index :users, :email_address
+    remove_index :users, :address_zip
+  end
+end
+
+
+************************
+
+
+bulk: true
+
+ means the schema changes will be squashed into one.
+
+def change
+    change_table :users, bulk: true do |t|
+      t.integer :new_column1
+      t.string  :new_column2
+      t.boolean :new_column3
+    end
+end
+
+************************
+
+
+========================================================================================================================================================================
+Validations*
+========================================================================================================================================================================
+
+
+Validations:
+
+validation should be used with your model file
+
+we can directly add validation in Modal class and it will applied automatically
+
+****************************
+
+rails generate model Student name:string
+
+****************************
+
+The following methods trigger validations, and will save the object to the database only if the object is valid:
+
+create
+create!
+save
+save!
+update
+update!
+
+The bang versions (e.g. save!) raise an exception if the record is invalid. The non-bang versions don't: save and update return false, and create just returns the object.
+
+********************
+
+s = Student.new(name: "John Doe")
+s.new_record?
+s.save
+s.new_record?
+
+*********************
+
+1) validates :name, presence: true                               # one field
+   validates :name, :login, :email, presence: true               # more than one field
+   validates :name, :login, :email, on: :create                  # on specific action
+
+  Student.create(name: "John Doe").valid? # => true
+  Student.create(name: nil).valid? # => false
+
+2)   Note that an object instantiated with new will not report errors even if it's technically invalid,
+       because validations are automatically run only when the object is saved, such as with the create or save methods.
+
+rails c
+
+p = Student.new
+# => #<Student id: nil, name: nil>
+
+>> p.errors.messages
+# => {}
+
+>> p.valid?
+# => false
+
+>> p.errors.messages
+# => {name:["can't be blank"]}
+
+>> p = Student.create
+# => #<Student id: nil, name: nil>
+
+>> p.errors.messages
+# => {name:["can't be blank"]}
+
+>> p.save
+# => false
+
+>> p.save!
+# => ActiveRecord::RecordInvalid: Validation failed: Name can't be blank
+
+>> Student.create!
+# => ActiveRecord::RecordInvalid: Validation failed: Name can't be blank
+
+
+3)
+
+validates :name, length: { minimum: 2 }
+validates :bio, length: { maximum: 500 }
+validates :password, length: { in: 6..20 }
+validates :registration_number, length: { is: 6 }
+validates_numericality_of :field_name, :in => 1..99
+
+
+4)  validates :legacy_code, format: { with: /\A[a-zA-Z]+\z/,    message: "only allows letters" }
+
+Alternatively, you can require that the specified attribute does not match the regular expression by using the :without option.
+
+
+5) validates :name, absence: true
+
+ensure that the name field is not given.
+give error RecordInvalid (Validation failed: Name must be blank) if we give name
+
+
+5)
+validates :name, uniqueness: true
+
+check that name should not present in database
+
+
+6)  validates :age, numericality: true
+
+
+*************************
+
+student =  Student.new
+student.valid?                 # => false
+student.errors.messages
+                            # => {:name=>["can't be blank", "is too short (minimum is 3 characters)"]}
+
+*************************
+
+student =  Student.new(name: "JD")
+student.valid? # => false
+student.errors[:name] # => ["is too short (minimum is 3 characters)"]
+
+*************************
+
+student.errors.full_messages
+student.errors.full_messages
+
+<ul>
+  <% @article.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ul>
+
+
+**************************
+Custom Validations:
+**************************
+
+class GoodnessValidator < ActiveModel::Validator
+  def validate(record)
+    if record.name == "Nouman"
+      record.errors[:base] << "This person is Nouman"
+    end
+  end
+end
+
+class MyValidator < ActiveModel::Validator
+  def validate(record)
+    unless record.name.starts_with? 'X'
+      record.errors[:base] << 'Need a name starting with X please!'
+    end
+  end
+end
+
+class Student < ApplicationRecord
+  # validates :name, presence: true, allow_blank: true
+  # validates :name, presence: true
+  # validates :name, absence: true
+  # validates :name, uniqueness: true
+  # validates :name, numericality: true
+  # validates_with GoodnessValidator
+  # validates_with MyValidator
+  # validates :name, presence: true, length: { minimum: 3 }
+  # validates :name, presence: { message: "name must be given please" }
+
+  validate :custom_method
+
+  def custom_method
+    if self.age < 18
+      errors.add(:age, "age should be greater than 18")
+    end
+  end
+
+end
+
+
+========================================================================================================================================================================
+Form field validations:
+========================================================================================================================================================================
+number_field_tag:
+<%= form.number_field :quantity, step: 5, min: 0, max: 999999999999 %>
+https://apidock.com/rails/ActionView/Helpers/FormTagHelper/number_field_tag
+
+text field:
+https://api.rubyonrails.org/classes/ActionView/Helpers/FormTagHelper.html#method-i-text_field_tag
+
+
+https://guides.rubyonrails.org/form_helpers.html
+
+
+number_field_tag 'quantity', nil, in: 1...10
+<input id="quantity" name="quantity" min="1" max="9" type="number" />
+
+maxlength vs size:
+maxlength is used to indicate the number of characters that can be entered in the input field regardless of how large the fields appears on the screen.
+The size attribute determines how wide the field will be on the screen.
+
+<%= text_field_tag 'create_text', nil, :maxlength => 15, :size => 40 %>
+
+========================================================================================================================================================================
+Day 4
+========================================================================================================================================================================
+
+
+*******************************
+Controller Callbacks
+*******************************
+
+
+rails g scaffold Student name:string
+rails db:migrate
+
+
+Filters are methods that are run "before", "after" or "around" a controller action.
+
+*****************
+
+Filters are inherited, so if you set a filter on ApplicationController, it will be run on every controller in your application.
+"before" filters may halt the request cycle.
+
+class ApplicationController < ActionController::Base
+  before_action :require_login
+
+  private
+
+  def require_login
+    unless logged_in?
+      flash[:error] = "You must be logged in to access this section"
+      redirect_to new_login_url # halts request cycle
+    end
+  end
+end
+
+*****************
+
+You can prevent this filter from running before particular actions with skip_before_action:
+
+class LoginsController < ApplicationController
+  skip_before_action :require_login, only: [:new, :create]
+end
+
+The :only option is used to skip this filter only for these actions, and there is also an :except option which works the other way.
+
+
+*****************************************************
+
+https://stackoverflow.com/questions/36143039/rails-around-action-in-the-callback-stack
+
+around_action are more like append_before_action + prepend_after_action.
+
+Internally, think of it like rails has two arrays, @before_actions and @after_actions.
+ So when you declare around_action, it pushes/appends it to the end of @before_actions and it unshift/prepends to the @after_actions.
+
+With a quick test as follows:
+
+class SomeController < ApplicationController
+  before_action :before_action
+  after_action :after_action
+  around_filter :around_action
+
+  def before_action
+    $stderr.puts "From before_action"
+  end
+
+  def after_action
+    $stderr.puts "From after_action"
+  end
+
+  def around_action
+    begin
+      $stderr.puts "From around_action before yielding"
+      yield
+      $stderr.puts "From around_action after yielding"
+    end
+  end
+
+  def index
+  end
+end
+
+
+I got the following in the log:
+
+Started GET "/" for 127.0.0.1 at 2016-03-21 17:11:01 -0700
+Processing by SomeController#index as HTML
+From before_action
+From around_action before yielding
+  Rendered some/index.html.slim within layouts/index (1.5ms)
+From around_action after yielding
+From after_action
+
+
+
+========================================================================================================================================================================
+notes Action Controller
+========================================================================================================================================================================
+
+Action Controller is concerned with communicating with the database and performing CRUD actions where necessary.
+
+***********************8
+
+resource based routing
+
+resources :student will generate all the routes for CRUD operations
+
+HTTP verbs
+
+POST    - Create
+GET     - Read
+PUT	 - UPdate
+DELETE  -Destroy
+
+
+The naming convention of controllers in Rails favors pluralization of the last word in the controller's name,
+although it is not strictly required (e.g. ApplicationController). For example, ClientsController is preferable to ClientController,
+ SiteAdminsController is preferable to SiteAdminController or SitesAdminsController, and so on.
+
+The controller naming convention differs from the naming convention of models, which are expected to be named in singular form.
+
+*******
+
+
+There are two kinds of parameters possible in a web application.
+1) query string (  after the ? in the url)
+2) The second type of parameter is usually referred to as POST data. This information usually comes from an HTML form which has been filled in by the user.
+
+Rails does not make any distinction between query string parameters and POST parameters, and both are available in the params hash in your controller:
+
+
+========================================================================================================================================================================
+params notes
+========================================================================================================================================================================
+
+http://localhost:3000/params/index?status=activated
+
+# {"status"=>"activated", "controller"=>"params", "action"=>"index"}
+
+puts "params:"
+p params[:controller]
+p params[:status]
+p params[:action]
+
+
+**********************
+
+
+get 'params/new'
+post 'params/create'
+
+
+
+========================================================================================================================================================================
+Session   , Flash  , Cookies
+========================================================================================================================================================================
+
+
+https://guides.rubyonrails.org/v5.2/action_controller_overview.html#session
+
+Sessions:
+Your application has a session for each user in which you can store small amounts of data that will be
+ persisted between requests.
+
+session[:user_id] = user.id
+
+session[:user_id] = nil
+
+******************
+
+Flash:
+The flash is a special part of the session which is cleared with each request.
+ This means that values stored there will only be available in the next request, which is useful for passing error messages etc.
+
+flash[:notice] = "You have successfully logged out."
+
+<% flash.each do |name, msg| -%>
+	<%= content_tag :div, msg, class: name %>
+<% end -%>
+
+
+#  'keep' to make it persist for another request.
+ def index
+    # Will persist all flash values.
+    flash.keep
+
+    # You can also use a key to keep only some kind of value.
+    # flash.keep(:notice)
+    redirect_to users_url
+  end
+
+
+
+By default, adding values to the flash will make them available to the next request, but sometimes you may want to access those values in the same request.For example, if the create action fails to save a resource and you render the new template directly, that's not going to result in a new request, but you may still want to display a message using the flash.
+
+flash.now[:error] = "Could not save client"
+render action: "new"
+
+******************
+
+Cookies:
+
+Your application can store small amounts of data on the client - called cookies - that will be persisted across requests and even sessions.
+ Rails provides easy access to cookies via the cookies method, which - much like the session - works like a hash:
+
+
+ cookies[:commenter_name] = @comment.author
+ cookies.delete(:commenter_name)
+
+
+ def set_cookie
+    cookies.encrypted[:expiration_date] = Date.tomorrow # => Thu, 20 Mar 2014
+    redirect_to action: 'read_cookie'
+  end
+
+  def read_cookie
+    cookies.encrypted[:expiration_date] # => "2014-03-20"
+  end
+
+
+ **************************************
+
+
+ cheetsheet:
+
+
+ # Create flash (reset every new request)
+flash[:success] = 'User created with success!'
+
+# Create flash.now (reset every new view render)
+flash.now[:error] = 'Please select s user!'
+
+# Create session (reset every browser close)
+session[:user_id] = user.id
+
+# Check if session exist
+session[:user_id].nil?
+
+# Remove
+session.delete(:user_id)
+
+# Remove all
+reset_session
+
+# Create cookie (reset at expiration date)
+cookies.permanent[:remember_token] = remember_token
+
+# Encrypted cookie
+cookies.permanent.encrypted[:user_id] = user.id
+
+# Delete cookie
+cookies.delete(:user_id)
+
+
+************************************
+
+
+The main difference, in Rails 3, is that when you use cookie[:foo] = 'bar' the user is able to see the value for the cookie, i.e. 'bar'.
+
+When you use session[:foo] = 'bar' the value will be encrypted by rails and stored in the _myapp_session cookie.
+
+You would use the cookie[] format when the information you want to store is not bound to the session, e.g. when the users selects the preferred language.
+
+You would use the session[] format when you want to store information that is related to the current session, e.g. the id of the the user.
+
+
+************************************
+
+
+session/cookies will be destroid if we close browser .
+
+
+========================================================================================================================================================================
+Associations
+========================================================================================================================================================================
+
+In Rails, an association is a connection between two Active Record models.
+
+Why do we need associations between models?
+Because they make common operations simpler and easier in your code.
+
+
+========================================================================================================================================================================
+1 one_to_many_association
+========================================================================================================================================================================
+
+cheetsheet:
+https://web-crunch.com/posts/understanding-active-record-associations
+
+rails new Associations
+rails g controller home index
+
+
+************************************************************************************************************
+one to many relationship:
+
+summary:
+  1) create simple parent model
+  2) create child model with foreign key of parent
+  3) add has_many statement in parent model
+************************************************************************************************************
+
+1)
+rails g model Student name:string email:string
+rails db:migrate
+
+2)
+rails generate model Blog title:string content:text student:references    ( we can manually add foreign key but this is better - this will also add belongsto statement in blog model)
+rails db:migrate
+
+3)
+and add  in student model:
+ has_many :blogs,
+
+
+
+To do manually:
+1)
+add column in blog table in migration  --  t.references :student, foreign_key: true, null: false
+and then add ( belongs_to :student ) in blog model
+and add ( has_many :blogs ) to stuent model
+
+2) or just add column in new migration:
+add_reference :blogs, :student, foreign_key: true, null: false
+
+3) add_column :blogs, :student_id, :integer, null: false
+
+
+***********
+
+Note:
+use singular name with belongs_to :student            ( hint: use file name of the model class)
+use plural name with   has_many :blogs                ( hint: use the table name in the database)
+
+****************
+
+class Student < ApplicationRecord
+  has_many :blogs
+end
+
+class Blog < ApplicationRecord
+  belongs_to :student
+end
+
+***************
+understand links:
+
+class Student < ApplicationRecord
+  has_many :blogs, foreign_key: "student_id"
+end
+
+class Blog < ApplicationRecord
+  belongs_to :student, foreign_key: "student_id"
+end
+
+std = Student.find(1)
+std.blogs
+SELECT  "blogs".* FROM "blogs" WHERE "blogs"."student_id" = 1
+# this will match the id of that student with the blogs model column "student_id" and fetch all blogs that match.
+
+bl = Blog.find(2)
+bl.student
+SELECT  "students".* FROM "students" WHERE "students"."id" = 1
+# use my own foreign key attribute (student_id) , and match it with the id of all students and get the matched student
+
+****************
+test in console:
+
+Create Students:
+-> Student.create(name:"Nouman", email:"nouman@gmail.com")
+-> Student.create(name:"Shahmeer", email:"shahmeer@gmail.com")
+-> Student.create(name:"Farhan", email:"farhan@gmail.com")
+-> Student.create(name:"Fatima", email:"fatima@gmail.com")
+
+Create Blog for Student(id=1):
+-> Blog.create(title:"std1 blog", content:"this is a blog", student_id: 1)
+
+or
+-> std = Student.find(1)
+-> std.blogs.create(title:"std1 2nd  blog", content:"this is 2nd blog")
+
+-> Blog.count
+-> Student.count
+-> std1 = Student.first
+-> std1.blogs                   #  use blogs ( plural as menthion with has_many statement )
+
+-> blog = Blog.last
+-> std = blog.student
+-> std
+-> blog.student_id
+-> blog.student.name             #  use student ( singular as menthion with belongs_to statement )
+
+****************
+
+
+
+
+========================================================================================================================================================================
+2 many_to_many_association
+========================================================================================================================================================================
+
+************************************
+has_and_belongs_to_many Association:
+************************************
+
+A has_and_belongs_to_many association creates a direct many-to-many connection with another model, with no intervening model.
+
+Implementation summary :
+    1) create two simple models
+    3) add has_and_belongs_to_many statement in both models
+    2) create a join_table which will associate both tables.
+
+we will join student and course model:
+************************************************************************************************************
+
+https://guides.rubyonrails.org/v5.2/association_basics.html#has-and-belongs-to-many-association-reference
+
+
+rails g model Course name:string description:text
+rails db:migrate
+
+1) add this to student model class
+has_and_belongs_to_many :courses
+
+2) add this to Course model class
+has_and_belongs_to_many :students
+
+3) generate migration to create join table:
+rails g migration create_course_student_join_table
+
+Add this to migration file:
+create_join_table :courses , :students                -- use lexical order to create join table
+
+rails db:migrate
+
+-> this will create courses_students table in database
+
+***********
+
+Create Courses:
+-> Course.create(name:"Bio", description:"Biology and science for males")
+-> Course.create(name:"Math", description:"Math for 2nd year")
+-> Course.create(name:"Physics", description:"Physics for 2nd year")
+
+Associate records:
+course1 = Course.find(1)
+course2 = Course.find(2)
+course3 = Course.find(3)
+
+assign student a course:
+std1 = Student.find(1)                        --  fetch student
+std1.courses << course1                       --  assign student a course
+std1.courses                                  -- fetch all courses of student
+std1.courses << course2 << course3            -- assign multiple courses
+
+you can also assign courses to students:
+course1 = Course.find(1)
+std1 = Student.find(1)
+std2 = Student.find(2)
+std3 = Student.find(3)
+std4 = Student.find(4)
+course1.students << std2 << std3 << std4
+course1.students
+std1.courses.size                                   --  see count of courses of this student
+std1.courses.find(2)                                -- find course with id=2
+
+
+************************
+To remove this relationship , generate a migration and drop join table:
+
+drop_join_table :courses , :students
+
+************************
+
+Limitations of has_and_belongs_to_many association  :
+
+( using join_table we cannot add extra attribute , or callbacks or validations to the ralationship table
+ because we do not have model for that )
+
+https://guides.rubyonrails.org/v5.2/association_basics.html#choosing-between-has-many-through-and-has-and-belongs-to-many
+
+
+*********************************************************
+has_many :through
+*********************************************************
+A has_many :through association is often used to set up a many-to-many connection with another model.
+This association indicates that the declaring model can be matched with zero or more instances of another model by proceeding through a third model.
+This method will implement many to many relationship using third model
+
+Implementation summary:
+  1) create two simple models
+  2) create third model with foreign keys of two other models and  we can add more attributes in this model if required
+  3) Add has many and has_many through statement in both two models
+
+
+we will join student and project model:
+************************************************************************************************************
+
+# create project model
+rails g model project name:string description:text
+rails db:migrate
+
+1) creating relationship model b/w student and project with third model
+rails g model student_project student:references project:references submission_date:date
+rails db:migrate
+
+2)  add this to student  model class:
+has_many :student_projects
+has_many :projects, through: :student_projects
+
+3) add this to project model class:
+has_many :student_projects
+has_many :students, through: :student_projects
+
+*****
+
+std = Student.first
+std.projects
+Project.create(name: "Driver app")
+Project.create(name: "School management app")
+Project.count
+
+
+StudentProject.create( student_id: 1, project_id: 1 , submission_date: Date.today + 20.days )
+std = Student.find(1)
+std.projects
+
+p = Project.find(1)
+p.students
+
+*****
+Use this syntax if you not have additional attributes for relationship model( but works fine in both cases):
+
+std2 = Student.find(2)
+p2 = Project.find(2)
+std2.projects << p2
+
+*****
+
+uniqueness validation:
+
+add_index :user_topics, %i[user_id topic_id], unique: true
+
+*****
+
+Project.joins(:student_projects).where(  project: { name: 'Driver app' }  )
+Driver app
+
+
+========================================================================================================================================================================
+3 one_to_one_associations
+========================================================================================================================================================================
+
+********************************************
+has_one
+********************************************
+
+Implementation summary:
+  1) generate simple parent model and a child model with foreign key of parent
+  2) add has_one statement in parent model
+************************************************************************************************************
+
+rails g model Supplier name:string
+rails db:migrate
+
+rails g model Account account_number:string supplier:references
+rails db:migrate
+
+1) add ( has_one :account ) in parent model
+both model msut use singular name for association
+
+-> supplier = Supplier.create(name: "Nouman")
+
+-> account = Account.create(account_number: 123, supplier_id: supplier.id)
+or
+-> supplier.create_account(account_number:123)
+
+-> supplier.account
+-> supplier.account.account_number
+
+-> account.supplier
+-> account.supplier.name
+
+
+
+***************************************************
+has_one :through
+*********************************************************
+
+Implementation summary:
+    1) create one simple parent model ( department )
+    2) create child model with foreign key of parent ( department:references )
+    3) create third model with foreign ley of child  ( manager:references )
+    4) add statement has_one and has_one_through in parent model
+    5) add has_one statement in child model
+
+https://guides.rubyonrails.org/v5.2/association_basics.html#the-has-one-through-association
+************************************************************************************************************
+A has_one :through association sets up a one-to-one connection with another model.
+This association indicates that the declaring model (department) can be matched with one instance of another model by proceeding through a third model.
+Use has_one_through when you want to associate two models using third model.
+
+For examle:
+If each Department has one Manager, and each Manager is associated with one Managerhistory,   or
+if each   supplier has one account, and each account is associated with one account history,
+
+In docs:
+supplier = Department
+Accout = manager
+account history = manager history
+
+***********
+
+1) create models
+rails g model department name:string
+rails g model manager name:string email:string contact:string department:references
+rails g model manager_history joining_date:date total_experience:integer manager:references
+rails db:migrate
+
+2) add this to department model
+has_one :manager
+has_one :manager_history, through: :manager
+
+3) add  in manager model
+  has_one :manager_history
+
+4) add records:
+
+dept1 = Department.create(name: "Production department")
+dept2 = Department.create(name: "Accounts department")
+
+manager = Manager.create(name: "Nouman", email: "noman@gmail.com" , contact: "03335465765", department_id: dept1.id)
+manager.department
+
+dept1.manager
+
+manager_history = ManagerHistory.create( joining_date: Date.today - 100.days , total_experience: 2, manager_id: Manager.first.id)
+manager_history.manager
+
+manager = Manager.find(1)
+manager.manager_history
+
+dept1.manager_history
+
+manager_history.department   --  give error bec there is not association that manager_history belongs to department
+                                  so we cannt accesss department through manager_history
+
+========================================================================================================================================================================
+Polymorphic Association
+========================================================================================================================================================================
+
+we need Polymorphic Association when we multiple parent models are their for a single child
+With polymorphic associations, a model can belong to more than one other model, on a single association.
+
+For example, you might have a picture model that belongs to either an employee model or a product model.
+If we do not use polimorphic association, we have a problem of missing foreig_key ( null=false  ) constraint of other model  ,
+as we have only on parent associated with one record.
+
+1)
+Parents:
+rails g model Article title:string text:text
+rails g model News title:string text:text
+
+Child:
+rails g model Comment title:string commentable_type:string commentable_id:integer
+
+rails db:migrate
+
+2) add in comment model:
+belongs_to :commentable, polymorphic:true
+
+3) and in article and news model:
+has_many :comments, as: :commentable
+
+
+4)
+
+Article.create(title:"article 1")
+Article.create(title:"article 2")
+News.create(title:"news 1")
+article = Article.find(1)
+
+article.comments.create(title: "comment for Article 1")
+article.comments.create(title: "2nd comment ")
+
+article.comments
+article.comments[0].title
+
+***
+
+news = News.find(1)
+
+news.comments.create(title: "comment for news 1")
+news.comments                -- give array of all comments on this news
+news.comments[0]             -- get first comment on that news
+
+comment = Comment.last
+comment.commentable
+comment.commentable.title
+comment.commentable.text
+
+
+
+
+========================================================================================================================================================================
+Self joins
+========================================================================================================================================================================
+
+
+rails g model Employee account employee_id:integer manager_id:integer
+rails db:migrate
+
+emp1 = Employee.create(:account => "emp1")
+emp2 = Employee.create(:account => "emp2")
+man1 = Employee.create(:account => "man1")
+emp1.subordinates
+emp1.manager
+
+emp1 = Employee.find(1)
+
+emp1.subordinates << emp2
+emp1.manager = man1
+emp1.subordinates
+
+
+************************
+
+
+In Self join association one model has relation with itself.
+For example one user table can have list of all coach and player.
+One coach can train many players. We will represent the association as:
+
+
+rails g model User name:string
+
+run migration:
+add_column :users , :coach_id, :integer
+
+class User < ActiveRecord::Base
+  has_many :players, :class_name => "User",  :foreign_key => "coach_id"
+  belongs_to :coach, :class_name => "User"
+end
+
+
+user1 = User.create(name:"Player1")
+user2 = User.create(name:"Player2")
+user3 = User.create(name:"Player3")
+
+coach1 = User.create(name:"coach1")
+
+user1.coach = coach1
+user1.save
+
+user2.coach = coach1
+user2.save
+
+user3.coach = coach1
+user3.save
+
+
+coach1.players
+# match id of users with coach_id
+
+user1.coach
+
+
+========================================================================================================================================================================
+dependent_options
+========================================================================================================================================================================
+https://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#method-i-has_many-label-Options
+
+
+Docs are available here
+
+Looks like the following options are supported:
+
+nil - do nothing (default). if it is required to do nothing on deletion, nil (which is default behaviour) can also be used
+
+:destroy - causes all the associated objects to also be destroyed.
+
+:delete_all - causes all the associated objects to be deleted directly from the database (so callbacks will not be executed).
+
+:nullify - causes the foreign keys to be set to NULL. Callbacks are not executed.
+
+:restrict_with_exception - causes an exception to be raised if there are any associated records.
+
+:restrict_with_error - causes an error to be added to the owner if there are any associated objects.
+
+
+========================================================================================================================================================================
+seed
+========================================================================================================================================================================
+
+
+Data seeding is the process of populating a database with an initial set of data.
+data seeding :  https://www.youtube.com/watch?v=eR07DB-GUJ8
+
+
+create object and run rails db:seed will populate data to model
+
+student = Student.create( name: "Nouman", email: "nouman@gmail.com")
+ rails db:seed
+
+
+*****************************
+renderring in different formats
+*****************************
+
+  render plain: "OK"
+
+  render html: helpers.tag.strong('Not Found')
+
+  @grades = { "Jane Doe" => 10, "Jim Doe" => 6 }
+  render json: @grades
+
+  render xml: @grades
+
+  render :file => 'public/404.html', :status => :not_found, :layout => false
+
+  render status: 500
+
+
+
+
+========================================================================================================================================================================
+Day 5
+exists?   vs present?
+========================================================================================================================================================================
+The big difference between the two methods, is that when you call present? it initializes ActiveRecord for each record found(!), while exists? does not.
+
+to show this I added after_initialize on User. it prints: 'You have initialized an object!'
+
+User.where(name: 'mike').present?
+
+User Load (8.1ms) SELECT "users".* FROM "users" WHERE "users"."name" = $1 ORDER BY users.id ASC  [["name", 'mike']]
+You have initialized an object!
+You have initialized an object!
+
+User.exists?(name: 'mike')
+User Exists (2.4ms)  SELECT 1 AS one FROM "users" WHERE "users"."name" = $1 ORDER BY users.id ASC LIMIT 1  [["name", 'mike']]
+
+
+*************************
+
+
+present?
+present? is an ActiveSupport extension to Object. It's usually used as a test for an object's general "falsiness". From the documentation:
+
+An object is present if it’s not blank?. An object is blank if it’s false, empty, or a whitespace string.
+
+So, for example:
+
+[ "", " ", false, nil, [], {} ].any?(&:present?)
+# => false
+
+
+exists?
+exists? is from ActiveResource. From its documentation:
+
+Asserts the existence of a resource, returning true if the resource is found.
+
+Note.create(:title => 'Hello, world.', :body => 'Nothing more for now...')
+Note.exists?(1) # => true
+
+
+
+========================================================================================================================================================================
+Day 5:
+
+routes
+========================================================================================================================================================================
+
+member routes: routes that needs the id to perform action (like  show, edit, update destroy) ( acts on single object)
+
+collection routes : routes that do not need id to perform action ( lik index, create , new)  ( acts on collection of obhects)
+
+***************************
+
+namespace routing is used when you want to organize group of controllers under a namespace
+
+***************************
+
+create controler in subdirectory:
+
+rails g controller admin/Users
+
+
+**********************************
+
+https://www.youtube.com/watch?v=KmYt07MUh9c
+
+http://localhost:3000/admin/sellers
+
+rails g scaffold admin/Sellers name:string
+rails db:migrate
+
+rails g scaffold animals/Cat name:string age:integer
+rails db:migrate
+
+**********************************
+
+or you can add existing controller in sub folder and then add Admin:: before controller class
+and move routes under namespace
+and at last we need to set the new links to our buttons
+
+**********************************
+
+
+# this will remove the admin prefix from the url and is still use controller in admin folder
+scope  module: :admin do
+  resources :students
+end
+
+Note: change links in case you change scope or namespace accordingly
+
+**********************************
+
+if you want admin prefix to your routes and not want the namespace
+( i.e you want normal controller in Controller folder not in any sub folder)
+
+scope :admin do
+  resources :students
+end
+
+
+========================================================================================================================================================================
+routes video Notes
+========================================================================================================================================================================
+
+get 'products', to: 'products#index', as: 'products'
+# ^verb  ^URL       ^controller#action    ^ refer: products_path
+
+get 'products/:id', to: 'products#show',  as: 'product' , id: /\d+/
+# ^verb  ^URL         ^controller ^action    ^ refer: product_path, constraint (for numeric values only)
+
+
+*****************
+
+get 'form', to: 'welcome#form', as: 'form'
+
+redirect_to :form
+render "form"          -- can also use string
+
+****
+
+redirect_to action: 'form'
+
+redirect_to(
+      content_components_path,
+      alert: "Cannot destroy associated content component"
+    ) if @content_component.configured
+
+*****************
+
+link to index acion:
+
+<a href="/products">Back</a>
+<%= link_to 'Back', products_path %>
+
+******************************
+
+link to show acion of particular product:
+ <!--   different ways to link_to our product from the most explicit to the most conventional. -->
+
+<%= link_to 'Details', product_path(id: product.id) %>
+<%= link_to 'Details', product_path(product) %>
+<%= link_to 'Details', product %>
+
+<a href="/products/<%= product.id %>">Details</a>
+
+
+**********************
+
+root 'products#index'
+
+root to: 'products#index'
+
+**********************
+
+# Generate the 2 default RESTful routes for index and show.
+resources :products, only: [:index, :show]
+
+# create all routes except for index action ( no route for index)
+resources :products, except: [:index]
+
+
+********************
+
+http://localhost:3000/about
+
+get 'about' => 'products#about'
+
+********************
+
+get 'blog', to: redirect('https://guides.rubyonrails.org/v5.2/routing.html')
+
+********************
+
+shallow routes: (nested resources)
+
+https://www.digitalocean.com/community/tutorials/how-to-create-nested-resources-for-a-ruby-on-rails-application
+
+resources :questions do
+    resources :answers, shallow: true
+end
+
+
+              questions GET       /questions(.:format)                                                                     questions#index
+                        POST      /questions(.:format)                                                                     questions#create
+            new_question GET      /questions/new(.:format)                                                                 questions#new
+          edit_question GET       /questions/:id/edit(.:format)                                                            questions#edit
+                question GET      /questions/:id(.:format)                                                                 questions#show
+                        PATCH     /questions/:id(.:format)                                                                 questions#update
+                        PUT       /questions/:id(.:format)                                                                 questions#update
+                        DELETE    /questions/:id(.:format)                                                                 questions#destroy
+        question_answers GET      /questions/:question_id/answers(.:format)                                                answers#index
+                        POST      /questions/:question_id/answers(.:format)                                                answers#create
+    new_question_answer GET       /questions/:question_id/answers/new(.:format)                                            answers#new
+            edit_answer GET       /answers/:id/edit(.:format)                                                              answers#edit
+                  answer GET      /answers/:id(.:format)                                                                   answers#show
+                        PATCH     /answers/:id(.:format)                                                                   answers#update
+                        PUT       /answers/:id(.:format)                                                                   answers#update
+                        DELETE    /answers/:id(.:format)                                                                   answers#destroy
+
+
+Shallow follows convention over configuration, and will shorten the URLs where possible.
+Note that with the shallow rails option even the “edit” is taken out of the nest.
+
+Only index, create, and new are left inside.
+
+========================================================================================================================================================================
+Day 6: ActionView
+
+forms:
+========================================================================================================================================================================
+
+rails g model Post title:string body:text author:string
+
+**********************************
+https://medium.com/@michellekwong2/form-tag-vs-form-for-vs-form-with-fa6e0ac73aac
+**********************************
+
+form_tag generates an HTML form for us and lets you specify options you want for your form.
+We use the rails method, url_for, to create a URL we want the form to submit to. This request for making a new post would have a URL of /posts and let Rails know the specific controller this URL is going to be for.
+
+******
+
+
+<%= form_tag url_for(action: 'create'), method: "post" do %>
+
+  <%= label_tag 'Title' %>
+  <%= text_field_tag 'title', @post.title %>
+
+  <%= label_tag 'Body' %>
+  <%= text_area_tag 'body', @post.body %>
+
+  <%= label_tag 'Author' %>
+  <%= text_field_tag 'author', @post.author %>
+
+  <%= submit_tag "Create Post" %>
+
+<% end %>
+
+
+**********************************
+
+form_for
+
+form_for method follows RESTful conventions on its own. It accepts the instance of the model as an argument where it makes assumptions for you (which is why it can be seen to be preferred over form_tag).
+form_for prefers the argument that you’re passing in to be an active record object. This will easily make a create or edit form.
+
+<%= form_for @post , :html => {:class => "w-100"} do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <br>
+
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+  <br>
+
+  <%= f.label :author %>
+  <%= f.text_field :author %>
+  <br>
+
+  <%= f.submit %>
+<% end %>
+
+**********************************
+
+
+Know when to use form_for vs. form_tag
+
+We use form_for with a specific model and use form_tag when you don’t have a model for it (for custom URLs).
+Both form_for and form_tag produce HTML for a form.
+However, the syntax for both forms is different since we use form builder field helpers with form_for but not with form_tag.
+And then theres form_with where we always use form builder.
+
+
+**********************************
+
+form_with
+
+If we don’t pass a model, form_with behaves like form_tag.
+
+form_with submits are remote by default and attaches the data-remote=“true” to the form.
+You can change this by using local: true. This is the opposite from the other methods where the default is local and you have to specify remote: true to make it remote.
+
+Another difference between form_with compared to form_for and form_tag is that form_for and form_tag generate automatic ids for the input fields.
+ On the other hand, form_with does not. Ids and classes have to be specified.
+
+
+Lastly, another difference in form_with is that any id and class are not wrapped in the html key.
+Example of form_with wrapping id & class in keys :
+
+<%= form_with model: @post, id: “custom-id”, class: “custom-class” do |form| %>
+
+as opposed to form_for where you have to specify the id and class:
+
+<%= form_for @post, html: { id: “custom-id”, class: “custom-class” } do |form| %>
+
+
+**************
+
+<%= form_with model: @post , local:true do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <br>
+
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+  <br>
+
+  <%= f.label :author %>
+  <%= f.text_field :author %>
+  <br>
+
+  <%= f.submit %>
+<% end %>
+
+
+**************
+other form Tags
+
+
+<div class="field form-group">
+  <%= f.label :name %><br />
+  <%= f.text_field :name , class:"form-control", placeholder:"Name"  ,autofocus: true, autocomplete: "name"   %>
+</div>
+
+******************
+
+<div class="field form-group">
+  <%= f.label :username %><br />
+  <%= f.text_field :username , class:"form-control", placeholder:"Username" , autofocus: true, autocomplete: "username"   %>
+</div>
+
+******************
+
+<div class="field form-group">
+  <%= f.label :age %>
+  <%= f.number_field :age, step: 1,  min: 0, max: 200, class:"form-control" , autofocus: true, autocomplete: "age" %>
+</div>
+
+******************
+enum gender: { unknown: 0, male: 1, female: 2 }
+
+<div class="field form-group" >
+  <%= f.label :gender %>
+  <%= f.select :gender, options_for_select(User.genders.collect { |s| [s[0].humanize, s[0]] }, selected: current_user.gender ), {}, class: "form-control" %>
+</div>
+
+******************
+
+<div class="field form-group">
+  <%= f.label :email %><br />
+  <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", placeholder:"Email" %>
+</div>
+
+*****************
+
+create_table :products do |t|
+    t.string :name, null: false
+    t.string :size, default: "1-3, 3-6", null: false
+    t.text :description, null: false
+    t.string :model
+    t.integer :quantity, default: 0, null: false
+    t.decimal :price, precision: 5, scale: 2, default: "0.0", null: false
+    t.boolean :status, default: true, null: false
+    t.string "color", limit: 25, default: "", null: false
+
+    t.references :user, foreign_key: true, null: false
+    t.timestamps
+end
+
+<%= form_with(model: product, local: true) do |form| %>
+
+  <% if product.errors.any? %>
+    <div id="error_explanation " class="m-3 text-danger">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+      <ul>
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, maxlength: 35, class:"form-control" %>
+  </div>
+
+  <div class="field  form-group">
+    <%= form.label :color %>
+    <%= form.text_field :color, maxlength: 25, class:"form-control"  %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :price %>
+    <%= form.number_field :price, step: 0.5,  min: 0, max: 999999999999, class:"form-control" %>
+  </div>
+  <div class="field form-group">
+    <%= form.label :size %>
+    <%= form.text_field :size, maxlength: 25  , class:"form-control" %>
+  </div>
+  <div class="field form-group">
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity, min: 0, max: 999999999999  , class:"form-control"%>
+  </div>
+  <div class="field form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description , maxlength: 250, class:"form-control"  %>
+  </div>
+  <div class="field form-group">
+    <%= form.label :model %>
+    <%= form.text_field :model , maxlength: 25, class:"form-control" %>
+  </div>
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+  <div class="field mb-4">
+    <%= form.label :images %>
+    <%= form.file_field :images , multiple: true %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+
+******************************
+View Helpers
+******************************
+
+Simple:
+https://guides.rubyonrails.org/action_view_helpers.html
+Descriptive:
+https://api.rubyonrails.org/classes/ActionView/Helpers.html
+
+
+<% @date = Date.today %>
+
+<%= @date.strftime('%A, %b, %d, %Y') %>
+
+<%= formatted_date(@date)%>
+
+<%= render_sample_button %>
+
+<%= time_ago_in_words(Time.now)  %>
+
+<%= number_to_human(10_000)  %>
+
+<%= image_url("edit.png") %>
+
+<%= stylesheet_url "application.css"  %>
+
+
+******************
+
+yield in application.html.erb
+
+1) add in application.html.erb where you want to add data from special page:
+  <%= yield :special_script %>
+
+
+2) add data from specific html page:
+<% content_for :special_script do %>
+  <h2>Hey this is special view</h2>
+<% end %>
+
+********************
+
+How to Use Helpers From Controllers
+In newer versions( >= 5), you can use helpers in your controller with the helpers (plural) object.
+
+class UsersController
+  def index
+    helpers.time_ago_in_words(Time.now)
+  end
+end
+
+********************
+
+How to Use Helpers From console
+
+
+You can use helpers from the console with helper.method_name.
+
+$ helper.time_ago_in_words(Time.now)
+
+Notice the singular form of “helper” so you don’t get an error message. And remember that the console doesn’t reload code changes automatically.
+
+
+***********************
+
+1 Overview of helpers provided by Action View
+  1.1 AssetTagHelper
+      1.1.1 auto_discovery_link_tag
+      1.1.2 image_path
+      1.1.3 image_url
+      1.1.4 image_tag
+      1.1.5 javascript_include_tag
+      1.1.6 javascript_path
+      1.1.7 javascript_url
+      1.1.8 stylesheet_link_tag
+      1.1.9 stylesheet_path
+      1.1.10 stylesheet_url
+  1.2 AtomFeedHelper
+      1.2.1 atom_feed
+  1.3 BenchmarkHelper
+      1.3.1 benchmark
+  1.4 CacheHelper
+      1.4.1 cache
+  1.5 CaptureHelper
+      1.5.1 capture
+      1.5.2 content_for
+  1.6 DateHelper
+      1.6.1 distance_of_time_in_words
+      1.6.2 time_ago_in_words
+  1.7 DebugHelper
+  1.8 FormHelper   ( https://guides.rubyonrails.org/form_helpers.html )
+  1.9 JavaScriptHelper
+      1.9.1 escape_javascript
+      1.9.2 javascript_tag
+  1.10 NumberHelper
+      1.10.1 number_to_currency
+      1.10.2 number_to_human
+      1.10.3 number_to_human_size
+      1.10.4 number_to_percentage
+      1.10.5 number_to_phone
+      1.10.6 number_with_delimiter
+      1.10.7 number_with_precision
+  1.11 SanitizeHelper
+      1.11.1 sanitize
+      1.11.2 sanitize_css(style)
+      1.11.3 strip_links(html)
+      1.11.4 strip_tags(html)
+  1.12 UrlHelper
+      1.12.1 url_for
+      1.12.1.1 Examples
+      1.12.2 link_to
+      1.12.3 button_to
+      1.12.3.1 Examples
+  1.13 CsrfHelper
+undefined
+
+
+========================================================================================================================================================================
+access controller and action name in views:
+========================================================================================================================================================================
+
+
+https://stackoverflow.com/questions/1244921/rails-controller-action-name-to-string
+
+*******************
+
+controller name:
+
+<%= controller.controller_name %>
+return => 'users'
+
+*******************
+
+action name:
+<%= controller.action_name %>
+return => 'show'
+
+*******************
+
+id:
+<%= ActionController::Routing::Routes.recognize_path(request.url)[:id] %>
+return => '23'
+
+========================================================================================================================================================================
+Pagination
+========================================================================================================================================================================
+https://github.com/kaminari/kaminari
+
+gem 'kaminari'
+ bundle install
+
+
+
+1) add in model class:
+  paginates_per 5
+
+2) IN controller:
+  @articles = Article.all.page(params[:page])
+
+3) add in index file
+<%= paginate @articles %>
+
+4) rails g kaminari:views bootstrap4
+
+
+**********************************
+
+It is A Tradeoff, Each one has its own advantages and disadvantages.
+
+For Server Side Pagination:
+your request time and data are reduced, as only a selected no of rows will be sent by the server.
+browser required less memory hence faster to process like filter, map, reduce etc.(only for one page)
+
+
+For Client Side Pagination:
+As all data is present on client machine user can easily switch between back and forth.
+filter, search, map, reduce is possible on whole data.
+server get few requests as for search, filter, etc needed extra request and many iterations to the server.
+So choose according to your specific requirements.
+
+
+========================================================================================================================================================================
+yield in views:
+========================================================================================================================================================================
+
+1) specify in application.html.erb
+<%= yield :special_script %>
+
+2) in views:
+<% content_for :special_script do %>
+  <h2>Hey this is special script</h2>
+<% end %>
+
+========================================================================================================================================================================
+Day 7
+Action queries
+========================================================================================================================================================================
+
+Use Day1/Blog Project for Practice:
+
+Article.count
+Article.first
+Article.last
+
+Article.column_names
+=>["id", "title", "text", "created_at", "updated_at"]
+
+
+Article.ids
+[7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
+
+
+*******************
+
+a= Article.find([9, 10])      #  find with id in  9 or 10
+a[0].text
+
+SELECT "articles".* FROM "articles" WHERE "articles"."id" IN (?, ?)  [["id", 9], ["id", 10]]
+
+
+Article.take(2)    # get first two records
+
+Article.first
+
+Client.first(3)
+SELECT  "clients".* FROM "clients" ORDER BY "clients"."id" ASC LIMIT ?  [["LIMIT", 3]]
+
+******************************
+
+order:
+
+Article.order(:title)              #  get all records order by title
+Article.order(:id)                 #  get all records order by id
+Article.order(:title).first        #   then fetch first record
+
+
+
+Article.order(created_at: :desc)
+
+Article.order(created_at: :asc)
+
+Article.order("created_at DESC")
+
+Article.order("created_at ASC")
+
+
+
+************************************
+select:
+ Modifies the SELECT statement for the query so that only certain fields are retrieved:
+
+
+
+Article.select(:id )
+SELECT "articles"."id" FROM "articles"
+=> #<ActiveRecord::Relation [#<Article id: 2>, #<Article id: 3>, #<Article id: 4>, #<Article id: 5>, #<Article id: 6>, #<Article id: 8>, #<Article id: 10>, #<Article id: 11>, #<Article id: 12>, #<Article id: 13>, ...]>
+
+Article.select(:id, :title)
+
+
+Client.select(:name).distinct
+
+Emp.select("ename , sal")
+
+
+
+**********************************
+calculate:
+
+syntax:
+calculate(operation, column_name)
+
+Emp.calculate(:sum, :sal)
+Emp.calculate(:sum, :sal)
+
+Emp.calculate(:count, :all)
+
+*********************************
+
+pluck
+pluck can be used to query single or multiple columns from the underlying table of a model.
+return output in simple array
+Pluck directly returns array of the attribute that we pass to it
+
+
+Article.pluck(:id)    						# get only specified attributes
+
+=> [2, 3, 4, 5, 6, 8, 10, 11, 12, 13, 14]
+
+Article.pluck(:id, :name, :dreams)
+
+=> [[2, "name", "dreams"], [3, "name", "dreams"], [4, "name", "dreams"], [5, "name", "dreams"], [6, "name", "dreams"], [8, "name", "dreams"], [10, "name", "dreams"], [11, "name", "dreams"], [12, "name", "dreams"], [13, "name", "dreams"], [14, "name", "dreams"]]
+
+
+* User.all.pluck(:id)
+SELECT "users"."id" FROM "users"
+ => [1, 2, 3, 4, 5]
+
+* User.all.pluck(:name)
+SELECT "users"."name" FROM "users"
+  => ["Nouman", "Shah", "Sergei", "John", "mike"]
+
+* User.all.pluck(:id, :name)
+SELECT "users"."id", "users"."name" FROM "users"
+ => [[1, "Nouman"], [2, "Shah"], [3, "Sergei"], [4, "John"], [5, "mike"]]
+
+****************************
+
+find_by
+
+Article.find_by(id: 9)
+Article.where(id:9).take          # same as above
+
+Article.find_by!(id: 9)           # give error if record not found
+
+
+************************************
+where:
+
+conditions ( where )
+
+
+params = {id:10 }
+Article.where("id= ?", params[:id])
+
+params = {id:7 }
+Article.where("id=? and title=?", params[:id], "Article 0")
+
+Emp.where("ename = ? and sal > ?",'CLARK' ,1000)
+
+Article.where(id:7)
+Article.where(title:"Article 0")
+Article.where("title" => "Article 0")     # we can also use string
+Article.where.not(id:7)         # get all records where id is not 7
+
+users = User.where(name: 'Nouman' , occupation: 'Code Artist').order(created_at: :desc)
+
+
+User.where("id > ?", 200)
+User.where("id > :id", id: 100)
+Emp.where("sal > :abc", abc:1000)
+
+************************
+
+in:  pass array
+
+Client.where(orders_count: [1,3,5])
+
+This code will generate SQL like this:
+SELECT * FROM clients WHERE (clients.orders_count IN (1,3,5))
+
+************************************
+
+OR condition:
+
+Article.where(id:1).or(Article.where(id:20))
+
+ => SELECT  "articles".* FROM "articles" WHERE ("articles"."id" = ? OR "articles"."id" = ?)
+
+
+******************************
+
+Use Day7/QueryInterface Project:
+
+rails g model client name:string orders_count:integer looked:boolean
+rails g model address postcode:string client:references
+rails g model order status:boolean client:references
+rails db:migrate
+
+
+*********************
+
+present?:
+
+User.where(name: 'mike').present?
+SELECT "users".* FROM "users" WHERE "users"."name" = ?  [["name", "mike"]]
+ => true
+
+**********************
+
+exists?
+
+check for the existence of the object there's a method called exists?.
+return either true or false
+
+User.exists?(1)
+
+User.exists?(id: [1,2,3])
+
+User.exists?(name: ['John', 'Sergei'])
+
+User.where(name:"Nouman").exists?
+
+User.exists?(name: 'mike')
+
+*********************
+
+ Calculations
+
+count:
+  User.count(:id)
+  User.count("id")
+  User.count(:age)
+
+
+Average:
+  Product.average(:price)
+  Product.average("price")
+
+Minimum:
+  Product.minimum(:price)
+  Product.minimum("price")
+
+Maximum
+  Product.maximum(:price)
+
+Sum:
+  Product.sum(:price)
+
+***************
+
+Emp.count - Emp.count(:sal)
+
+
+***********************
+
+:includes  loads associated records in advance and limits the number of SQL queries made to the database.
+ This technique is known as "eager loading" and in many cases will improve performance by a significant amount.
+
+
+User.includes(:products).where(products: {name:"Laptop"})
+
+
+*************************
+
+Length:
+
+Product.where("LENGTH(name) < 5")
+
+
+*************************
+Scope:
+*************************
+
+syntax:
+    scope :name, -> { where(:attibute => value)}
+
+create scope in Product model class
+
+> scope  :laptops, -> { where( name:"Laptop") }
+
+In console:
+Product.laptops
+
+
+****
+
+Passing in arguments:
+
+scope  :get_product, -> (name) { where( "name= ?", name) }
+
+Product.get_product("Laptop")
+
+
+************
+
+anas:
+
+scope :with_include, -> { includes(:purpose_of_transfer, :sender, :receiver) }
+scope :with_detail, ->(data) { where('sender_id = ? or receiver_id = ?', data, data) }
+
+
+
+@transfer_funds = TransferFund.with_detail(current_user.id).with_include
+
+*************************
+default_scope:
+*************************
+
+default_scope: this scope will be applied across all queries to the model
+
+> default_scope { where("user_id IS NOT NULL") }
+>Product.all.count
+
+
+default_scope { order(id: :desc) }
+
+*************************
+
+
+
+========================================================================================================================================================================
+Group:
+========================================================================================================================================================================
+
+1) To get the total of grouped items on a single query, call count after the group.
+
+Order.group(:status).count
+
+SELECT COUNT(*) AS count_all, "orders"."status" AS orders_status FROM "orders" GROUP BY "orders"."status"
+ => {false=>2, true=>4}
+
+******************************************************
+
+2) Product.group(:price).count
+{0.334e1=>1, 0.8399e2=>1, 0.11334e3=>1, 1000=>3, 2000=>3}
+it says that product with price 1000 are 3 and product with price 2000 are 3 and so on
+
+******************************************************
+a = Emp.group(:job)         -- group by job
+a.count
+a.count(:job)
+a.count(:deptno)
+a.count(:comm)
+a.sum(:sal)                 -- give sum of salaries of each job
+a.average(:sal)
+a.maximum(:sal)             -- give maximum salary of each type of job
+
+******************************************************
+
+Emp.group(:job).count
+SELECT COUNT(*) AS count_all, "emps"."job" AS emps_job FROM "emps" GROUP BY "emps"."job"
+ => {"ANALYST"=>2, "CLERK"=>4, "MANAGER"=>3, "PRESIDENT"=>1, "SALESMAN"=>4}
+
+
+******************************************************
+
+3) Count Instances of each Job:
+  Emp.group(:job).count(:job)
+  SELECT COUNT("emps"."job") AS count_job, "emps"."job" AS emps_job FROM "emps" GROUP BY "emps"."job"
+  => {"ANALYST"=>2, "CLERK"=>4, "MANAGER"=>3, "PRESIDENT"=>1, "SALESMAN"=>4}
+
+******************************************************
+
+4) Count Instances (record of emp) from each department :
+Emp.group(:deptno).count(:deptno)
+ SELECT COUNT("emps"."deptno") AS count_deptno, "emps"."deptno" AS emps_deptno FROM "emps" GROUP BY "emps"."deptno"
+ => {10=>2, 20=>5, 30=>6, 50=>1}
+
+******************************************************
+
+5) Total sal of employess in each department:
+Emp.group(:deptno).sum(:sal)
+
+SELECT SUM("emps"."sal") AS sum_sal, "emps"."deptno" AS emps_deptno FROM "emps" GROUP BY "emps"."deptno"
+ => {10=>0.745e4, 20=>0.10875e5, 30=>0.94e4, 50=>0.0}
+
+******************************************************
+6) Emp.group(:deptno, :job).sum(:sal)
+
+SELECT SUM("emps"."sal") AS sum_sal, "emps"."deptno" AS emps_deptno, "emps"."job" AS emps_job FROM "emps" GROUP BY "emps"."deptno", "emps"."job"
+
+select deptno, job, sum(sal) from emps group by deptno,job
+
+=> {[10, "MANAGER"]=>0.245e4, [10, "PRESIDENT"]=>0.5e4, [20, "ANALYST"]=>0.6e4, [20, "CLERK"]=>0.19e4, [20, "MANAGER"]=>0.2975e4, [30, "CLERK"]=>0.95e3, [30, "MANAGER"]=>0.285e4, [30, "SALESMAN"]=>0.56e4, [50, "CLERK"]=>0.0}
+
+this will give sum salaries for each job of each deptno
+( see db register pg:40 )
+
+******************************************************
+Interpret Output Hash:
+https://www.geeksforgeeks.org/ruby-hash-class/
+
+result = Emp.group(:job).sum(:sal)
+
+result.each {|key, value| puts  "the sum of all #{key} salary is #{value}" }
+result.each_key {|key| puts key }
+result.each_value{|value| puts value }
+result.empty?
+result.key?("ANALYST")
+result.value?(6000)
+result.length
+
+========================================================================================================================================================================
+Joins
+========================================================================================================================================================================
+
+why Joins?
+
+Article.find(14).comments                                                    - get all comments of article 3  ( this will run 2 sql queries )
+
+-> get the comments where the arycle title is  "Article 3" :
+
+irb>    cmt = Comment.joins(:article).where(articles: {title: "Article 3" }).first
+
+************
+
+user = User.create(name:"NOuman")
+user.products.create(name:"tv", price: 5000)
+
+User.find(2).products.create(name:"Laptop", price:30000)
+
+******************************************
+
+simple Join or Inner Join:
+
+select all products where user name is "NOuman:
+
+products = Product.joins(:user).where(:users =>{:name => "Nouman" })
+products = Product.joins(:user).where( users: {name: "Nouman" })           --  above query can be wriiten as this
+
+SELECT "products".* FROM "products" INNER JOIN "users" ON "users"."id" = "products"."user_id" WHERE "users"."name" = ?  [["name", "Nouman"]]
+
+products[0]
+products[1]
+
+******************************************
+
+
+product = Product.joins(:user).where(users: {name: "NOuman" }).first
+product
+
+
+prod = Product.joins(:user)
+prod.to_sql
+
+
+*****************
+
+Create product with not user:
+
+p = Product.create(name:"prod1", price: 1234)
+p.user
+
+prod = Product.where(:user_id => nil)
+prod
+
+*****************
+
+> user = User.create(name:"Farhan")
+
+> User.where(name:"Farhan").joins(:products).where( :products => { :id=>nil} ).first
+=> nil
+
+Note:
+Inner join connects foreign and primary key
+Inner join excludes relations that don't exist in between the joined tables ( as above ).
+
+***************************************************************
+
+outer join:
+Outer Join take all users and match them up with a product even if no matching product exists
+
+> User.left_outer_joins(:products).where(:products=>{:id=>nil})
+
+can be written as
+
+> User.left_outer_joins(:products).where(products:{id:nil})
+
+Now this outer join has solved the problem
+
+*********************
+
+get product where user name is "Nouman" and product name is "laptop":
+
+product1 = Product.joins(:user).where(  users: {name: "Nouman" },  products:{name: "Laptop"}  )
+or
+product = Product.where(name:"Laptop").joins(:user).where( users: {name: "Nouman" } )
+
+***************************
+
+find_by_sql
+
+User.find_by_sql("SELECT * FROM users INNER JOIN products ON user.id = products.user_id ")
+
+========================================================================================================================================================================
+Join2
+========================================================================================================================================================================
+
+https://medium.com/swlh/getting-really-good-at-rails-joins-93fd5b33fa8e
+
+models:
+rails g model company name verified:boolean
+rails g model Employee status name company:references
+rails g model Location state country company:references
+
+
+************************
+
+load all active employees:
+Employee.where(status: "active")
+
+************************
+Performance without joins:
+
+But what if we want to load all active employees who belong to companies that are verified? Without joins, you would write something like this:
+
+active_employees = Employee.where(status: "active")
+result = active_employees.select do |employee|
+  employee.company.verified?
+end
+
+Note: select is array method in ruby.
+
+This isn’t great because it triggers an N + 1 query since it is looking in the database for a company record for each employee in the loop
+
+************************
+Improve quality using Joins:
+
+We can easily improve the code above by using :joins.
+
+Employee.where(status: "active").joins(:company).where(companies: { verified: true })
+
+SELECT `employees`.* FROM `employees` INNER JOIN `companies`
+ON `companies`.`id` = `employees`.`company_id`
+WHERE `employees`.`status` = 'active' AND `companies`.`verified` = 1
+
+************************
+
+Let’s break this down even more
+
+1) Employee.where(status: "active").joins(:company)
+We would be loading all active employees who belong to a company. If an employee is not associated with a company, then they would not be returned. This is because :joins performs a SQL inner join by default.
+
+2) Adding the clause where(companies: { verified: true }) scopes companies so that only employee’s with verified companies are returned. Note that this section of the query uses companies as a keyword since it is referring to the table name.
+
+************************
+other ways to write same above query:
+
+Employee.where(status: "active").joins("INNER JOIN companies ON companies.id = employees.company_id WHERE companies.is_verified = 1")
+Employee.joins("INNER JOIN companies ON companies.id = employees.company_id WHERE employees.status = 'active' AND companies.is_verified = 1")
+
+************************
+Now say company has many locations.
+If we wanted to grab all employees who are at companies that have locations, we would perform the following query:
+
+Employee.joins(company: [:locations]).distinct          # [] bracket cam be removed
+
+SELECT DISTINCT "employees".* FROM "employees" INNER JOIN "companies" ON "companies"."id" = "employees"."company_id" INNER JOIN "locations" ON "locations"."company_id" = "companies"."id"
+
+************************
+
+Get active employees at companies that are verified in the state of California:
+
+Employee.where(status: "active").joins(company: [:locations]).where(locations: { state: 'CA'}, companies: { verified: true })
+
+************************
+
+When to use :includes
+
+:includes is a method in ActiveRecord used to preload data in order to avoid N + 1 queries.
+
+Use :joins when you solely need to filter data based on associated tables
+and use :includes if you need to reference data in associated tables later on.
+
+For example, we’d want to use :includes if we were to load all active employees at companies that are verified
+and then print each employee’s name and their company name.
+
+employees = Employee.where(status: "active").includes(:company).where(companies: { verified: true })
+employees.each do |employee|
+  puts employee.name
+  puts employee.company.name
+  # puts "#{employee.name} works in #{employee.company.name} "
+end
+
+*********
+same as :
+Employee.where(status: "active").includes(company: [:locations]).where(locations: { state: 'CA'}, companies: { verified: true })
+
+
+
+========================================================================================================================================================================
+preload, includes, eager_load
+========================================================================================================================================================================
+
+https://www.bigbinary.com/blog/preload-vs-eager-load-vs-joins-vs-includes
+
+Preload:
+
+Article.preload(:comments).where(articles: {title: "Article 3" })                 -- use two queries
+
+Article.preload(:comments).where(comments: { commenter: "Nouman4" })              -- we cannot use where on 2nd table
+
+***********
+
+includes:
+
+:includes  loads associated records in advance and limits the number of SQL queries made to the database.
+ This technique is known as "eager loading" and in many cases will improve performance by a significant amount.
+
+
+User.includes(:products).where(products: {name:"Laptop"})
+
+
+Article.includes(:comments)                                                       --  work as preload (using two queries )
+
+Article.includes(:comments).where(comments: { commenter: "Nouman" })              --  use left outer join when we use where or order command
+
+Article.includes(:comments).references(:comments)                                 --  forcefully run in single query
+
+Article.all.includes(:comments).where(articles: {title: "Article3" })
+
+Article.all.includes(:comments).where(comments:{article_id: 2 })
+
+
+************
+
+Eager load:
+
+Eager loading loads all association in a single query using LEFT OUTER JOIN.
+
+Article.eager_load(:comments).to_a
+
+Article.eager_load(:comments).where(comments: { commenter: "Nouman" })
+
+
+========================================================================================================================================================================
+queries
+========================================================================================================================================================================
+
+
+pluck
+pluck can be used to query single or multiple columns from the underlying table of a model.
+
+User.all.pluck(:id)
+User.all.pluck(:name)
+
+*********************
+
+exists?
+
+check for the existence of the object there's a method called exists?.
+return either true or false
+
+User.exists?(1)
+
+User.exists?(id: [1,2,3])
+
+User.exists?(name: ['John', 'Sergei'])
+
+User.where(name:"NOuman").exists?
+
+*********************
+
+ Calculations
+
+count:
+  User.count(:id)
+  User.count("id")
+
+Average:
+  Product.average(:price)
+  Product.average("price")
+
+Minimum:
+  Product.minimum(:price)
+  Product.minimum("price")
+
+Maximum
+  Product.maximum(:price)
+
+Sum:
+  Product.sum(:price)
+
+*************************
+
+Length:
+
+Product.where("LENGTH(name) < 5")
+
+*************************
+
+Scope:
+
+syntax:
+    scope :name, -> { where(:attibute => value)}
+
+create scope in Product model class:
+> scope  :laptops, -> { where( name:"Laptop") }
+
+In console:
+Product.laptops
+
+****
+
+Passing in arguments:
+
+scope  :get_product, -> (name) { where( "name= ?", name) }
+
+Product.get_product("Laptop")
+
+***
+
+default_scope:   this scope will be applied across all queries to the model
+
+> default_scope { where("user_id IS NOT NULL") }
+> Product.all.count
+
+*************************
+
+
+
+========================================================================================================================================================================
+day 8
+devise setup
+========================================================================================================================================================================
+
+https://rubygems.org/
+https://rubygems.org/gems/devise
+
+devise gem:
+  Devise is the cornerstone gem for Ruby on Rails authentication. With Devise, creating a User that can log in and out of your application is so simple
+  because Devise takes care of all the controllers necessary for user creation ( users_controller ) and for user sessions ( users_sessions_controller ).
+
+Go to https://rubygems.org/   and search for devise
+
+1) copy gem to gemfile  ( gem 'devise', '~> 4.8', '>= 4.8.1'  )
+Go to its doc at github https://github.com/heartcombo/devise
+
+
+2) bundle install will install all the gems in the gemfile
+
+3) rails generate devise:install
+
+complete instructions
+
+4) rails g devise:views
+
+5) rails generate devise user    ( this is migration command )
+   rails db:migrate              ( migrate )
+
+Add links to navbar and style each page with bootstrap
+
+*****************
+Note: User model Callbacks
+
+update user model callbacks carefully,
+overriding after_commit callback will not send email on signup
+
+******************
+
+fake email
+https://www.mailinator.com/v4/public/inboxes.jsp?trialshow=true&to=nouman
+
+
+==================================================================================================================================
+Update Devise User  ( configure devise)
+==================================================================================================================================
+
+
+https://github.com/heartcombo/devise#strong-parameters
+
+1) create migration to add fields:
+def change
+    add_column :accounts, :website, :string
+    add_column :accounts, :bio, :text
+end
+
+
+2) Allow new params attributes in application controller
+
+before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :website, :bio])
+  end
+
+3) add fields in views
+
+********************
+add gender:
+https://zhangjingqiang.wordpress.com/2015/03/30/how-to-add-a-gender-column-to-user-model-under/
+
+========================================================================================================================================================================
+active storage:
+========================================================================================================================================================================
+
+devise user image:
+https://www.youtube.com/watch?v=BYvzLYRIZK4
+
+multiple images:
+https://www.youtube.com/watch?v=A23zCePXe74
+
+*****************************
+
+for validations we can use gem:
+https://github.com/igorkasyanchuk/active_storage_validations
+
+also add error messages in config/locals/en.yml
+
+*****************************
+
+rails active_storage:install
+rails db:migrate
+
+gem 'mini_magick', '~> 4.8'
+sudo apt-get install imagemagick
+
+
+*****************************
+
+user= User.first
+
+ActiveStorage::Blob.service.path_for(user.avatar.key)
+
+"/home/dev/Rails/Day 8/Rails_Devise/storage/nN/yd/nNydy5Z9hY5evqt5oo44CYFT"
+
+*****************************
+home index:
+
+<p><%= current_user.avatar.content_type.in?(%('image/jpeg image/png')) %></p>
+<p><%= %('image/jpeg image/png') %></p>
+<p><%= %w('image/jpeg image/png') %></p>
+
+
+*****************************
+
+devise edit:
+
+
+<div class="field">
+  <%= image_tag( resource.avatar_thumbnail) if resource.avatar.attached?  %><br />
+</div>
+
+
+========================================================================================================================================================================
+
+day 9
+
+Active Jobs
+========================================================================================================================================================================
+
+Active Job is a framework for declaring jobs and making them run on a variety of queueing backends.
+
+******************************
+Active Job is an interface to queueing backends such as sidekiq, delayed_job or resque.
+ It's simply a way for you to write background jobs where you don't have to care about which of the queueing backends will be used.
+******************************
+
+rails g job first_job
+
+GuestsCleanupJob.set(wait: 5.seconds).perform_later(2)
+
+*****************************
+
+Sidekiq is a Ruby Background Processor that manages its queue with a Redis service. Learn the basics of Sidekiq and integrating it with ActiveJob
+
+1) gem 'sidekiq'
+   bundle
+
+2) config/application.rb:
+config.active_job.queue_adapter = :sidekiq
+config.active_job.queue_adapter =  Rails.env.production? ? :sidekiq : :async
+
+3) create sidekiq.rb in config/initializers
+
+4) rails g job generate_random_user
+
+5) GenerateRandomUserJob.perform_later
+
+6) in terminal run sidekiq sever:
+    sidekiq
+
+7) run rails server in production:
+    rails s -e production
+
+8) http://localhost:3000/sidekiq
+
+
+https://www.youtube.com/watch?v=CStZg8ql9Vs
+https://www.digitalocean.com/community/questions/how-to-run-rails-server-in-production-mode
+
+9) rake db:migrate RAILS_ENV=production
+
+https://stackoverflow.com/questions/4909831/rake-dbmigrate-doesnt-seem-to-work-in-production
+
+
+*********************
+Background Processing with Rails, Redis and Sidekiq
+https://www.youtube.com/watch?v=GBEDvF1_8B8
+
+*********************
+https://stackoverflow.com/questions/32947076/redis-server-in-ubuntu14-04-bind-address-already-in-use
+
+stop server is redis not worK:
+
+sudo service redis-server stop
+
+redis-server
+
+
+# sleep(5.seconds)
+
+# sleep(5.minutes)
+
+# sleep(5.hours)
+
+# sleep(5.days)
+
+========================================================================================================================================================================
+services and concerns
+========================================================================================================================================================================
+
+see Day9/activejobs **
+
+we write re usable modules in concerns
+
+A rail concern is any module that extends ActiveSupport::Concern module
+
+concerns
+https://www.youtube.com/watch?v=iLKSpfQWvMA
+https://www.akshaykhot.com/how-rails-concerns-work-and-how-to-use-them/
+
+
+Using concern we can add common code of controllers in concern module and include it in controller that will enhance readability
+
+
+========================================================================================================================================================================
+webpacker
+========================================================================================================================================================================
+
+before 5.X rails uses sprockets for managing the assets.
+
+Rails 6 uses webpacker
+
+
+========================================================================================================================================================================
+Day 10
+active storage    ( react-crud)
+========================================================================================================================================================================
+
+gem "trix-rails", require: "trix"
+gem 'image_processing', '~> 1.2'
+gem 'jquery-rails'
+gem 'cloudinary'
+
+bundle install
+
+rails active_storage:install
+
+apllication.js
+//= require jquery
+//= require trix
+
+application.css
+*= require trix
+
+
+rails g scaffold books title:string
+rails g scaffold images
+
+config/cloudinary.yml
+
+development:
+  cloud_name: ""
+  api_key: ""
+  api_secret: ""
+  secure: true
+
+production:
+  cloud_name: ""
+  api_key: ""
+  api_secret: ""
+  secure: true
+
+
+
+config/storage.yml
+cloudinary:
+  service: Cloudinary
+  folder: rails_uploads
+
+Comment to local in config/storage.yml
+
+
+config/environments/development.rb
+config.active_storage.service = :cloudinary
+
+and Comment this line :
+config.active_storage.service = :local
+
+
+config/environments/application.rb
+require 'cloudinary'
+
+module Well
+  class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 5.2
+
+    # Settings in config/environments/* take precedence over those specified here.
+    # Application configuration can go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded after loading
+    # the framework and any gems in your application.
+    config.i18n.default_locale = :en
+    config.assets.initialize_on_precompile = false
+    config.exceptions_app = self.routes
+    config.active_storage.service = :cloudinary
+    Cloudinary.config_from_url("cloudinary://417697891113881:FNLTVGPyPgwUhvcwxIkC4zhQgl4@dvd6ckurb")
+
+    Cloudinary.config do |config|
+      config.secure = true
+    end
+
+  end
+end
+
+
+assets/javascripts/.coffee:
+
+$(document).ready ->
+  uploadAttachment = (attachment) ->
+    csrfToken = $('meta[name="csrf-token"]').attr('content')
+    file = attachment.file
+    form = new FormData
+    endpoint = '/images.json'
+    form.append 'Content-Type', file.type
+    form.append 'image[attachment]', file
+    xhr = new XMLHttpRequest
+    xhr.open 'POST', endpoint, true
+    xhr.setRequestHeader 'X-CSRF-Token', Rails.csrfToken()
+    xhr.upload.onprogress = (event) ->
+      progress = event.loaded / event.total * 100
+      attachment.setUploadProgress progress
+    xhr.onload = ->
+      if @status >= 200 and @status < 300
+        data = JSON.parse(@responseText)
+        return attachment.setAttributes(
+          url: data.attachment_url
+          href: data.attachment_url)
+      return
+    xhr.send form
+  Trix.config.attachments.preview.caption =
+    name: false
+    size: false
+  document.addEventListener 'trix-attachment-add', (event) ->
+    attachment = event.attachment
+    if attachment.file
+      return uploadAttachment(attachment)
+    return
+  return
+
+
+image.rb:
+class Image < ApplicationRecord
+  has_one_attached :attachment
+end
+
+book.rb:
+class Book < ApplicationRecord
+  has_one_attached :image
+  has_many_attached :pictures
+end
+
+
+images_contoller.rb:
+def image_params
+  params.require(:image).permit(:attachment)
+end
+
+books_controller.rb:
+def book_params
+ params.require(:book).permit(:title, :image, pictures: [])
+end
+
+views/images/_image.json.builder:
+json.attachment_url rails_blob_url(image.attachment)
+
+book/show.html:
+<p>
+  <strong>Title:</strong>
+  <%= sanitize @book.title %>
+</p>
+
+<%= link_to image_tag(@book.image,style: "width:150px; height: 150px;"),@book.image %>
+<hr/>
+<% @book.pictures.each do |picture| %>
+  <%= link_to image_tag(picture,style: "width:150px; height: 150px;"),picture %>
+<% end %>
+
+book/_form.html:
+ <div class="field">
+    <%= form.label :title %>
+    <%= form.trix_editor :title %>
+  </div>
+
+ <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pictures %>
+    <%= form.file_field :pictures, multiple: true %>
+  </div>
+
+
+
+rails db:migrate
+
+routes:
+root 'books#index'
+
+========================================================================================================================================================================
+Cloudinary  (react-crud )
+========================================================================================================================================================================
+
+1) add gem
+2) add env variables for cloudinary
+3) add cloudinary.rb file in config/initializers
+4)
+
+
+config/storage.yml
+cloudinary:
+  service: Cloudinary
+  folder: rails_uploads
+
+Comment to local in config/storage.yml
+
+
+config/environments/development.rb
+config.active_storage.service = :cloudinary
+
+and Comment this line :
+config.active_storage.service = :local
+
+
+config/environments/application.rb
+require 'cloudinary'
+
+module ReactCrud
+  class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 5.2
+
+    # Settings in config/environments/* take precedence over those specified here.
+    # Application configuration can go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded after loading
+    # the framework and any gems in your application.
+    config.i18n.default_locale = :en
+    config.assets.initialize_on_precompile = false
+    config.exceptions_app = self.routes
+    config.active_storage.service = :cloudinary
+    Cloudinary.config_from_url("cloudinary://417697891113881:FNLTVGPyPgwUhvcwxIkC4zhQgl4@dvd6ckurb")
+
+    Cloudinary.config do |config|
+      config.secure = true
+    end
+
+  end
+end
+
+
+========================================================================================================================================================================
+debugging
+========================================================================================================================================================================
+
+
+
+
+<%= debug(params) %>
+<%= debug(@post) %>
+<%= simple_format(@post.to_yaml) %>
+
+<%= @post.inspect %>
+
+**************************
+
+gem 'web-console'
+
+to get console, add console statement anywhere on page:
+we write any query there and can access instance variables also:
+
+
+<%= console %>
+
+**************************
+
+gem 'pry-rails'
+
+********
+
+gem "table_print"
+
+tp Post.all
+
+**************************
+
+rails c --sandbox
+
+now any change in database will be rollback
+
+**************************
+
+use byebug anywhere:
+
+byebug
+
+========================================================================================================================================================================
+environment variables  (figaro)
+========================================================================================================================================================================
+
+figaro:
+https://github.com/laserlemon/figaro
+
+we use figaro gem to add environment variables:
+
+1) gem 'figaro'
+2) bundle exec figaro install
+
+add variables in config/application.yml by this syntax:
+key_name: "value"
+
+and access like:
+ENV["key_name"]
+
+
+==================================================================================================================================
+Credentials
+==================================================================================================================================
+Ruby on Rails #28 Action Mailer: Gmail SMTP - send emails in production for free
+https://www.youtube.com/watch?v=eYhi_rbnOo8
+
+1) EDITOR=vim rails credentials:edit
+
+esc i   to insert
+
+:wq    to save
+
+2) add credentails in this file like:
+google_smtp:
+  email: --- ,
+  password: ----
+
+and access using
+Rails.application.credentials.dig(:google_smtp, :email),
+
+
+
+==================================================================================================================================
+Email Verification devise
+==================================================================================================================================
+
+
+https://www.youtube.com/watch?v=GXsL2p0YoHg
+
+https://github.com/heartcombo/devise/wiki/How-To:-Add-:confirmable-to-Users
+
+***************************
+
+1) add :confirmable in devise model
+2) rails g migration add_confirmable_to_devise
+
+
+class AddConfirmableToDevise < ActiveRecord::Migration[5.2]
+   # Note: You can't use change, as User.update_all will fail in the down migration
+  def up
+    add_column :users, :confirmation_token, :string
+    add_column :users, :confirmed_at, :datetime
+    add_column :users, :confirmation_sent_at, :datetime
+    add_column :users, :unconfirmed_email, :string # Only if using reconfirmable
+    add_index :users, :coBootstrapnfirmation_token, unique: true
+    # User.reset_column_information # Need for some types of updates, but not for update_all.
+    # To avoid a short time window between running the migration and updating all existing
+    # users as confirmed, do the following
+    User.update_all confirmed_at: DateTime.now
+    # All existing user accounts should be able to log in after this.
+  end
+
+  def down
+    remove_index :users, :confirmation_token
+    remove_columns :users, :confirmation_token, :confirmed_at, :confirmation_sent_at
+    # remove_columns :users, :unconfirmed_email # Only if using reconfirmable
+  end
+end
+
+
+3) add in development.rb
+
+config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'example.com',
+    user_name: ENV["email"],
+    password: ENV["password"],
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
+
+
+
+******************
+
+
+if something went wrong
+
+set it to true
+
+  config.action_mailer.raise_delivery_errors = true
+
+
+******************
+
+Ruby on Rails #28 Action Mailer: Gmail SMTP - send emails in production for free
+https://www.youtube.com/watch?v=eYhi_rbnOo8
+
+1) EDITOR=vim rails credentials:edit
+
+esc i   to insert
+
+:wq    to save
+
+2) add credentails in this file like:
+google_smtp:
+  email: --- ,
+  password: ----
+
+and access using
+Rails.application.credentials.dig(:google_smtp, :email),
+
+
+
+==================================================================================================================================
+Devise controllers:
+==================================================================================================================================
+https://stackoverflow.com/questions/6234045/how-do-you-access-devise-controllers
+
+rails generate devise:controllers users
+
+devise_for :users,controllers: {
+  registrations:'users/registrations'
+}
+
+
+name, age, gender, email, username, and profile picture
+==================================================================================================================================
+error pages
+==================================================================================================================================
+
+
+https://web-crunch.com/posts/custom-error-page-ruby-on-rails
+
+rails g controller errors not_found internal_server_error
+
+
+==================================================================================================================================
+postgre sql
+==================================================================================================================================
+
+
+https://www.youtube.com/watch?v=v4yrpGy8NTs
+
+sudo -u postgres psql
+
+
+rails new instagram-clone -d postgresql
+add credentials in config/database.yml
+rails db:create
+
+
+********************
+chnage databaser from sqlite to postgres:
+********************
+
+https://www.bogotobogo.com/RubyOnRails/RubyOnRails_Devise_Authentication_Sending_Confirmation_Email.php
+
+1) add gem
+gem 'pg', '>= 0.18', '< 2.0'
+
+2) edit config/database.yml
+
+3) run rails db:create
+run rails db:migrate
+run rails db:seed(if you have a seed file)
+
+Now test your app, and you are now using Postgres!
+
+
+
+postgres username: nouman
+password: noumanrehman042
+
+
+==================================================================================================================================
+pundit
+==================================================================================================================================
+
+
+pundit
+https://rubygems.org/gems/pundit/versions/1.1.0
+
+https://github.com/varvet/pundit
+
+
+1) add gem for all environments
+gem 'pundit'
+bundle
+
+2)
+
+rails g pundit:install
+this will create policies folder in app
+
+3) include it in your application controller:
+
+class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  private
+
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_back(fallback_location: root_path)
+  end
+end
+
+
+4)
+rails g pundit:policy account  ( name of model in lowercase)
+this will also initialze it in app policy
+
+
+****************
+
+user is the current user in pundit
+record is the object we passed with authorize
+
+
+***************
+
+def pundit_user
+  current_account
+end
+
+def destroy
+  authorize @post  # we can access this passed object using record
+  if @post.destroy
+    flash[:notice] = "Post deleted!"
+  else
+    flash[:alert] = "Something went wrong ..."
+  end
+  redirect_to posts_path
+end
+
+
+def destroy?
+  user == record.account  #   return true if we want to allow this action
+end
+
+***************
+
+rails g pundit:policy post
+rails g pundit:policy comment
+rails g pundit:policy account
+rails g pundit:policy story
+
+
+==================================================================================================================================
+rspec   test
+==================================================================================================================================
+
+https://github.com/rspec/rspec-rails
+
+https://relishapp.com/rspec/rspec-rails/docs/
+
+https://relishapp.com/rspec/rspec-rails/v/5-1/docs/controller-specs/controller-spec
+
+https://github.com/simplecov-ruby/simplecov
+
+rspec playlist
+https://www.youtube.com/watch?v=Spogv4o8haM&list=PLS6F722u-R6KiuOupokyl8Xnqrot9ukc7&index=47
+
+
+***************************
+run test:
+1) rspec
+2) RUBYOPT="-W0" rspec
+
+***************************
+
+1) gem 'rspec-rails'
+
+2) rails generate rspec:install
+
+3) rails generate model article            -- way to create model
+
+rails generate rspec:model article         -- way to create rspec for this model
+
+
+4) rails g rspec:controller articles
+
+
+***********************
+
+add in .rspec:
+
+--format documentation
+
+*********************
+
+rails stats
+
+*********************
+https://github.com/pry/pry-rails
+
+gem 'pry-rails'
+
+bundle
+*********************
+simple cov
+
+1) add gem and bundle
+2) add 2 lines in spec_helper
+
+xdg-open coverage/index.html
+
+***********************
+
+https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md#configure-your-test-suite
+
+gem 'factory_bot_rails'
+bundle
+
+
+add in rails helper
+config.include FactoryBot::Syntax::Methods
+
+article = FactoryBot.create(:article)
+
+==================================================================================================================================
+rubocop
+==================================================================================================================================
+
+
+gem 'rubocop', require: false
+bundle
+rubocop --auto-gen-config
+rubocop -a
+
+
+*************
+vscode settings for rubocop:
+
+"ruby.rubocop.executePath": "/usr/share/rvm/gems/ruby-2.7.0/wrappers/rubocop",
+"ruby.rubocop.useBundler": true,
+"ruby.rubocop.onSave": true,
+"ruby.format": "rubocop",
+"[ruby]": {
+  "editor.defaultFormatter": "misogi.ruby-rubocop"
+},
+
+*************
+setup rubocop:
+
+1) add gems
+
+gemfile:
+group :development, :test do
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
+end
+
+2) create files:
+
+.rubocop.yml:
+require: rubocop-rspec
+require: rubocop-rails
+
+inherit_from: .rubocop_todo.yml
+
+
+.rubocop_todo.yml:
+AllCops:
+  SuggestExtensions: false
+  TargetRubyVersion: 2.7
+  TargetRailsVersion: 5.2
+  Exclude:
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "vendor/bundle/**/*"
+    - "bin/**/*"
+
+Layout/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 23
+
+Metrics/BlockLength:
+  Exclude:
+    - config/**/*
+    - spec/**/*
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - spec/**/*
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+    - "app/helpers/posts_helper.rb"
+
+==================================================================================================================================
+active_model_serializers
+==================================================================================================================================
+
+
+1) gem 'active_model_serializers', '~> 0.10.2'
+
+2) rails g serializer post
+
+***********************
+
+docs:  https://github.com/rails-api/active_model_serializers/blob/0-10-stable/docs/general/getting_started.md
+
+
+
+
+gem 'active_model_serializers', '~> 0.10.2'
+
+
+rails g resource post title:string body:string
+
+# frozen_string_literal: true
+
+# PostSerializer
+class PostSerializer < ActiveModel::Serializer
+  belongs_to :user
+  has_many :comments
+  has_many :likes
+  has_many :reports
+  attributes :id, :title, :text, :created_at, :avatar_url, :comment_likes
+
+  def avatar_url
+    object.image.service_url if object.image.attached?
+  end
+
+  def comment_likes
+    Like.group(:likeable_id).where(likeable_type: 'Comment').count
+  end
+end
+
+
+
+
+
+========================================================================================================================================================================
+end of project Notes
+========================================================================================================================================================================
+========================================================================================================================================================================
+========================================================================================================================================================================
+========================================================================================================================================================================
+
+
+
+========================================================================================================================================================================
+9_Best_Practices.txt
+========================================================================================================================================================================
+
+Caching With Instance Variable
+
+
+
+class Project < ActiveRecord::Base
+    belongs_to :creator, :class_name => “User”
+    def company
+        @company ||= creator.company
+    end
+end
+
+
+******************
+
+Use Local Variables in Place of Instance Variables in Partials
+
+<%= render :partial => 'header' %>
+
+Good Practice
+<%= render :partial =>  'header', :locals => {:project => @project} %>
+
+********************
+
+Prevent SQL Injection:
+
+Bad Practice
+User.where(“name = #{params[:name]}“)
+
+## Good Practice
+User.where(“name = ?”, params[:name])
+or
+User.where(:name => params[:name])
+
+
+********************
+
+Avoid the n+1 Problem
+
+Rails has a (in)famous query problem known as the n+1 query problem i.e eagerloading.
+
+in controller:
+@users = User.limit(50)
+
+In the view:
+<% @users.each do |user|%>
+    <%= user.house.address %>
+<% end %>
+
+The above code will execute 51 queries, 1 to fetch all users and other 50 to fetch house of each user.
+Active Record lets you specify in advance all the associations that are going to be loaded. This is possible by specifying the includes method of the Model.find call. With includes, Active Record ensures that all of the specified associations are loaded using the minimum possible number of queries.
+
+## Good Practice
+The retrieval should be made as follows
+
+In the Controller
+@users = User.includes(:house).limit(50)
+In the view
+<% @users.each do |user|%>
+    <%= user.house.address %>
+<% end %>
+
+********************
+
+Follow The Law of Demeter:
+
+According to law of Demeter, a model should only talk to its immediate associated models. If you want to use associated attributes then you should use ‘delegate’.
+
+
+## Bad Practice
+class Project < ActiveRecord::Base
+    belongs_to :creator
+end
+
+In the view:
+<%= @project.creator.name %>
+<%= @project.creator.company %>
+
+
+## Good Practice
+class Project > ActiveRecord::Base
+   belongs_to :creator
+   delegate :name, :company, :to => :creator, :prefix => true
+end
+
+
+In the view:
+<%= @project.creator_name %>
+<%= @project.creator_company %>
+
+
+*************************
+
+Declare Instance Variables Inside the Action
+
+As a convention, instance variables should not be hidden in private methods but declared inside the action.
+
+
+before_filter :get_project
+
+def show
+    @project = get_project
+    @tasks = @project.tasks
+end
+
+private
+def get_project
+    Project.find(params[:id])
+end
+
+
+**************************
+
+Use Lambda in Scopes
+
+*************************
+
+Use ? At the End of Method Name If It Is Returning Boolean Value
+
+## Bad Practice
+def exist
+end
+
+Good Practice
+def exist?
+end
+
+*************************
+
+
+Make Helper Methods for Views:
+
+The MVC paradigm advocates keeping the views as clean as possible from any calculations. Still, sometimes this cannot be avoided, so for those instances do the processing with helpers.
+
+
+
+
+<% case @filter %>
+<% when 'inbox' %>
+    <%= render 'inbox'%>
+<% when 'sent' %>
+    <%= render 'sent' %>
+<% when 'draft' %>
+    <%= render 'draft' %>
+<% when 'trash'%>
+    <%= render 'trash' %>
+<% end %>
+
+
+Goog Practice:
+
+<%= render filter_templates(@filter) %>
+
+def filter_templates(filter)
+    case filter
+    when 'inbox'
+        render 'inbox'
+    when 'sent'
+        render 'sent'
+    when 'draft'
+        render 'draft'
+    when 'trash'
+        render  'trash'
+    end
+end
+
+
+
+========================================================================================================================================================================
+naming conventions
+========================================================================================================================================================================
+
+General Ruby conventions
+
+
+Class names are CamelCase.
+
+Methods and variables are snake_case.
+
+Methods with a ? suffix will return a boolean.
+
+Methods with a ! suffix mean one of two things: either the method operates destructively in some fashion, or it will raise and exception instead of failing (such as Rails models' #save! vs. #save).
+
+*******************************
+
+
+Model class names :
+	singular
+	use CamelCase
+        plural database table name.
+
+
+Rails will plularize your tablename
+Model name will automatically get pluralize in database
+
+
+Model naming convention
+
+Model/Class	Table/Schema
+Article	articles
+LineItem	line_items
+Deer		  deers
+Mouse		  mice
+Person		people
+
+
+rails g model  LineItem name
+will generate table with name line_items
+
+
+Suppose you have Model name Book , it will store in sqlite as books and
+in model it will be class name as  Book
+
+This will create a Book model, mapped to a books table at the database
+
+Book.all
+Book.new
+@book.save
+@book.update
+@book.destroy
+
+
+*********************************
+
+
+Controllers :
+  use Plural name
+
+
+rails g controller UiConfigurations
+
+will create:
+  create  app/controllers/ui_configurations_controller.rb
+  invoke  erb
+  create    app/views/ui_configurations
+  invoke  rspec
+  create    spec/requests/ui_configurations_spec.rb
+  invoke  helper
+  create    app/helpers/ui_configurations_helper.rb
+  invoke    rspec
+  create      spec/helpers/ui_configurations_helper_spec.rb
+  invoke  assets
+  invoke    css
+  create      app/assets/stylesheets/ui_configurations.css
+
+
+
+
+*********************************
+
+rails g model UiConfiguration content_component:references ui_component:references rank:integer active:boolean
+
+
+invoke  active_record
+      create    db/migrate/20230201101909_create_ui_configurations.rb
+      create    app/models/ui_configuration.rb
+      invoke    rspec
+      create      spec/models/ui_configuration_spec.rb
+      invoke      factory_bot
+      create        spec/factories/ui_configurations_factory.rb
+
+
+
+*********************************
+
+
+routes
+
+Route names are snake_case , and usually match the controller. Most of the time routes
+are plural and use the plural resources .
+
+
+*******************************
+
+rails g controller Comments
+
+rails g model Comment
+
+resources :comments
+
+
+========================================================================================================================================================================
+rails basic commands
+========================================================================================================================================================================
+
+ redirect_to action: 'read_cookie'
+
+
+
+***********************
+
+rails destroy :
+
+rails destroy controller CookiesController
+
+
+rails destroy model Person
+
+*****************************
+
+drop table in cli console:
+
+Open Sqlite:
+
+sqlite3 db/development.sqlite3
+
+
+sqlite> drop table table_name;
+sqlite> .quit
+
+
+************************
+
+
+$ rake routes -c articles    (  see all routes of article )
+
+rails g  (  see all generators )
+
+rails -T ( see all available rails commands)
+
+rails -T db  ( filter by namespace db)
+
+
+
+********************
+
+Rails console:
+
+rails c
+
+reload!
+
+clear irb screen with ctrl+l
+
+********************
+
+gem 'jquery-rails'
+
+bundle install
+
+
+
+Put this in your app/assets/javascripts/application.js
+//= require jquery
+//= require jquery_ujs
+
+
+
+
+
+
+
+========================================================================================================================================================================
+rails error solution
+========================================================================================================================================================================
+
+
+
+1) `initialize': No such file or directory - connect(2)
+`spawn': No such file or directory - /home/dev/Rails/Day (Errno::ENOENT)
+
+
+solution:  https://stackoverflow.com/questions/48703240/module-build-failed-error-spawn-bin-rails-enoent
+
+run this command:
+rails app:update:bin
+
+******************************
+
+
+https://stackoverflow.com/questions/19961821/why-bundle-install-is-installing-gems-in-vendor-bundle
+
+To Install Gem in system wide avoiding path vendor/bundle, just run the following command in project directory
+
+bundle install --system
+
+******************************
+
+Rails 4: check if a local variable exists and is true in a partial
+
+https://stackoverflow.com/questions/23018339/rails-4-check-if-a-local-variable-exists-and-is-true-in-a-partial
+
+
+******************************
+
+
+Render and/or redirect were called multiple times in this action.
+Please note that you may only call render OR redirect, and at most once per action.
+
+Also note that neither redirect nor render terminate execution of the action,
+so if you want to exit an action after redirecting, you need to do something like "redirect_to(...) and return".
+
+
+******************************
+
+remove warnings:
+
+https://stackoverflow.com/questions/59491848/how-to-fix-railss-warning-messages-with-ruby-2-7-0
+
+RUBYOPT='-W0'  rails s
+
+or
+
+export RUBYOPT='-W0'
+rails s
+
+******************************
+
+kill
+kill -9 $(lsof -i tcp:3000 -t)
+
+
+********************************
+
+error: cannot load such file -- /home/dev/.rvm/rubies/ruby-2.7.0/lib/ruby/gems/2.7.0/gems/bundler-2.1.2/exe/bundle (LoadError)
+
+solution:
+remove gem.lock file and
+run bunlde install
+
+
+========================================================================================================================================================================
+rails installations: gems
+========================================================================================================================================================================
+
+
+gem install rails -v 5.2.0
+
+
+I accidentally installed rails version 4.1.7 but I need rails version 4.1.6 . In order to fix this issue I uninstalled rails with this command:
+
+gem uninstall rails
+gem install rails -v 5.2
+sudo gem uninstall railties
+
+***********************
+install ruby 2.7.0
+***********************
+
+rvm uninstall "ruby-2.7.2"
+rvm install "ruby-2.7.0"
+
+sudo rvm --default use 2.7.0
+
+
+
+rvm list
+
+=* ruby-2.7.0 [ x86_64 ]
+   ruby-3.0.0 [ x86_64 ]
+
+# => - current
+# =* - current && default
+#  * - default
+
+
+https://rvm.io/rubies/default
+
+***********************
+
+mrsool:
+
+/bin/bash --login
+rvm install "ruby-2.6.5"
+sudo rvm --default use 2.6.5
+
+***********************
+
+gem list
+
+bundle -v
+bundler -v
+gem list | grep "bundle"
+gem install --default bundler:2.3.19
+
+gem install bundler:2.3.19
+
+
+***********************
+
+nvm = node version manager
+
+nvm install 19.0.0
+
+https://betterprogramming.pub/how-to-use-nvm-to-manage-node-js-19-and-npm-9-bc5656d52d5f
+
+***********************
+
+sudo apt install sqlitebrowser
+
+**********************
+
+Put this in your app/assets/javascripts/application.js
+
+//= require jquery
+//= require jquery_ujs
+and install this gem file:
+
+gem 'jquery-rails'
+bundle install
+
+************************
+
+add favicon:
+
+https://discoposse.com/2018/09/04/setting-your-favicon-in-ruby-on-rails-apps/
+
+
+The code block is super easy to remember…except when I need to remember it, so here it is:
+
+<%= favicon_link_tag asset_path('image-name.ico') %>
+
+Here are the steps to set up your favicon in your Rails app:
+
+Generate your icon
+Copy the icon to the app/assets/images folder
+Create the pointer in the HEADsection of your app/views/layouts/application.html.erb file as shown here:
+
+========================================================================================================================================================================
+gems         --  multiple rails version
+========================================================================================================================================================================
+
+https://gorails.com/forum/running-multiple-rails-versions
+
+Every Rails project has the version of Rails in the Gemfile that it will use separately from every other app. There's nothing you need to do to manage two different Rails versions.
+
+The only thing you'll want to do is gem install rails to get the latest version and create your new project with rails new myapp. That will make sure the new project starts with Rails 5.1 (or whatever is the latest at the time).
+
+You can also create apps with older versions of rails using rails _5.2.8.1_ new myapp
+
+Rbenv and Rvm have pretty much nothing to do with this because they are for Ruby versions, not Rails. All of this is taken care of by Bundler.
+
+When you switch apps to work on the correct versions will be automatically used, no changes required by you.
+
+
+
+*********************************
+
+https://relativkreativ.at/articles/how-to-manage-multiple-rails-versions
+
+
+bundle exec rails -v
+
+*******************************
+
+
+see all gems:
+gem list --local
+
+*********************************
+
+rails _5.2.8.1_ new myapp
+
+5.2.8.1
+
+*********************************
+
+
+Put this in your app/assets/javascripts/application.js
+
+//= require jquery
+//= require jquery_ujs
+and install this gem file:
+
+gem 'jquery-rails'
+bundle install
+
+========================================================================================================================================================================
+gems discovered:
+========================================================================================================================================================================
+
+carrierwave   for file uploads
+fog           use fog instead of file with carrierwave
+
+mini_magick   for resizing images
+
+figaro        to use environment variables in development
+
+toastr_rails   to show notices   https://www.youtube.com/watch?v=4XZPfujnRUI&list=PLN8D2dU8NedZ44iF8bvk5-SoVv21ipsPK&index=8
+
+paperclip       for image uploading
+
+dropzonejs-rails   for asynchronous multifile upload     https://github.com/ncuesta/dropzonejs-rails
+
+for user friends:
+https://github.com/has-friendship/has_friendship
+
+Pundit        for Authorization
+
+rolify        to add user roles
+
+gem 'ransack'        for searching
+
+devise_invitable   --  send invites to users ( It adds support to Devise for sending invitations by email (it requires to be authenticated) and accept the invitation setting the password.)
+
+invisible_captcha   -- a time-sensitive hourglass form submission
+https://github.com/markets/invisible_captcha Complete and flexible spam protection solution for Rails applications.
+https://www.youtube.com/watch?v=4Z4yVSXDRyw&list=PLdTytUiloS15XyPr5HBwW5KzvsNioQYJV&index=15
+
+*******************
+
+fontawesome
+https://fontawesome.com/docs/web/use-with/ruby-on-rails
+https://fontawesome.com/icons/
+
+free icons:
+https://fontawesome.com/search?m=free&o=r
+
+
+1) add gem
+gem "font-awesome-sass", "~> 6.2.0"
+
+2) bundle install
+
+3) add in application.scss
+@import "font-awesome";
+
+**********************
+
+Faker
+
+1) bundle add faker
+
+2) User.create( email:Faker::Internet.email)
+3) Tag.create( name: Faker::Movie.title)
+
+rails c
+
+Faker::Internet.email
+Faker::Movie.title
+
+name= Faker::Name.name,
+email= Faker::Internet.email
+title= Faker::Lorem.sentence(word_count: 3)
+body=Faker::Lorem::paragraph(sentence_count: 3)
+
+*************************
+Add bootstrap:
+
+https://www.youtube.com/watch?v=dqjF3C9A-Yg&t=794s   10:00
+
+gem 'bootstrap', '~> 4.0.0'
+
+bundle install
+
+assets:
+application.js
+//= require bootstrap-sprockets
+
+
+application.css renamed to aplication.scss
+
+@import "bootstrap";
+
+**********************
+
+schema information:
+
+https://github.com/ctran/annotate_models
+
+1) add gem and run bundle:
+gem 'annotate'
+
+2) run in terminal to annotate only models:
+annotate --models
+
+Ideally, run it after each migration.
+
+**************************
+
+For development:  ( see Projects/blog_app)
+
+# Guard is a command line tool to easily handle events on file system modifications.
+gem 'guard', '~> 2.14', '>= 2.14.1'
+
+# reload the browser after changes to assets/helpers/tests
+gem 'guard-livereload', '~> 2.5', '>= 2.5.2', require: false
+
+# Make errors prettier
+gem 'better_errors', '~> 2.4'
+
+
+for guard-livereload:
+guard init livereload
+
+run Guard:
+bundle exec guard
+
+add this in development.rb
+BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
+
+
+**********************
+erb file formatter extension:
+
+ERB Formatter/Beautify
+
+
+*********************
+
+bullet:
+
+1) Add in development group:
+gem 'bullet'
+
+2) add in developmnt.rb file (before last end)
+
+Rails.application.configure do
+
+  //
+  //
+  //
+
+  config.after_initialize do
+    Bullet.enable        = true
+    Bullet.alert         = false
+    Bullet.bullet_logger = false
+    Bullet.console       = false
+    Bullet.rails_logger  = false
+    Bullet.add_footer    = true
+  end
+end
+
+*********************
+
+easy auto complete with ransack gem
+
+*************************
+
+
+gem 'pry-rails'
+
+gem 'query_count'
+
+
+*******************************
+rails-erd
+
+https://github.com/voormedia/rails-erd
+https://voormedia.github.io/rails-erd/install.html
+
+sudo apt-get install graphviz
+
+Add gem 'rails-erd', group: :development to your application's Gemfile
+
+Run bundle exec erd
+
+
+========================================================================================================================================================================
+enums
+devise user role
+========================================================================================================================================================================
+
+
+How to Use Enums in Rails
+https://blog.saeloun.com/2022/01/05/how-to-use-enums-in-rails.html#:~:text=An%20enum%20is%20an%20attribute,time%20by%20providing%20dynamic%20methods.
+
+
+1) rails g migration add_role_to_users
+  add_column :users, :role, :integer, default: 0, null: false
+
+  this will also add default role to existing users
+
+
+2)   enum role: [:user, :moderator,:admin]
+
+:user => 0
+:moderator => 1
+:admin => 2
+
+3) Commands:
+
+
+ALl scopes works same ( get all users where status is admin):
+  a) User.admin
+  b) User.where(role: :admin)
+  c) User.where(role: 2)
+
+Set role to moderator
+  user = User.last
+  user.moderator!
+  or
+  user.role = :moderator
+  user.role = "moderator"
+
+Chack if user is moderator:
+  user.moderator?
+
+see all roles( use plural name):
+  User.roles
+
+**************************
+Array approach is not flexible at all.
+The recommended way is to use a hash instead of an array for enums,
+because if we change the order of the values, we will break the whole logic inside our Rails app.
+
+enum role: { user: 0, moderator: 1, admin: 2 }
+
+**************************
+
+
+Sufix:
+
+enum role: { user: 0, moderator: 1, admin: 2 }, suffix: true
+
+now we will use:
+user.admin_role?
+user.moderator_role?
+user.moderator_role!
+User.admin_role
+
+**************************
+
+Instead, we can add prefix and suffix as per our requirement and call the methods accordingly.
+
+
+class Post < ActiveRecord::Base
+  enum :status, { draft: 0, published: 1, archived: 2, trashed: 3 }, prefix: true
+  enum :category, { free: 0, premium: 1 }, suffix: true
+end
+
+Post.free_category
+
+post.status_published?
+
+post.premium_category!
+
+========================================================================================================================================================================
+lines used
+========================================================================================================================================================================
+
+
+
+https://stackoverflow.com/questions/5679983/rspec-testing-ajax-response-should-render-a-partial
+
+def create
+  @project = Project.new...
+  respond_to do |format|
+    if @project.save
+      format.js { render :partial => "projects/form" }
+    end
+  end
+end
+
+
+========================================================================================================================================================================
+
+========================================================================================================================================================================
+
+
+
+
+
+
+
+========================================================================================================================================================================
+
+========================================================================================================================================================================
+
+
+
+
+
+
+
+========================================================================================================================================================================
+
+========================================================================================================================================================================
+
+
+
+
+
+
+
+========================================================================================================================================================================
+
+========================================================================================================================================================================
+
+
+
+
+
+
+
+========================================================================================================================================================================
+
+========================================================================================================================================================================
+
+
+
+
+
+
+
+========================================================================================================================================================================
+
+========================================================================================================================================================================
+
+
+
+
+
+
+
+========================================================================================================================================================================
+
+========================================================================================================================================================================
+
+
+
+
+
+
+
+========================================================================================================================================================================
+
+========================================================================================================================================================================
+
+
+

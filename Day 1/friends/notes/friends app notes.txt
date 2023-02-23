@@ -1,0 +1,104 @@
+I am applying all commands in friends folder
+
+$ rails new friends
+
+$ rails s   or  rails server
+
+localhost:3000
+
+127.0.0.1:3000
+
+********************
+
+To create a new controller, you will need to run the "controller" generator and tell it you want a controller called "home" with an action called "index", just like this:
+
+$ rails g controller home index
+
+home is the controller name
+index is the action name ( )
+
+http://localhost:3000/home/index
+
+********************
+to see all routes
+$ rails routes 
+
+********************
+
+ partial files 
+
+_header.html.erb
+
+use _ before partial file name and include in file without _  
+
+********************
+
+Scaffold:
+
+for CRUD operations we use scaffold:
+$ rails g scaffold friends first_name:string last_name:string email:string phone:string twitter:string
+( this will create all the CRUD functoinality )
+
+$ pushing the migrations into the database( craete schema file):
+rails db:migrate
+
+
+delete this file as it is adding it own css:
+scaffolds.scss
+
+http://localhost:3000/friends
+
+we need to use _path after prefix to create a link to that route
+
+***************************************************************
+
+devise gem:
+
+Devise is the cornerstone gem for Ruby on Rails authentication. With Devise, creating a User that can log in and out of your application is so simple because Devise takes care of all the controllers necessary for user creation ( users_controller ) and for user sessions ( users_sessions_controller ).
+
+Go to https://rubygems.org/   and search for devise
+
+copy gem to gemfile 
+Go to its doc at github https://github.com/heartcombo/devise
+
+bundle install will install all the gems in the gemfile
+
+rails generate devise:install
+
+complete instructions
+
+rails g devise:views
+
+rails generate devise user    ( this is migration command )
+rails db:migrate              ( migrate )
+
+Add links to navbar and style each page with bootstrap
+
+**********************
+model is like database
+
+views are web pages 
+
+controller is like views in django
+
+ctrl +c to break server
+
+use two terminals open
+
+for every web page we need a route
+
+
+************************************
+
+
+https://guides.rubyonrails.org/v3.2/migrations.html
+
+
+************************************
+noumanrehman042@gmail.com
+nouman
+
+nouman.rehman@devsinc.com
+nouman
+
+1:21:50

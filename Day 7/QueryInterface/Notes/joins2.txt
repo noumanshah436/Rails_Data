@@ -1,0 +1,112 @@
+
+************************************
+Joins2
+https://medium.com/swlh/getting-really-good-at-rails-joins-93fd5b33fa8e
+************************************
+
+models:
+rails g model company name verified:boolean
+rails g model Employee status name company:references
+rails g model Location state country company:references
+
+
+seed data:
+dev =Company.create(name:"Devsinc",verified:true )
+mic =Company.create(name:"Microsoft",verified:false )
+google =Company.create(name:"google",verified:true )
+daraz =Company.create(name:"daraz",verified:true )
+Hub4u =Company.create(name:"Hub4u",verified:false )
+
+dev.employees.create(name:"Nouman",status:"active")
+dev.employees.create(name:"Shah",status:"inactive")
+mic.employees.create(name:"Salman",status:"active")
+mic.employees.create(name:"Hammad",status:"inactive")
+google.employees.create(name:"Fatima",status:"active")
+daraz.employees.create(name:"Zobia",status:"inactive")
+Hub4u.employees.create(name:"ARfa",status:"active")
+
+dev.locations.create(state:'CA', country:"USA")
+dev.locations.create(state:'Punjab', country:"PAK")
+google.locations.create(state:'LA', country:"USA")
+google.locations.create(state:'Punjab', country:"PAK")
+
+
+************************
+
+load all active employees:
+Employee.where(status: "active")
+
+************************
+Performance without joins:
+
+But what if we want to load all active employees who belong to companies that are verified? Without joins, you would write something like this:
+
+active_employees = Employee.where(status: "active")
+result = active_employees.select do |employee|
+  employee.company.verified?
+end
+
+Note: select is array method in ruby.
+
+This isn’t great because it triggers an N + 1 query since it is looking in the database for a company record for each employee in the loop
+
+************************
+Improve quality using Joins:
+
+We can easily improve the code above by using :joins.
+
+Employee.where(status: "active").joins(:company).where(companies: { verified: true })
+
+SELECT `employees`.* FROM `employees` INNER JOIN `companies`
+ON `companies`.`id` = `employees`.`company_id`
+WHERE `employees`.`status` = 'active' AND `companies`.`verified` = 1
+
+************************
+
+Let’s break this down even more
+
+1) Employee.where(status: "active").joins(:company)
+We would be loading all active employees who belong to a company. If an employee is not associated with a company, then they would not be returned. This is because :joins performs a SQL inner join by default.
+
+2) Adding the clause where(companies: { verified: true }) scopes companies so that only employee’s with verified companies are returned. Note that this section of the query uses companies as a keyword since it is referring to the table name.
+
+************************
+other ways to write same above query:
+
+Employee.where(status: "active").joins("INNER JOIN companies ON companies.id = employees.company_id WHERE companies.is_verified = 1")
+Employee.joins("INNER JOIN companies ON companies.id = employees.company_id WHERE employees.status = 'active' AND companies.is_verified = 1")
+
+************************
+Now say company has many locations.
+If we wanted to grab all employees who are at companies that have locations, we would perform the following query:
+
+Employee.joins(company: [:locations]).distinct          # [] bracket cam be removed
+
+SELECT DISTINCT "employees".* FROM "employees" INNER JOIN "companies" ON "companies"."id" = "employees"."company_id" INNER JOIN "locations" ON "locations"."company_id" = "companies"."id"
+
+************************
+
+Get active employees at companies that are verified in the state of California:
+
+Employee.where(status: "active").joins(company: [:locations]).where(locations: { state: 'CA'}, companies: { verified: true })
+
+************************
+
+When to use :includes
+
+:includes is a method in ActiveRecord used to preload data in order to avoid N + 1 queries.
+
+Use :joins when you solely need to filter data based on associated tables
+and use :includes if you need to reference data in associated tables later on.
+
+For example, we’d want to use :includes if we were to load all active employees at companies that are verified
+and then print each employee’s name and their company name.
+
+employees = Employee.where(status: "active").includes(:company).where(companies: { verified: true })
+employees.each do |employee|
+  puts employee.name
+  puts employee.company.name
+  # puts "#{employee.name} works in #{employee.company.name} "
+end
+
+************************

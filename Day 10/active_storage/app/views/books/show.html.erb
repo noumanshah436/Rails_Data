@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @book.title %>
+</p>
+<% @book.pictures.each do |picture| %>
+  <%= link_to image_tag(picture,style: "width:150px; height: 150px;"),picture %>
+<% end %>
+
+<%= link_to 'Edit', edit_book_path(@book) %> |
+<%= link_to 'Back', books_path %>

@@ -1,0 +1,114 @@
+rails generate model Student name:string
+
+****************************
+
+The following methods trigger validations, and will save the object to the database only if the object is valid:
+
+create
+create!
+save
+save!
+update
+update!
+
+The bang versions (e.g. save!) raise an exception if the record is invalid. The non-bang versions don't: save and update return false, and create just returns the object.
+
+********************
+
+s = Student.new(name: "John Doe")
+s.new_record?
+s.save
+s.new_record?
+
+*********************
+
+1) validates :name, presence: true                               # one field
+    validates :name, :login, :email, presence: true               # more than one field
+
+  Student.create(name: "John Doe").valid? # => true
+  Student.create(name: nil).valid? # => false
+
+2)   Note that an object instantiated with new will not report errors even if it's technically invalid, because validations are automatically run only when the object is saved, such as with the create or save methods.
+rails c
+
+p = Student.new
+# => #<Student id: nil, name: nil>
+
+>> p.errors.messages
+# => {}
+
+>> p.valid?
+# => false
+
+>> p.errors.messages
+# => {name:["can't be blank"]}
+
+>> p = Student.create
+# => #<Student id: nil, name: nil>
+
+>> p.errors.messages
+# => {name:["can't be blank"]}
+
+>> p.save
+# => false
+
+>> p.save!
+# => ActiveRecord::RecordInvalid: Validation failed: Name can't be blank
+
+>> Student.create!
+# => ActiveRecord::RecordInvalid: Validation failed: Name can't be blank
+
+
+3)
+
+validates :name, length: { minimum: 2 }
+validates :bio, length: { maximum: 500 }
+validates :password, length: { in: 6..20 }
+validates :registration_number, length: { is: 6 }
+
+
+4)  validates :legacy_code, format: { with: /\A[a-zA-Z]+\z/,    message: "only allows letters" }
+
+Alternatively, you can require that the specified attribute does not match the regular expression by using the :without option.
+
+
+5) validates :name, absence: true
+
+ensure that the name field is not given.
+give error RecordInvalid (Validation failed: Name must be blank) if we give name
+
+
+5)
+validates :name, uniqueness: true
+
+check that name should not present in database
+
+
+6)  validates :age, numericality: true
+
+
+*************************
+
+student =  Student.new
+student.valid?                 # => false
+student.errors.messages
+                            # => {:name=>["can't be blank", "is too short (minimum is 3 characters)"]}
+
+*************************
+
+student =  Student.new(name: "JD")
+student.valid? # => false
+student.errors[:name] # => ["is too short (minimum is 3 characters)"]
+
+*************************
+
+student.errors.full_messages
+student.errors.full_messages
+
+<ul>
+  <% @article.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ul>
+
+

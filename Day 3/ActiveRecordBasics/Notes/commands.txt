@@ -1,0 +1,34 @@
+rails g model Product name:string
+rails db:migrate
+
+create controller:
+rails generate controller Product index
+
+
+rails g controller User index
+rails g model User name:string occupation:string
+rails db:migrate
+
+
+rails g controller Person index
+rails g model Person  age:integer
+rails db:migrate
+
+
+
+
+******************************
+
+
+delete any model
+
+When you generate a model, it creates a database migration. If you run 'destroy' on that model, it will delete the migration file, but not the database table. So before run
+
+bundle exec rails db:rollback
+rails destroy model <model_name>
+For rails versions before 5.0 and higher use rake instead of rails
+
+bundle exec rake db:rollback
+rails destroy model <model_name>
+
+******************************

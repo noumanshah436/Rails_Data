@@ -1,0 +1,32 @@
+1) rails new react-crud
+2) rails g scaffold post title:string body:text
+
+3) bundle add rack-cors
+4) rails db:migrate
+
+5) add cors file -> https://github.com/cyu/rack-cors
+
+6) add
+skip_before_action :verify_authenticity_token
+
+
+
+For Images:
+
+7) add gems then
+rails active_storage:install
+rails db:migrate
+
+a) add image in model
+b) add fields in model
+c) allow params for image
+
+****************************
+
+access image url:
+
+<p><%= rails_blob_url(@post.image) %></p>
+<p><%= @post.image.service_url %></p>
+<p><%= url_for(@post.image) %></p>
+
+****************************

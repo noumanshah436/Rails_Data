@@ -1,0 +1,127 @@
+
+************************************************************************************************************
+has_and_belongs_to_many Association:
+
+A has_and_belongs_to_many association creates a direct many-to-many connection with another model, with no intervening model.
+
+Implementation summary :
+    1) create two simple models
+    3) add has_and_belongs_to_many statement in both models
+    2) create a join_table which will associate both tables.
+
+we will join student and course model:
+************************************************************************************************************
+
+https://guides.rubyonrails.org/v5.2/association_basics.html#has-and-belongs-to-many-association-reference
+
+
+rails g model Course name:string description:text
+rails db:migrate
+
+1) add this to student model class
+has_and_belongs_to_many :courses
+
+2) add this to Course model class
+has_and_belongs_to_many :students
+
+3) generate migration to create join table:
+rails g migration create_course_student_join_table
+
+Add this to migration file:
+create_join_table :courses , :students                -- use lexical order to create join table
+
+rails db:migrate
+
+-> this will create courses_students table in database
+
+***********
+associate records:
+
+course1 = Course.find(1)
+course2 = Course.find(2)
+course3 = Course.find(3)
+
+assign student a course:
+std1 = Student.find(1)                        --  fetch student
+std1.courses << course1                       --  assign student a course
+std1.courses                                  -- fetch all courses of student
+std1.courses << course2 << course3            -- assign multiple courses
+
+you can also assign courses to students:
+course1 = Course.find(1)
+std1 = Student.find(1)
+std2 = Student.find(2)
+std3 = Student.find(3)
+std4 = Student.find(4)
+course1.students << std2 << std3 << std4
+course1.students
+std1.courses.size                                   --  see count of courses of this student
+std1.courses.find(2)                                -- find course with id=2
+
+
+************************
+
+Limitations of has_and_belongs_to_many association  :
+
+( using join_table we cannot add extra attribute , or callbacks or validations to the ralationship table
+ because we do not have model for that )
+
+https://guides.rubyonrails.org/v5.2/association_basics.html#choosing-between-has-many-through-and-has-and-belongs-to-many
+
+
+
+
+************************************************************************************************************
+************************************************************************************************************
+has_many :through
+
+A has_many :through association is often used to set up a many-to-many connection with another model.
+This association indicates that the declaring model can be matched with zero or more instances of another model by proceeding through a third model.
+This method will implement many to many relationship using third model
+
+Implementation summary :
+  1) create two simple models
+  2) create third model with foreign keys of two other models and  we can add more attributes in this model if required
+  3) Add has many and has_many through statement in both two models
+
+
+we will join student and project model:
+************************************************************************************************************
+
+
+# create project model
+rails g model project name:string description:text
+rails db:migrate
+
+1) creating relationship model b/w student and project with third model
+rails g model student_project student:references project:references submission_date:date
+rails db:migrate
+
+2)  add this to student  model class:
+has_many :student_projects
+has_many :projects, through: :student_projects
+
+3) add this to project model class:
+has_many :student_projects
+has_many :students, through: :student_projects
+
+
+
+*****
+
+std = Student.first
+std.projects
+Project.create(name: "Driver app")
+Project.create(name: "School management app")
+Project.count
+
+StudentProject.create( student_id: 1, project_id: 1 , submission_date: Date.today + 20.days )
+std = Student.find(1)
+std.projects
+
+p = Project.find(1)
+p.students
+
+
+Project.joins(:student_projects).where(  project: { name: 'Driver app' }  )
+Driver app

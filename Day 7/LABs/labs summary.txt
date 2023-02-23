@@ -1,0 +1,9 @@
+lab 3       select  operation  ( functions) 
+
+lab 4 group func
+lab 5   joins
+lab 6 joins
+lab 7 DML (insert , update , dleete)
+lab 8   create and manage tables
+lab 9 create view 
+lab 10 pl/sql

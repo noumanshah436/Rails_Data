@@ -1,0 +1,11 @@
+gem source:
+https://github.com/activerecord-hackery/ransack
+
+
+docs:
+https://activerecord-hackery.github.io/ransack/getting-started/simple-mode/
+
+1) add gem
+gem 'ransack'
+
+2)

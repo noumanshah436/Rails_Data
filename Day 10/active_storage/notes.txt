@@ -1,0 +1,169 @@
+gem "trix-rails", require: "trix"
+gem 'image_processing', '~> 1.2'
+gem 'jquery-rails'
+gem 'cloudinary'
+
+bundle install
+
+rails active_storage:install
+
+apllication.js
+//= require jquery
+//= require trix
+
+application.css
+*= require trix
+
+
+rails g scaffold books title:string
+rails g scaffold images
+
+config/cloudinary.yml
+
+development:
+  cloud_name: ""
+  api_key: ""
+  api_secret: ""
+  secure: true
+
+production:
+  cloud_name: ""
+  api_key: ""
+  api_secret: ""
+  secure: true
+
+config/storage.yml
+cloudinary:
+  service: Cloudinary
+  folder: rails_uploads
+
+Comment to local in config/storage.yml
+
+
+config/environments/development.rb
+config.active_storage.service = :cloudinary
+
+and Comment this line :
+config.active_storage.service = :local
+
+
+config/environments/application.rb
+require 'cloudinary'
+
+module Well
+  class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 5.2
+
+    # Settings in config/environments/* take precedence over those specified here.
+    # Application configuration can go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded after loading
+    # the framework and any gems in your application.
+    config.i18n.default_locale = :en
+    config.assets.initialize_on_precompile = false
+    config.exceptions_app = self.routes
+    config.active_storage.service = :cloudinary
+    Cloudinary.config_from_url("cloudinary://754979966771437:q61v_o4enRrFVHwVVzJ5WhzU05w@dp9mei1zc")
+
+    Cloudinary.config do |config|
+      config.secure = true
+    end
+
+  end
+end
+
+
+assets/javascripts/.coffee:
+
+$(document).ready ->
+  uploadAttachment = (attachment) ->
+    csrfToken = $('meta[name="csrf-token"]').attr('content')
+    file = attachment.file
+    form = new FormData
+    endpoint = '/images.json'
+    form.append 'Content-Type', file.type
+    form.append 'image[attachment]', file
+    xhr = new XMLHttpRequest
+    xhr.open 'POST', endpoint, true
+    xhr.setRequestHeader 'X-CSRF-Token', Rails.csrfToken()
+    xhr.upload.onprogress = (event) ->
+      progress = event.loaded / event.total * 100
+      attachment.setUploadProgress progress
+    xhr.onload = ->
+      if @status >= 200 and @status < 300
+        data = JSON.parse(@responseText)
+        return attachment.setAttributes(
+          url: data.attachment_url
+          href: data.attachment_url)
+      return
+    xhr.send form
+  Trix.config.attachments.preview.caption =
+    name: false
+    size: false
+  document.addEventListener 'trix-attachment-add', (event) ->
+    attachment = event.attachment
+    if attachment.file
+      return uploadAttachment(attachment)
+    return
+  return
+
+
+image.rb:
+class Image < ApplicationRecord
+  has_one_attached :attachment
+end
+
+book.rb:
+class Book < ApplicationRecord
+  has_one_attached :image
+  has_many_attached :pictures
+end
+
+
+images_contoller.rb:
+def image_params
+  params.require(:image).permit(:attachment)
+end
+
+books_controller.rb:
+def book_params
+ params.require(:book).permit(:title, :image, pictures: [])
+end
+
+views/images/_image.json.builder:
+json.attachment_url rails_blob_url(image.attachment)
+
+book/show.html:
+<p>
+  <strong>Title:</strong>
+  <%= sanitize @book.title %>
+</p>
+
+<%= link_to image_tag(@book.image,style: "width:150px; height: 150px;"),@book.image %>
+<hr/>
+<% @book.pictures.each do |picture| %>
+  <%= link_to image_tag(picture,style: "width:150px; height: 150px;"),picture %>
+<% end %>
+
+book/_form.html:
+ <div class="field">
+    <%= form.label :title %>
+    <%= form.trix_editor :title %>
+  </div>
+
+ <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pictures %>
+    <%= form.file_field :pictures, multiple: true %>
+  </div>
+
+
+
+rails db:migrate
+
+routes:
+root 'books#index'

@@ -1,0 +1,11 @@
+development:
+  cloud_name: "dvd6ckurb"
+  api_key: "417697891113881"
+  api_secret: "FNLTVGPyPgwUhvcwxIkC4zhQgl4"
+  secure: true
+
+production:
+  cloud_name: "dvd6ckurb"
+  api_key: "417697891113881"
+  api_secret: "FNLTVGPyPgwUhvcwxIkC4zhQgl4"
+  secure: true

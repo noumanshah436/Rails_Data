@@ -1,0 +1,54 @@
+// 1: What & Why SASS
+// 2: How to use SASS
+// 3: SCSS VS SASS
+// 4: Operators in SASS
+// 5:  Variables in SASS
+// 6: Nesting in SASS.
+// 7: Mixins & Include in SASS.
+// 8: Partials in SASS.
+// 9: Import in SASS
+
+// sass in rails http://railscasts.com/episodes/268-sass-basics
+
+@import "var";
+@import "mixin";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+.main_header {
+  @include layouts;
+  display: grid;
+  place-items: center;
+
+  // background: $bg_color;
+  background: darken( $bg_color ,30%);
+
+
+  h1 {
+    color: red;
+    @include letterspacing(0.8rem, uppercase);
+
+    &:hover {
+      color: yellow;
+    }
+  }
+
+  p {
+    color: red;
+    @include letterspacing(0.8rem, capitalize);
+
+    &::before {
+      content: "Intro: ";
+    }
+
+    &::after {
+      content: " Nouman";
+    }
+  }
+}

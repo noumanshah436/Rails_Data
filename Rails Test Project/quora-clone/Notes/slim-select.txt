@@ -1,0 +1,9 @@
+https://www.youtube.com/watch?v=F0au2jk7Skw
+
+
+website:
+https://slimselectjs.com/install#cdn
+
+
+Links cdn:
+https://cdnjs.com/libraries/slim-select

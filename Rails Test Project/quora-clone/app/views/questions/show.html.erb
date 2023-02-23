@@ -1,0 +1,29 @@
+<% if @question.user == current_user %>
+  <div  class="mt-4 ">
+    <%= link_to 'Edit', edit_question_path(@question) %> |
+    <%= link_to 'Destroy', @question, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+<% end %>
+<div class="card my-4">
+  <%= render 'questions/user', question: @question %>
+  <div class="card-header bg-transparent font-weight-bold text-primary">
+    <%= @question.text %>
+    <div class="mt-3 " id="Icons-Question-<%= @question.id.to_s %>">
+      <%= render 'questions/icons',
+        votable:@question,
+        likes_count: @question.likes_count,
+        dislikes_count: @question.dislikes_count,
+        liked: @question.liked(current_user.id),
+        disliked: @question.disliked(current_user.id)
+
+      %>
+    </div>
+  </div>
+  <%= render 'answers/answers' , answers: @question.all_answers %>
+  <div id="new-answers-question-<%= @question.id.to_s %>"></div>
+</div>
+<div>
+  <h3>Give Answer </h3>
+  <%= render 'answers/form', question: @question,  answer: @question.answers.new %>
+  <br>
+</div>

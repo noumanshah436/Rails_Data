@@ -1,0 +1,55 @@
+p = Product.last
+
+p.images[0]
+this will give active_storage_attachments object
+
+p.images[0].blob
+this will give active_storage_blobs object
+
+
+p.images[0].blob.metadata
+
+
+
+*****************************
+
+gem 'mini_magick' vs image_processing
+https://blog.saeloun.com/2019/11/04/rails-6-active-storage-updates.html
+
+
+Rails 6 - Active Storage changes   ( minimagic to image_processing)
+https://blog.saeloun.com/2019/11/04/rails-6-active-storage-updates.html
+
+
+****************************
+
+def resize_image
+    puts "images"
+    self.images.each do |image|
+
+      byebug
+      image.variant(resize_to_limit: [300, 300]).processed.url
+      # self.images[i].resize('300x300!')
+    end
+    # unless images.attached?
+    #   avatar.attach(
+    #     io:File.open(Rails.root.join('app', 'assets', 'images', 'default_profile.jpg' )  ),
+    #     filename: 'default_profile.jpg',
+    #     content_type: 'image/jpg'
+    #   )
+    # end
+
+  end
+
+
+****************************
+<% (0...@product.images.count).each do |i| %>
+  <%= image_tag( @product.images[i].variant(resize: '300x300!') ) %>
+<% end  %>
+
+
+********************
+<% image_tag( product.images[0] , class: "card-img-top")%>
+<%= image_tag( product.images[0].variant(resize: '300x300!') , class: "card-img-top") %>
+
+********************

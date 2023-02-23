@@ -1,0 +1,121 @@
+  # The scope option to the Rails uniqueness validation rule allows us to specify additional columns to consider when checking for uniqueness.
+  # validates :account_id, uniqueness: {scope: :post_id}
+
+
+
+rails g model Post content:string account:references
+
+rails g model Photo  image:string post:references
+
+************************************************
+rails g model Like post:references account:references
+rails db:migrate
+
+now add associate statement in both tables
+
+user = Account.first
+p = Post.first
+
+Like.create!(account:user, post:p)
+Like.create!(account:user, post:p)   # this will give error now
+
+p.liked(user)   # we have defined method in post model
+
+***
+
+we can also create like on post by using account object:
+
+current_account.likes.new(post_id)
+
+***************************************************
+
+rails g model Comment content:text post:references account:references
+rails db:migrate
+
+we add parent column :
+add_column :comments, :parent_id, :integer, null: true
+
+and make association
+
+1) c = Comment.last
+
+c.parent
+c.comments
+c.comments.create(post_id: 46, account_id: 1, content: "child")
+c.comments
+
+
+child = Comment.find(40)
+child.parent
+
+c.content = "Parent"
+c.save!
+
+
+***********************
+
+Account.search('Far')
+
+
+
+******************
+
+delete story after 24 hours:
+https://stackoverflow.com/questions/55911166/ruby-on-rails-background-application-to-run-jobs-automaically-at-a-time-dynamica
+
+
+********************
+
+p = Post.where.not(active: false)
+
+@posts = Post.where.not(active: false).includes(:photos, :account, :likes).order("id desc")
+
+@posts = Post.all.includes(:photos, :account, :likes).order("id desc")
+
+
+**********************
+
+check if user1 is follwed by user6:
+
+user1&.followees&.include?(user6)
+
+**********************
+
+check if user6 is follwing user1
+
+user1&.followers&.include?(user6)
+
+**********************
+
+follow request:
+
+it will give all the users the users that request to follow:
+user1.followers.where.not(id: user1.followees.ids )
+
+user1.followees.ids
+
+*********************
+
+search account:
+
+Account.all.where('name like ?  and active=true', "%n%")
+
+*********************
+
+
+p = Post.find(122)
+p.likes
+
+user = Account.find(1)
+like = user.likes.new({post_id:122})
+
+*************************
+
+
+
+Story.create(account_id:1,image:File.open("#{Rails.root}/app/assets/images/default2.png")  )
+
+
+*************************
+
+

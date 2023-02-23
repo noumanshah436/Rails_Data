@@ -1,0 +1,9 @@
+https://www.youtube.com/watch?v=4VkKmQWJoBI
+
+https://github.com/carrierwaveuploader/carrierwave
+
+
+1)  ADD gem and run bundle install
+gem 'carrierwave', '~> 2.0'
+
+2)

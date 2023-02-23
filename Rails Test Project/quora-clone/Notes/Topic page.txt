@@ -1,0 +1,10 @@
+Topic page
+
+This page should display the total number of users following this topic
+
+All questions related to the topics should appear here,
+ if it contains more than 10 questions only starting 10 questions should appear on the first page.
+
+All questions should be sorted according to given likes/dislikes
+
+A user should be able to navigate to the next, previous, or any specific page

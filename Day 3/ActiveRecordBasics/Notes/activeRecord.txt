@@ -1,0 +1,9 @@
+
+
+we can add instance methods in model and use these with instance object
+
+@post.display_name
+
+********************
+
+we can use self in model to access model fields or access fields directly

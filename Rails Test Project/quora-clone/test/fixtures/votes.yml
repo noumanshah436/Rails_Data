@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  likable: one
+  likable_type: Likable
+  user: one
+  vote: 1
+
+two:
+  likable: two
+  likable_type: Likable
+  user: two
+  vote: 1

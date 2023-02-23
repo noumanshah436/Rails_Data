@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quora-Clone</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- font -->
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu&subset=cyrillic,latin' rel='stylesheet' type='text/css' />
+    <!-- slim-select -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/2.3.3/slimselect.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/2.3.3/slimselect.css" rel="stylesheet"></link>
+  <%# <script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
+    <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"></link> %>
+</head>
+<body>
+  <%= render "shared/navbar" %>
+  <%= render 'shared/alerts' %>
+  <div class="container ">
+    <%= yield %>
+  </div>
+</body>
+</html>

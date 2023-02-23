@@ -1,0 +1,69 @@
+ redirect_to action: 'read_cookie'
+ 
+ 
+ 
+***********************
+ 
+rails destroy :
+
+rails destroy controller CookiesController
+
+
+rails destroy model Person
+
+*****************************
+
+Open Sqlite:
+
+sqlite3 db/development.sqlite3
+
+
+sqlite> drop table table_name;
+sqlite> .quit
+
+
+
+************************
+
+
+
+$ rake routes -c articles    (  see all routes of article )
+
+rails g  (  see all generators )
+
+rails -T ( see all available rails commands)
+
+rails -T db  ( filter by namespace db)
+
+
+Data seeding is the process of populating a database with an initial set of data.
+data seeding :  https://www.youtube.com/watch?v=eR07DB-GUJ8
+
+
+
+**********************
+
+
+
+
+********************
+
+Rails console:
+
+rails c
+
+reload!  
+
+clear irb screen with ctrl+l
+
+********************
+
+gem 'jquery-rails'
+
+bundle install
+
+ 
+
+Put this in your app/assets/javascripts/application.js
+//= require jquery
+//= require jquery_ujs

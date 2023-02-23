@@ -1,0 +1,13 @@
+<!--
+<%= commentable.inspect   %>
+-->
+
+<%# see show page of article or post  %>
+<%# commentable is comming from show page here %>
+
+<%=form_for [commentable, commentable.comments.new] do |f|%>
+  <div class="form-group">
+    <%= f.text_area :text, class:"form-control", placeholder:"Write Comments Here" %>
+  </div>
+  <%= f.submit class:"btn btn-primary m-2"%>
+<%end%>

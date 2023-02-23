@@ -1,0 +1,40 @@
+<h1>New Post</h1>
+<br>
+
+
+<!-- <%= form_tag url_for(action: 'create'), method: "post" do %>
+
+  <%= label_tag 'Title' %>
+  <%= text_field_tag 'title', @post.title %>
+
+  <%= label_tag 'Body' %>
+  <%= text_area_tag 'body', @post.body %>
+
+  <%= label_tag 'Author' %>
+  <%= text_field_tag 'author', @post.author %>
+
+  <%= submit_tag "Create Post" %>
+
+<% end %> -->
+
+
+
+
+<!-- <%= form_for @post do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <br>
+
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+  <br>
+
+  <%= f.label :author %>
+  <%= f.text_field :author %>
+  <br>
+
+  <%= f.submit %>
+<% end %> -->
+
+
+<%= render 'form' %>

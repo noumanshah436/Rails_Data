@@ -1,0 +1,8 @@
+<div class="card-header d-flex align-items-center">
+  <%= link_to profile_path(question.user), class: "mr-2 no-text-decoration" do %>
+    <%= image_tag( question.user.avatar,  class: "profile_pic  rounded-circle")    %>
+  <% end %>
+  <%= link_to profile_path(question.user), class: "font-weight-bold text-dark"  do %>
+    <%= question.user.name %>
+  <% end %>
+</div>

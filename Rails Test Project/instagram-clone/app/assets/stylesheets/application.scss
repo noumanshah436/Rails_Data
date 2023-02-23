@@ -1,0 +1,74 @@
+@import "bootstrap";
+@import "dropzone/dropzone";
+@import "font-awesome";
+
+body {
+  background-color: #fafafa;
+
+  color: #262626;
+}
+
+.upload-photos-icon:hover {
+  cursor: pointer;
+}
+
+.dz-preview.dz-image-preview {
+  margin: 2px;
+}
+
+.dz-image {
+  border-radius: 0px !important;
+
+  img {
+    width: 100%;
+  }
+}
+
+.dropzone .dz-preview:hover .dz-remove {
+  opacity: 1;
+}
+
+.upload-photos-icon {
+  height: 120px;
+  width: 120px;
+  border: 2px dashed #dddfe2;
+  border-radius: 2px;
+  padding: 48px;
+  display: inline-block;
+  margin: 2px;
+}
+
+.profile_pic {
+  height: 50px;
+  width: 50px;
+}
+
+
+.nounderline {
+  text-decoration: none !important
+}
+
+a {
+  color: black;
+}
+
+.hide-form {
+  display: none;
+}
+
+.search-result-item {
+  padding: 15px;
+}
+
+.search-result-item:hover {
+  background-color: #fafafa;
+}
+
+.popover {
+  border-radius: 0;
+}
+
+.popover-body {
+  background: #fff;
+  padding: 0;
+}

@@ -1,0 +1,66 @@
+u1 = User.first
+
+tp u1.topics
+tp u1.questions
+tp u1.answers
+
+
+*************************
+
+seed data:
+
+u1 = User.find(1)
+u2 = User.find(2)
+
+t1= Topic.new(title:"Rails 2", desc:"All about rails", user_id:u1.id)
+t1.picture.attach(io: File.open("#{Rails.root}/app/assets/images/default2.jpg"), filename: "default2.jpg")
+t1.save
+
+or
+t1= u1.topics.new(title:"Pakistan", desc:"All about Pakistan")
+t1.picture.attach(io: File.open("#{Rails.root}/app/assets/images/default2.jpg"), filename: "default2.jpg")
+t1.save
+
+*********************
+
+t2 = Topic.find(2)
+t3 = Topic.find(3)
+t4 = Topic.find(4)
+t5 = Topic.find(5)
+t6 = Topic.find(6)
+
+
+u3 = User.find(3)
+u2 = User.find(2)
+
+q3 = u3.questions.create(text: "Name five things Rails Migration can do.")
+q4 = u3.questions.create(text: "How can you protect Rails against Cross-Site Request Forgery?")
+q1 = u2.questions.create(text: "What is Ruby on Rails?")
+q2 = u2.questions.create(text: "What do subdirectory app/controllers and app/helpers do?")
+
+t6 = Topic.find(6)
+t6.questions << q3 << q4 << q1 << q2
+
+*********************
+
+u1= User.find(1)
+q3 = u1.questions.create(text: "How do you reverse a string in Java? ...")
+q4 = u1.questions.create(text: "How do you determine if a string is a palindrome? ...")
+q1 = u1.questions.create(text: "Find the number of occurrences of a character in a String? ...")
+q2 = u1.questions.create(text: "How to find out if the given two strings are anagrams or not? ...")
+q5 = u1.questions.create(text: "How do you calculate the number of vowels and consonants in a String?")
+
+
+t2 = Topic.find(2)
+t2.questions << q1 << q2 << q3 << q4 << q5
+
+*********************
+u = User.find(1)
+
+t= u.followed_topics.each do |t|
+  puts t.questions.count
+end
+
+
+
+u3.questions.create(text: "define basic electronic?")

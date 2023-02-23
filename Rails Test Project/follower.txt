@@ -1,0 +1,6 @@
+https://betterprogramming.pub/how-to-create-a-follow-feature-in-rails-by-aliasing-associations-30d63edee284
+
+
+
+diagram ERD:
+https://online.visual-paradigm.com/app/diagrams/#G1Vqki6oi5YihHeQV8hxWOed4JbFgDlBw5

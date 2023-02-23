@@ -1,0 +1,165 @@
+BEGIN
+insert into emp(empno,ename,job) values(027,'Nouman','CLERK');
+END;
+
+
+declare
+rn number (4);
+name varchar2(20);
+begin
+rn :=27;
+name :='Syed Nouman Rehman';
+dbms_output.put_line('My Roll Number is: ' || rn);
+dbms_output.put_line('My Name is: ' || name);
+end;
+
+
+
+declare
+a number(10);
+BEGIN
+a:=:a;
+if (a<100) then a:=:a*10;
+else a:=:a*5;
+END IF;
+dbms_output.put_line(a);
+end;
+
+
+declare
+empno emp.empno%type,
+ename emp.ename%type,
+job emp.job%type,
+mgr emp.mgr%type,
+hiredate emp.hiredate%type,
+sal emp.sal%type,
+comm emp.comm%type,
+deptno emp.deptno%type
+
+begin
+
+empno:=:empno;
+ename:=:ename;
+job:=:job;
+mgr :=:mgr;
+hiredate := :hiredate;
+sal:=:sal; 
+comm :=:=comm;
+deptno:=:deptno;
+insert into emp values(ename,job,mgr,hiredate,sal,comm,deptno);
+end;
+
+
+
+
+declare 
+empno number(5);
+ename varchar2(25);
+job varchar2(10);
+mgr number(5);
+hiredate varchar2(13);
+sal number(5);
+comm number(4);
+deptno number(3);
+begin
+
+empno:=:empno;
+ename:=:ename;
+job:=:job;
+mgr:=:mgr;
+hiredate:=:hiredate;
+sal:=:sal;
+comm:=:comm;
+deptno:=:deptno;
+
+insert into emp values(empno,ename,job,mgr,hiredate,sal,comm,deptno);
+end;
+
+
+
+
+declare
+num number(10);
+begin
+num :=:num;
+case
+    when (num<50) then 
+    dbms_output.put_line('GPA: 0.00');
+    dbms_output.put_line('Grade:F');
+    when (num<55) then
+    dbms_output.put_line('GPA: 1.00');
+    dbms_output.put_line('Grade:D');
+    when (num<58) then 
+    dbms_output.put_line('GPA: 1.70');
+    dbms_output.put_line('Grade:C-');
+    when (num<61) then 
+    dbms_output.put_line('GPA: 2.00');
+    dbms_output.put_line('Grade:C');
+    when (num<65) then 
+    dbms_output.put_line('GPA: 2.30');
+    dbms_output.put_line('Grade:C+');
+    when (num<70) then 
+    dbms_output.put_line('GPA: 2.70');
+    dbms_output.put_line('Grade:B-');
+    when (num<75) then 
+    dbms_output.put_line('GPA: 3.00');
+    dbms_output.put_line('Grade:B');
+    when (num<80) then 
+    dbms_output.put_line('GPA: 3.30');
+    dbms_output.put_line('Grade:B+');
+    when (num<85) then 
+    dbms_output.put_line('GPA: 3.70');
+    dbms_output.put_line('Grade:A-');
+    else 
+    dbms_output.put_line('GPA: 4.00');
+    dbms_output.put_line('Grade:A');
+    end case;
+end;
+
+i)
+create or replace function getTotalJobDays (empname emp.ename%type) 
+return number is
+num number;
+begin
+select round(sysdate-hiredate,0) into num from emp where empname=ename;
+return num;
+end;
+
+ii)
+select getTotalJobDays('ALLEN') from dual
+
+create or replace function getTotalJobDays (empn emp.ename%type) 
+return number is
+num number;
+begin
+select round(sysdate-hiredate) into num from emp where empn=ename;
+return num;
+end;
+
+select getTotalJobDays('ALLEN') from dual
+
+
+
+create index emp_ename_index
+on emp(ename)
+
+
+
+create procedure insert_IntoEMP (
+empno number ,
+ename varchar2 ,
+job varchar2 ,
+mgr number ,
+hiredate varchar2 ,
+sal number ,
+comm number ,
+deptno number  ) is
+begin
+
+insert into emp values(empno,ename,job,mgr,hiredate,sal,comm,deptno);
+end;
+
+
+begin 
+insert_IntoEMP(027,'Nouman','Clerk',7369,'11/19/1998',2500,0,10);
+end;

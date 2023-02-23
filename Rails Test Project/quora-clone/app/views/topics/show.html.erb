@@ -1,0 +1,23 @@
+<div class="card w-100"  >
+  <h1 class="text-center mt-3"><%= @topic.title %>
+  </h1>
+  <div class="card-body text-secondary">
+    <p class="card-text  ">- <%= @topic.desc %></p>
+    <div id="follower-count">
+      <%= render 'follow_count', followers: @topic.users.count %>
+    </div>
+    <div id="follow-btn">
+      <%= render 'follow_button', topic: @topic %>
+    </div>
+  </div>
+  <%= image_tag(@topic.picture,  class: " card-img-top" )  %>
+</div>
+<br>
+<br>
+
+<%= render @questions , show_answer_form: false %>
+
+<%= paginate @questions %>
+
+
+<% @topic.user.id %>

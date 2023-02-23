@@ -1,0 +1,11 @@
+
+About page:
+This page should display user info,
+
+followed topics,
+
+asked questions,
+
+and answers to any question given up till now
+
+A user should only be able to view his info on this page

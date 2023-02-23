@@ -1,0 +1,24 @@
+<div class="w-full d-flex justify-content-center mx-auto my-4">
+  <%= image_tag( current_user.avatar,  class: "display_pic text-center rounded-circle" ) %><br />
+</div>
+<div class="card"  >
+  <div class="card-body text-center">
+    <h5 class="card-title font-weight-bold"><%= current_user.name %></h5>
+    <h5 class="card-title  "><%= current_user.email %></h5>
+  </div>
+</div>
+
+<div class="my-5">
+  <h3 class=" font-weight-bold">Follwed Topics</h3>
+  <%= render current_user.followed_topics %>
+</div>
+
+<div class="my-5">
+  <h3 class="mt-4 font-weight-bold">Asked Questions</h3>
+  <%= render asked_questions  , show_answer_form: false  %>
+</div>
+
+<div class="my-5">
+  <h3 class="mt-4 font-weight-bold">Given Answers</h3>
+  <%= render questions_answered_by_user(current_user.id), show_answer_form: false  %>
+</div>

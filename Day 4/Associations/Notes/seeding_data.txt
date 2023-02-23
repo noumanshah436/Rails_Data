@@ -1,0 +1,9 @@
+
+
+populate data
+
+
+create object and run rails db:seed will populate data to model
+
+student = Student.create( name: "Nouman", email: "nouman@gmail.com")
+ rails db:seed

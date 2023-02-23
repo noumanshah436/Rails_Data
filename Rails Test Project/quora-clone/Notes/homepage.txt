@@ -1,0 +1,126 @@
+Home Page
+A user can view questions related to topics he’s following
+A user can search any topic in the search bar which will list down all relevant questions for that certain topic
+A user can answer any question
+All answers to the question should be sorted according to given likes/dislikes
+For each question only the top two answers should be displayed, there should be a separate page for each question that will display all given answers
+A user can like/dislike any question
+A user can like/dislike any answer given by any other user for any specific question
+A user can follow any topic from here
+
+
+u1 =User.find(1)
+u1.followed_topics        -- all topics followed by this user
+
+SELECT "topics".* FROM "topics" INNER JOIN "user_topics"
+ON "topics"."id" = "user_topics"."topic_id"
+WHERE "user_topics"."user_id" = $1  [["user_id", 1]]
+
+
+
+
+ Question.joins(topics: [:user_topics])
+
+***************
+
+Question.joins(topics: [:user_topics]).where(user_id: 2)
+
+SELECT "questions".* FROM "questions" INNER JOIN "question_topics"
+ON "question_topics"."question_id" = "questions"."id"
+INNER JOIN "topics" ON "topics"."id" = "question_topics"."topic_id" INNER JOIN "user_topics" ON "user_topics"."topic_id" = "topics"."id" WHERE "questions"."user_id" = $1  [["user_id", 2]]
+
+***************
+
+
+All questions of all topics user is following:
+
+u = User.find(1)
+topics = u.followed_topics.includes(:questions)
+
+followed_questions = Array.new
+topics.each do |topic|
+  followed_questions.push(topic.questions)
+end
+
+followed_questions.flatten.uniq
+
+***************  or **************
+n+1 solution:
+https://blog.saeloun.com/2020/03/06/eagerload-active-storage-models.html
+https://stackoverflow.com/questions/53199420/rails-activestorage-scope-for-when-file-is-attached
+https://stackoverflow.com/questions/51785703/how-do-you-solve-n1-for-activestorage-urls
+
+Question.joins(:topics).where(topics: { id:2})
+
+Question.distinct.joins(:topics).where(topics: { id: followed_topic_ids  })
+
+Question.distinct.includes(:topics, :user).where(topics: { id: self.followed_topic_ids  })
+
+Question.distinct.joins(:topics).where(topics: { id: self.followed_topic_ids  })
+
+Question.distinct.includes(:topics, user: [avatar_attachment: [:blob]] ).where(topics: { id: self.followed_topic_ids  })
+
+Question.distinct.includes(:topics, :answers, user: [avatar_attachment: :blob] ).where(topics: { id: self.followed_topic_ids  })
+
+Final:
+Question.distinct.includes(:topics, answers: :user, user: [avatar_attachment: :blob] ).where(topics: { id: self.followed_topic_ids  })
+
+
+***************
+
+scopes:
+ scope :with_includes, -> { includes(:topics, answers: :user, user: [avatar_attachment: :blob] ) }
+  scope :select_topics, -> (ids) { where(topics:{ id: ids }) }
+
+query become:
+Question.distinct.with_includes.where(topics: { id: self.followed_topic_ids  })
+
+
+***************
+
+  <% render "questions/questions", {questions: @questions} %>
+***************
+
+<div class="card-body">
+  <%= question.answers.first.text %>
+</div>
+
+<hr>
+
+<div class="card-body">
+  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum eligendi quisquam pariatur nihil optio labore officia repellat vero rerum magni eveniet architecto reiciendis consectetur maxime laborum, porro laudantium! Exercitationem, natus.
+</div>
+
+***************
+
+has_many :followed_topics, through: :user_topics, source: :topic, dependent: :destroy
+
+u = User.find(3)
+u.followed_topics
+
+SELECT  "topics".* FROM "topics" INNER JOIN "user_topics"
+ON "topics"."id" = "user_topics"."topic_id"
+WHERE "user_topics"."user_id" = 3
+
+***************
+
+has_many :followed_questions, through: :followed_topics, source: :questions
+
+
+SELECT "questions".* FROM "questions" INNER JOIN "question_topics"
+ON "questions"."id" = "question_topics"."question_id" INNER JOIN "topics" ON "question_topics"."topic_id" = "topics"."id" INNER JOIN "user_topics" ON "topics"."id" = "user_topics"."topic_id" WHERE "user_topics"."user_id" = $1  [["user_id", 3]]
+
+
+
+************************
+
+
+q.answers.joins(:votes).order(votes: :desc)
+
+
+ tp q.answers.joins(:votes).where(votes:{status: :like}).order(votes: :desc)
+
+**********************
+
+@questions = @questions.sort_by{|q| q.votes.count}.reverse
+

@@ -1,0 +1,28 @@
+<div id="answer-<%= answer.id.to_s %>">
+  <div class="list-group-item" >
+    <div class="m-3">
+      <div>
+        <%= link_to profile_path(answer.user), class: "font-weight-bold mb-0 text-dark"  do %>
+          <%= answer.user.name %>
+        <% end %>
+        <% if current_user == answer.user %>
+          <%= link_to " ", question_answer_path(question_id:answer.id ,id:answer.id),  method: :delete, remote: true, class: "mx-3 fa-sharp text-danger fa-solid fa-trash fa-1x nounderline float-right" %>
+        <% end %>
+      </div>
+      <p>    <%= answer.text %>  </p>
+      <div class="mt-3" id="Icons-Answer-<%= answer.id.to_s %>">
+        <%= render "answers/icons" ,
+        votable: answer,
+        likes_count: answer.likes_count,
+        dislikes_count: answer.dislikes_count,
+        liked: answer.liked(current_user.id),
+        disliked: answer.disliked(current_user.id)
+
+
+
+
+        %>
+      </div>
+    </div>
+  </div>
+</div>

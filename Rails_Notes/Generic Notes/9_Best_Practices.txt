@@ -1,0 +1,176 @@
+Caching With Instance Variable
+
+
+
+class Project < ActiveRecord::Base
+    belongs_to :creator, :class_name => “User”
+    def company
+        @company ||= creator.company
+    end
+end
+
+
+******************
+
+Use Local Variables in Place of Instance Variables in Partials
+
+<%= render :partial => 'header' %>
+
+Good Practice 
+<%= render :partial =>  'header', :locals => {:project => @project}%>
+
+********************
+
+Prevent SQL Injection:
+
+Bad Practice 
+User.where(“name = #{params[:name]}“)
+
+## Good Practice
+User.where(“name = ?”, params[:name])
+or
+User.where(:name => params[:name])
+
+
+********************
+
+Avoid the n+1 Problem
+
+Rails has a (in)famous query problem known as the n+1 query problem i.e eagerloading.
+
+in controller:
+@users = User.limit(50)  
+
+In the view:             
+<% @users.each do |user|%>
+    <%= user.house.address %>
+<% end %>
+
+The above code will execute 51 queries, 1 to fetch all users and other 50 to fetch house of each user.
+Active Record lets you specify in advance all the associations that are going to be loaded. This is possible by specifying the includes method of the Model.find call. With includes, Active Record ensures that all of the specified associations are loaded using the minimum possible number of queries.
+
+## Good Practice
+The retrieval should be made as follows
+
+In the Controller 
+@users = User.includes(:house).limit(50)
+In the view 
+<% @users.each do |user|%>
+    <%= user.house.address %>
+<% end %>
+
+
+
+********************
+
+Follow The Law of Demeter:
+
+According to law of Demeter, a model should only talk to its immediate associated models. If you want to use associated attributes then you should use ‘delegate’.
+
+
+
+## Bad Practice 
+class Project < ActiveRecord::Base
+    belongs_to :creator
+end
+
+In the view:
+<%= @project.creator.name %>
+<%= @project.creator.company %>
+
+
+## Good Practice
+class Project > ActiveRecord::Base
+   belongs_to :creator
+   delegate :name, :company, :to => :creator, :prefix => true
+end
+
+
+In the view: 
+<%= @project.creator_name %>
+<%= @project.creator_company %>
+
+
+*************************
+
+Declare Instance Variables Inside the Action
+
+As a convention, instance variables should not be hidden in private methods but declared inside the action.
+
+
+before_filter :get_project
+
+def show
+    @project = get_project
+    @tasks = @project.tasks
+end
+
+private
+def get_project
+    Project.find(params[:id])
+end
+
+
+**************************
+
+Use Lambda in Scopes
+
+*************************
+
+Use ? At the End of Method Name If It Is Returning Boolean Value
+
+## Bad Practice
+def exist 
+end
+
+Good Practice 
+def exist?
+end
+
+*************************
+
+
+Make Helper Methods for Views:
+
+The MVC paradigm advocates keeping the views as clean as possible from any calculations. Still, sometimes this cannot be avoided, so for those instances do the processing with helpers.
+
+
+
+
+<% case @filter %>
+<% when 'inbox' %>
+    <%= render 'inbox'%>
+<% when 'sent' %>
+    <%= render 'sent' %>
+<% when 'draft' %>
+    <%= render 'draft' %>
+<% when 'trash'%>
+    <%= render 'trash' %>
+<% end %>
+
+
+Goog Practice:
+
+<%= render filter_templates(@filter) %>
+
+def filter_templates(filter)
+    case filter
+    when 'inbox'
+        render 'inbox'
+    when 'sent'
+        render 'sent'
+    when 'draft'
+        render 'draft'
+    when 'trash'
+        render  'trash'
+    end
+end
+
+
+
+
+
+
+
+
+

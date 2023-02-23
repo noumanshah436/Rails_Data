@@ -1,0 +1,14 @@
+1)  rails g migration add_user_to_products user:references
+
+  add_reference :products, :user, foreign_key: true
+
+
+2) add in products:
+  belongs_to :user
+  validates :user, presence: true
+
+3) add in users:
+  has_many :products
+
+4) change controller to set user
+  @product.user = current_user

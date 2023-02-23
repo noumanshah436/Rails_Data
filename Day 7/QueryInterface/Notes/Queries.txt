@@ -1,0 +1,95 @@
+
+******************************
+
+pluck
+pluck can be used to query single or multiple columns from the underlying table of a model.
+
+User.all.pluck(:id)
+User.all.pluck(:name)
+
+*********************
+
+exists?
+
+check for the existence of the object there's a method called exists?.
+return either true or false
+
+User.exists?(1)
+
+User.exists?(id: [1,2,3])
+
+User.exists?(name: ['John', 'Sergei'])
+
+User.where(name:"NOuman").exists?
+
+*********************
+
+ Calculations
+
+count:
+  User.count(:id)
+  User.count("id")
+
+Average:
+  Product.average(:price)
+  Product.average("price")
+
+Minimum:
+  Product.minimum(:price)
+  Product.minimum("price")
+
+Maximum
+  Product.maximum(:price)
+
+Sum:
+  Product.sum(:price)
+
+
+***********************
+
+:includes  loads associated records in advance and limits the number of SQL queries made to the database.
+ This technique is known as "eager loading" and in many cases will improve performance by a significant amount.
+
+
+User.includes(:products).where(products: {name:"Laptop"})
+
+
+*************************
+
+Length:
+
+Product.where("LENGTH(name) < 5")
+
+
+*************************
+
+Scope:
+
+syntax:
+    scope :name, -> { where(:attibute => value)}
+
+create scope in Product model class
+
+> scope  :laptops, -> { where( name:"Laptop") }
+
+In console:
+Product.laptops
+
+
+****
+
+Passing in arguments:
+
+scope  :get_product, -> (name) { where( "name= ?", name) }
+
+Product.get_product("Laptop")
+
+***
+
+default_scope:   this scope will be applied across all queries to the model
+
+> default_scope { where("user_id IS NOT NULL") }
+>Product.all.count
+
+*************************
+

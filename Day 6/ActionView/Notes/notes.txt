@@ -1,0 +1,25 @@
+
+
+
+access controller and action name in views:
+
+https://stackoverflow.com/questions/1244921/rails-controller-action-name-to-string
+
+*******************
+
+controller name:
+
+<%= controller.controller_name %>
+return => 'users'
+
+*******************
+
+action name:
+<%= controller.action_name %>
+return => 'show'
+
+*******************
+
+id:
+<%= ActionController::Routing::Routes.recognize_path(request.url)[:id] %>
+return => '23'

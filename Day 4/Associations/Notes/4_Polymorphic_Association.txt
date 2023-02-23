@@ -1,0 +1,49 @@
+we need Polymorphic Association when we multiple parent models are their for a single child
+With polymorphic associations, a model can belong to more than one other model, on a single association.
+
+For example, you might have a picture model that belongs to either an employee model or a product model.
+If we do not use polimorphic association, we have a problem of missing foreig_key ( null=false  ) constraint of other model  ,
+as we have only on parent associated with one record.
+
+1)
+Parents:
+rails g model Article title:string text:text
+rails g model News title:string text:text
+
+Child:
+rails g model Comment title:string commentable_type:string commentable_id:integer
+
+rails db:migrate
+
+2) add in comment model:
+belongs_to :commentable, polymorphic:true
+
+3) and in article and news model:
+has_many :comments, as: :commentable
+
+
+4)
+
+article = Article.find(1)
+
+article.comments.create(title: "comment for Article 1")
+article.comments.create(title: "2nd comment ")
+
+article.comments
+article.comments[0].title
+
+***
+
+news = News.find(1)
+
+news.comments.create(title: "comment for news 1")
+news.comments                -- give array of all comments on this news
+news.comments[0]             -- get first comment on that news
+
+comment = Comment.last
+comment.commentable
+comment.commentable.title
+comment.commentable.text
+
+
+

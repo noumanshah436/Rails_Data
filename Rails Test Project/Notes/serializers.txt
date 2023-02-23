@@ -1,0 +1,33 @@
+ 
+ 
+ 
+docs:  https://github.com/rails-api/active_model_serializers/blob/0-10-stable/docs/general/getting_started.md
+
+
+
+
+gem 'active_model_serializers', '~> 0.10.2'
+
+
+rails g resource post title:string body:string
+
+
+
+# frozen_string_literal: true
+
+# PostSerializer
+class PostSerializer < ActiveModel::Serializer
+  belongs_to :user
+  has_many :comments
+  has_many :likes
+  has_many :reports
+  attributes :id, :title, :text, :created_at, :avatar_url, :comment_likes
+
+  def avatar_url
+    object.image.service_url if object.image.attached?
+  end
+
+  def comment_likes
+    Like.group(:likeable_id).where(likeable_type: 'Comment').count
+  end
+end

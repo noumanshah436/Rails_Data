@@ -1,0 +1,112 @@
+
+# Create:
+
+#  the create method call will create and save a new record into the database:
+
+@user = User.create(name: "Nouman", occupation: "ASE")
+p @user
+#<User id: 1, name: "David", occupation: "Code Artist", created_at: "2022-08-25 10:30:45", updated_at: "2022-08-25 10:30:45">
+
+
+# Using the new method, an object can be instantiated without being saved:
+
+user = User.new
+user.name = "Shah"
+user.occupation = "Code Artist"
+p user
+
+user = User.new do |u|
+  u.name = "David"
+  u.occupation = "Code Artist"
+end
+
+p user
+
+******************************
+
+Read :
+
+@users = User.all
+@users.each do |user|
+  p user
+end
+
+user = User.first
+p user
+
+# return the first user named Nouman
+nouman = User.find_by(name: 'Nouman')
+p nouman
+
+nouman = User.find_by(name: 'Nouhhman')
+p nouman
+
+
+# find all users named David who are Code Artists and sort by created_at in reverse chronological order
+users = User.where(name: 'Nouman' , occupation: 'Code Artist').order(created_at: :desc)
+users.each do |user|
+  p user
+end
+
+******************************
+
+update:
+
+user = User.find_by(name: 'Nouman')
+user.name = 'Syed'
+user.save
+
+
+user = User.find_by(name: 'David')
+user.update(name: 'Dave')
+
+User.update_all "name = 'Nouman', occupation='seller' "
+
+
+******************************
+
+destroy:
+
+user = User.find_by(name: 'Nouman')
+user.destroy
+
+# find and delete all users named David
+User.where(name: 'Nouman').destroy_all
+
+# delete all users
+User.destroy_all
+
+
+******************************
+
+<h1>Listing Users</h1>
+<table  >
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Occupation</th>
+  </tr>
+
+  <% @users.each do |user| %>
+  <tr>
+    <td><%= user.id %></td>
+    <td><%= user.name %></td>
+    <td><%= user.occupation %></td>
+  </tr>
+  <% end %>
+</table>
+
+
+
+******************************
+
+make your own action:
+
+1) just create action in controller
+2) add route to that action
+3) create template with action_name.html.erb
+
+
+***********************
+more on queries:
+https://guides.rubyonrails.org/v5.2/active_record_querying.html

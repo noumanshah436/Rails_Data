@@ -1,0 +1,9 @@
+
+
+<p>
+<%= @user.username%>
+</p>
+ 
+
+<p>  <%= pluralize(@user.followers.count, "follower" )  %> </p>
+<p> <%= @user.followees.count %> following  </p>

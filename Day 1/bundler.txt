@@ -1,0 +1,41 @@
+
+
+A Gemfile describes the gem dependencies required to execute associated Ruby code.
+
+*****************
+
+gem lock file specified the version of each gem  used in the project, 
+so whenever you run bundle install it will alway install that version specified
+
+if you want to update the gem you can run 
+bundle update dependency_name
+
+to update all gems 
+bundle update
+
+**************************
+
+you can pass version number in gem as the 2nd argument and it will always install that version of gem and
+even the newer version is available bundle update will stick to that version
+
+gem 'capistrano', '~> 2.11.2'
+
+~> means that bundle update will update only the last number of version
+for example:
+ 2.11.2  to 2.11.3
+ 2.11    to 2.12
+
+**************************
+
+require is used to specify what file should be used if the specified gem is not found 
+
+**************************
+
+bundle help
+
+bundle outdated    - give list of all versions that can be updated
+
+********************
+
+
+A manifest typically includes special comments, called directives, to add JavaScript files to a bundle. 
